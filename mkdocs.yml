@@ -1,0 +1,4 @@
+site_name: Data Programming
+site_url: https://dataprogpy.github.io
+theme:
+  name: material
