@@ -8,6 +8,22 @@ theme:
   icon:
     logo: material/table-heart
   favicon: assets/images/dataset_24dp_1F1F1F.png
+  features:
+    - content.code.copy
+    - content.code.annotate
+    - content.tooltips
+    - navigation.footer
+
+copyright: Copyright &copy; 2025 Midhubalan Balasubramanian
+
+extra:
+  generator: true
+  social:
+    - icon: fontawesome/brands/linkedin
+      link: https://linkedin.com/in/midhubalan
+    - icon: fontawesome/brands/github-alt
+      link: https://github.com/midhubalan 
+
   palette:
     # Palette toggle for light mode
     - scheme: default
@@ -26,6 +42,7 @@ theme:
         #accent: indigo
 
 markdown_extensions:
+  - abbr
   - attr_list
 # Emoji config
   - pymdownx.emoji:
@@ -44,4 +61,8 @@ markdown_extensions:
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  # - pymdownx.superfences
+  # Tabbed content
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
