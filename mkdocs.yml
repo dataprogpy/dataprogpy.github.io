@@ -5,81 +5,43 @@ theme:
   font:
     text: Roboto
     code: Roboto Mono
-  logo: assets/Shield_UnivPittsburgh_3color.png
-  favicon: assets/favicon.ico
-  features:
-    - navigation.footer
-    - navigation.tabs
-    - navigation.indexes
-    - navigation.expand
-    - navigation.sections
   icon:
-    # logo: fontawesome/solid/chess
-    admonition:
-      note: octicons/tag-16
-      abstract: octicons/checklist-16
-      info: octicons/info-16
-      tip: octicons/squirrel-16
-      success: octicons/check-16
-      question: octicons/question-16
-      warning: octicons/alert-16
-      failure: octicons/x-circle-16
-      danger: octicons/zap-16
-      bug: octicons/bug-16
-      example: octicons/beaker-16
-      quote: octicons/quote-16
+    logo: material/table-heart
+  favicon: assets/images/dataset_24dp_1F1F1F.png
   palette:
-    - scheme: slate
-      toggle:
-        icon: material/weather-sunny
-        name: Dark mode
-      primary: teal
-      accent: deep purple
+    # Palette toggle for light mode
     - scheme: default
       toggle:
-        icon: material/weather-night
-        name: Light mode
-      primary: blue
-      accent: deep orange
+        icon: material/brightness-7 
+        name: Switch to dark mode
+        #primary: indigo
+        #accent: indigo
+
+    # Palette toggle for dark mode
+    - scheme: slate
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+        #primary: indigo
+        #accent: indigo
 
 markdown_extensions:
+  - attr_list
+# Emoji config
   - pymdownx.emoji:
-      emoji_index: !!python/name:material.extensions.emoji.twemoji 
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
       emoji_generator: !!python/name:material.extensions.emoji.to_svg
+# Mermaid markdown config for diagrams
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+# Code block display config
   - pymdownx.highlight:
       anchor_linenums: true
       line_spans: __span
       pygments_lang_class: true
   - pymdownx.inlinehilite
   - pymdownx.snippets
-  - pymdownx.superfences:
-      custom_fences:
-        - name: mermaid
-          class: mermaid
-          format: !!python/name:pymdownx.superfences.fence_code_format
-  - pymdownx.tabbed:
-      alternate_style: true
-  - admonition
-  - pymdownx.details
-
-# Page tree
-nav:
-  - Home: index.md
-  - Syllabus: 
-    - syllabus/index.md
-  - Diagrams:
-    - diagrams/index.md
-    - Quadrant Chart: diagrams/quadrant.md
-    - Flow Chart: diagrams/flowchart.md
-
-extra:
-  social:
-    - icon: fontawesome/brands/linkedin
-      link: https://www.linkedin.com/in/midhubalan
-    - icon: fontawesome/brands/python
-      link: https://pypi.org/project/mkdocs-material/
-    - icon: octicons/mark-github-24
-      link: https://github.com/midhubalan
-copyright: Copyright &copy; 2025 Midhubalan Balasubramanian
-extra_css:
-  - stylesheets/extra.css
+  # - pymdownx.superfences
