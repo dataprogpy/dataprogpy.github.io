@@ -7,15 +7,28 @@ theme:
     code: Roboto Mono
   icon:
     logo: material/table-heart
-  favicon: assets/images/dataset_24dp_1F1F1F.png
+  favicon: assets/images/dataset_24dp_4B77D1_FILL0_wght400_GRAD0_opsz24.png
   features:
     - content.code.copy
     - content.code.annotate
     - content.tooltips
+    - navigation.tabs
+    - navigation.path
+    - navigation.expand
+    - navigation.indexes
+    - navigation.tracking
     - navigation.footer
+    - navigation.top
+    - navigation.instant
+    - navigation.instant.progress
+    # - toc.integrate
+    - toc.follow
+    - search.suggest
+    - search.highlight
 
 copyright: Copyright &copy; 2025 Midhubalan Balasubramanian
-
+repo_url: https://github.com/dataprogpy/code-samples
+repo_name: dataprogpy/code-samples
 extra:
   generator: true
   social:
@@ -41,7 +54,15 @@ extra:
         #primary: indigo
         #accent: indigo
 
+plugins:
+  - tags
+  - search
+
 markdown_extensions:
+  - md_in_html
+  - toc:
+      permalink: true
+      title: On this page
   - abbr
   - attr_list
 # Emoji config
@@ -66,3 +87,18 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Syllabus: 
+    - syllabus/index.md
+  - Diagrams: 
+    - diagrams/index.md
+    - Samples:
+      - diagrams/entity-relationship.md
+      - diagrams/flowchart.md
+      - diagrams/quadrant.md
+      - diagrams/user-journey.md
+  - Code: 
+    - code/index.md
+    - code/code-examples.md
