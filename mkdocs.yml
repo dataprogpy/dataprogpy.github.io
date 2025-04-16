@@ -92,6 +92,8 @@ nav:
   - Home: index.md
   - Syllabus: 
     - syllabus/index.md
+    - admonitions.md
+    - content-tabs.md
   - Diagrams: 
     - diagrams/index.md
     - Samples:
@@ -102,3 +104,4 @@ nav:
   - Code: 
     - code/index.md
     - code/code-examples.md
+    
