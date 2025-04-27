@@ -4,7 +4,7 @@ hide:
   - toc
   - footer
 ---
-# Data Programming
+# Introduction to Modeling
 
 <div class="grid cards" markdown>
 

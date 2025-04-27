@@ -2,9 +2,11 @@
 hide:
   - navigation
   - toc
+  - path
   - footer
 ---
-# Data Programming
+
+# Advanced Data Types
 
 <div class="grid cards" markdown>
 

@@ -2,9 +2,11 @@
 hide:
   - navigation
   - toc
+  - path
   - footer
 ---
-# Data Programming
+
+# Exploratory Data Analysis
 
 <div class="grid cards" markdown>
 

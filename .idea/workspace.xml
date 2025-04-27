@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="834928a9-fbae-4ec4-b3c2-56cc3d4c98ad" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/adv-data-types/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/eda/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/getting-started/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/modeling/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/docs/resources/index.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/scratch.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/admonitions.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/admonitions.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/code/code-examples.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/code-examples.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/code/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/content-tabs.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/content-tabs.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrams/entity-relationship.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/entity-relationship.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrams/flowchart.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/flowchart.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrams/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/index-2.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrams/quadrant.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/quadrant.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/diagrams/user-journey.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/bin/user-journey.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/syllabus/index.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/syllabus/index.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mkdocs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mkdocs.yml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "git-widget-placeholder": "Merging main"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
