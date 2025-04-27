@@ -92,6 +92,7 @@ nav:
   - Home: index.md
   - Syllabus: 
     - syllabus/index.md
+    - Course Policies: syllabus/course-policies.md
   - Getting Started:
     - getting-started/index.md
   - Exploratory Data Analysis:

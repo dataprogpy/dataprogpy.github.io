@@ -6,6 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="834928a9-fbae-4ec4-b3c2-56cc3d4c98ad" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/syllabus/course-policies.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/syllabus/course-policies.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/syllabus/university-policies.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mkdocs.yml" beforeDir="false" afterPath="$PROJECT_DIR$/mkdocs.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +21,7 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "1-create-course-syllabus",
     "node.js.selected.package.tslint": "(autodetect)"
   }
 }]]></component>
