@@ -87,7 +87,12 @@ markdown_extensions:
       alternate_style: true
   - admonition
   - pymdownx.details
-
+  # Formatting text
+  - pymdownx.critic
+  - pymdownx.caret
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.tilde
 nav:
   - Home: index.md
   - Syllabus: 
