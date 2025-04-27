@@ -92,16 +92,14 @@ nav:
   - Home: index.md
   - Syllabus: 
     - syllabus/index.md
-    - admonitions.md
-    - content-tabs.md
-  - Diagrams: 
-    - diagrams/index.md
-    - Samples:
-      - diagrams/entity-relationship.md
-      - diagrams/flowchart.md
-      - diagrams/quadrant.md
-      - diagrams/user-journey.md
-  - Code: 
-    - code/index.md
-    - code/code-examples.md
+  - Getting Started:
+    - getting-started/index.md
+  - Exploratory Data Analysis:
+    - eda/index.md
+  - Introduction to Modeling:
+    - modeling/index.md
+  - Advanced Data Types:
+    - adv-data-types/index.md
+  - Resources:
+    - resources/index.md
     
