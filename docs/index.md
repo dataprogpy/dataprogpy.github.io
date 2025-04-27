@@ -4,7 +4,8 @@ hide:
   - toc
   - footer
 ---
-# Data Programming
+# **BMIS-2542: Data Programming Essentials with Python**
+
 
 <div class="grid cards" markdown>
 

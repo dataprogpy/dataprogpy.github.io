@@ -1,5 +1,7 @@
 ---
 icon: material/calendar
+hide:
+  - toc
 ---
 
 # Schedule

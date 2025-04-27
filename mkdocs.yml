@@ -97,6 +97,7 @@ nav:
   - Home: index.md
   - Syllabus: 
     - syllabus/index.md
+    - Course Description: syllabus/course-design.md
     - Schedule: syllabus/schedule.md
     - Course Policies: syllabus/course-policies.md
   - Getting Started:
