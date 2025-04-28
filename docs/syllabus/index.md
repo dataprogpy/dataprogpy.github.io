@@ -33,7 +33,7 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-solid-brain: [__Course Description__](course-description)
+- :fontawesome-brands-python: [__Course Description__](course-description)
 - :fontawesome-regular-calendar: [__Schedule__](schedule)
 - :man_teacher_tone4: __CSS__ for text running out of boxes
 - :fontawesome-brands-internet-explorer: __Internet Explorer__ ... huh?
