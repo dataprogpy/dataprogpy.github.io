@@ -33,9 +33,10 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-brands-python: [__Course Description__](course-description)
-- :fontawesome-regular-calendar: [__Schedule__](schedule)
-- :man_teacher_tone4: __CSS__ for text running out of boxes
-- :fontawesome-brands-internet-explorer: __Internet Explorer__ ... huh?
+- :material-text: [__Course Description__](course-description.md)
+- :fontawesome-regular-calendar: [__Schedule__](schedule.md)
+- :material-bookshelf: [__Course Material__](course-materials.md)
+- :material-book-check-outline: [__Grading & Evaluation__](grading.md)
+- :simple-googlegemini: [__Generative AI & Learning__](#)
 
 </div>

@@ -9,14 +9,16 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :material-clock-fast:{ .lg .middle } __Syllabus__
+-   :material-text-long:{ .lg .middle } [__Syllabus__](syllabus/index.md)
 
     ---
 
-    Install [`mkdocs-material`](#) with [`pip`](#) and get up
-    and running in minutes
+    Learn Python Data Skills: Go from data to decisions. Hands-on essentials 
+    for your career. 
 
-    [:octicons-arrow-right-24: Getting started](#)
+    [:octicons-arrow-right-24: Course Description](syllabus/course-description.md)
+
+    [:octicons-arrow-right-24: Schedule](syllabus/schedule.md)
 
 -   :material-clock-fast:{ .lg .middle } __Instructor's Office & Classroom__
 
@@ -43,7 +45,7 @@ hide:
 
     [:octicons-arrow-right-24: Customization](#)
 
--   :material-format-font:{ .lg .middle } __Labs__
+-   :octicons-beaker-24:{ .lg .middle } __Labs__
 
     ---
 
