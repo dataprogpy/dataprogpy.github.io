@@ -104,6 +104,16 @@ nav:
     - Course Policies: syllabus/course-policies.md
   - Getting Started:
     - getting-started/index.md
+    - Introduction to Colab: 
+      - getting-started/colab/index.md
+      - Getting Started with Colab: getting-started/colab/colab-intro.md
+      - Colab Interface: getting-started/colab/colab-interface.md
+      - Kernel State: getting-started/colab/kernel-state.md
+      - Working with Data & Files in Colab: getting-started/colab/data-files.md
+      - Essential Techniques: getting-started/colab/essential-techniques.md
+      - Going Deeper: getting-started/colab/going-deeper.md
+      - Best Practice & Getting Help: getting-started/colab/best-practice.md
+
   - Exploratory Data Analysis:
     - eda/index.md
   - Introduction to Modeling:
