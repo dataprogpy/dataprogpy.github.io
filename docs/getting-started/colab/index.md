@@ -17,6 +17,18 @@ An **IDE**, which stands for **Integrated Development Environment**, is like tha
 
 Using an IDE helps you be more productive and focus on the logic of your analysis, rather than fighting with basic tools. For this course, Google Colab will be our IDE, specifically tailored for working with data in Python.
 
+!!! tip "**Aside: The "Studio" Connection**"
+
+    That idea of an IDE being a programmer's "workshop" or creative "studio" isn't just an analogy we're using – it's reflected right in the names of many widely-used development tools! You might recognize names like:
+
+    * **Visual Studio** and **Visual Studio Code** (from Microsoft, for various types of software development)
+    * **Android Studio** (from Google, for building Android mobile apps)
+    * **RStudio** (very popular in data science for working with the R programming language)
+
+    The "Studio" name emphasizes that these are integrated environments designed for focused, productive coding work, bringing all the necessary tools together in one place.
+
+
+
 ### **What are Jupyter Notebooks?**
 
 Google Colab is built upon a popular open-source project called **Jupyter**. So, what's a Jupyter Notebook?
