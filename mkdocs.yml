@@ -102,6 +102,7 @@ nav:
     - Course Policies: syllabus/course-policies.md
   - Getting Started:
     - getting-started/index.md
+    - Colab: getting-started/colab/index.md
   - Exploratory Data Analysis:
     - eda/index.md
   - Introduction to Modeling:
