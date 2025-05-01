@@ -8,21 +8,16 @@ hide:
 
 <div class="grid cards" markdown>
 
--   :simple-googlecolab:{ .lg .middle } __Introduction to Colab__
+
+-   [:simple-googlecolab:{ .lg .middle } __Introduction to Colab__](colab/index.md)
 
     ---
 
-    Install [`mkdocs-material`](#) with [`pip`](#) and get up
-    and running in minutes
+    [:octicons-arrow-right-24: Getting started](colab/colab-intro.md)
 
-    [:octicons-arrow-right-24: Getting started](colab/index.md)
-
--   :simple-python:{ .lg .middle } __Introduction to Python__
+-   [:simple-python:{ .lg .middle } __Introduction to Python__](python/index.md)
 
     ---
-
-    Install [`mkdocs-material`](#) with [`pip`](#) and get up
-    and running in minutes
 
     [:octicons-arrow-right-24: Getting started](#)
 
