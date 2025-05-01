@@ -8,13 +8,13 @@ hide:
 
 <div class="grid cards" markdown>
 
-- :fontawesome-brands-html5: __Getting Started__ 
-- :fontawesome-brands-js: __User Interface__ 
-- :fontawesome-brands-css3: __Kernel State__ 
-- :fontawesome-brands-internet-explorer: __Data & Files__ 
-- :fontawesome-brands-internet-explorer: __Essential Techniques__ 
-- :fontawesome-brands-internet-explorer: __Going Deeper__ 
-- :fontawesome-brands-internet-explorer: __Best Practice__ 
+- :material-ray-start-arrow: __Getting Started__ 
+- :material-mouse-scroll-wheel: __User Interface__ 
+- :material-memory: __Kernel State__ 
+- :material-file-plus: __Data & Files__ 
+- :material-tools: __Essential Techniques__ 
+- :material-shovel: __Going Deeper__ 
+- :material-lightbulb: __Best Practice__ 
 
 
 
