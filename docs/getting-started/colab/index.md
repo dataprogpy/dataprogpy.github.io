@@ -584,11 +584,11 @@ While Colab's free tier is generous, it's not infinite. Knowing the limitations 
 * **Paid Options:** Google offers Colab Pro/Pro+ with extended runtimes and more resources, but these are **not necessary** for completing this course successfully.
 
 
-## **7. Best Practices & Getting Help**
+## **Best Practices & Getting Help**
 
 You've now toured the essential features and concepts for using Google Colab in our "Data Programming Essentials with Python" course. To ensure a smooth learning experience, keep these best practices in mind and know where to turn for help.
 
-**7.1. Summary: Working Effectively in Colab**
+**Summary: Working Effectively in Colab**
 
 * **Document with Markdown:** Use Text cells and Markdown headings (`#`, `##`, etc.) frequently. Explain your code, structure your analysis, and make your notebooks readable (See Section 2.5). Clear documentation is crucial for learning and collaboration.
 * **Manage State Consciously:** Remember that execution order matters more than cell order (Section 3.1). Use **`Runtime -> Restart runtime`** if things behave strangely, and *always* use **`Runtime -> Restart and run all`** before submitting work or considering an analysis complete to ensure reproducibility (Section 3.4).
@@ -597,7 +597,7 @@ You've now toured the essential features and concepts for using Google Colab in 
 * **Leverage Colab Features:** Use helpful tools like the File Browser's "Copy path" (Section 4.4), Keyboard Shortcuts (Section 6.1), and the integrated AI Assistance (Section 5.2) – but always focus on understanding the underlying concepts.
 * **Debug Systematically:** Errors are learning opportunities. Read tracebacks carefully (Section 5.3), use `print()`, `type()`, and `dir()` to inspect the state of your variables (Section 5.3), and try to isolate the problem step-by-step.
 
-**7.2. Leverage Colab for Learning from External Code**
+**Leverage Colab for Learning from External Code**
 
 A key skill in programming is learning from code written by others. When you find relevant Python examples online (e.g., on documentation sites, GitHub, Stack Overflow), Colab offers a great environment to deconstruct and understand them:
 
@@ -615,7 +615,7 @@ A key skill in programming is learning from code written by others. When you fin
 
 **Caution:** Always review AI explanations critically. Ensure you understand *why* the code works. Test thoroughly, especially if adapting code, and remember to cite your sources appropriately if using significant portions in your own work.
 
-**7.3. Official Colab Resources**
+**Official Colab Resources**
 
 For more in-depth information directly from Google, check out these official resources:
 
@@ -623,7 +623,7 @@ For more in-depth information directly from Google, check out these official res
 * **Colab Overview:** [https://research.google.com/colaboratory/](https://research.google.com/colaboratory/) (High-level features).
 * **Colab FAQ:** [https://research.google.com/colaboratory/faq.html](https://research.google.com/colaboratory/faq.html) (Answers to common questions).
 
-**7.4. Getting Help in This Course**
+**Getting Help in This Course**
 
 If you've reviewed this guide and the official resources but still have questions about using Colab for *our specific course activities*:
 
