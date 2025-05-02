@@ -113,6 +113,15 @@ nav:
       - Essential Techniques: getting-started/colab/essential-techniques.md
       - Going Deeper: getting-started/colab/going-deeper.md
       - Best Practice & Getting Help: getting-started/colab/best-practice.md
+    - Introduction to Pyhon:
+      - getting-started/python/index.md
+      - Why Python?: getting-started/python/why-python.md
+      - Modeling Information: getting-started/python/modeling-information.md
+      - Modeling Structures: getting-started/python/modeling-structures.md
+      - Polars Teaser: getting-started/python/polars-teaser.md
+      - Task Automation: getting-started/python/task-automation.md
+      - Structuring Code: getting-started/python/code-organization.md
+      - Next Steps: getting-started/python/next-steps.md
 
   - Exploratory Data Analysis:
     - eda/index.md
