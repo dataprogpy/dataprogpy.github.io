@@ -8,12 +8,12 @@ hide:
 
 <div class="grid cards" markdown>
 
-- [:material-ray-start-arrow: __Getting Started__](colab-intro.md) 
-- [:material-mouse-scroll-wheel: __User Interface__](colab-interface.md) 
-- [:material-memory: __Kernel State__](kernel-state.md) 
-- [:material-file-plus: __Data & Files__](data-files.md) 
-- [:material-tools: __Essential Techniques__](essential-techniques.md) 
-- [:material-shovel: __Going Deeper__](going-deeper.md) 
-- [:material-lightbulb: __Best Practice__](best-practice.md) 
+- [ :material-numeric-1:{ .lg .middle } __Getting Started__](colab-intro.md) 
+- [ :material-numeric-2:{ .lg .middle } __User Interface__](colab-interface.md) 
+- [ :material-numeric-3:{ .lg .middle } __Kernel State__](kernel-state.md) 
+- [ :material-numeric-4:{ .lg .middle } __Data & Files__](data-files.md) 
+- [ :material-numeric-5:{ .lg .middle } __Essential Techniques__](essential-techniques.md) 
+- [ :material-numeric-6:{ .lg .middle } __Going Deeper__](going-deeper.md) 
+- [ :material-numeric-7:{ .lg .middle } __Best Practice__](best-practice.md) 
 
 </div>
