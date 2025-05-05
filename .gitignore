@@ -12,3 +12,6 @@ wheels/
 # mkdocs generated
 .cache
 site/
+
+# Pycharm
+.idea/
