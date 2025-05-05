@@ -10,7 +10,7 @@ hide:
   <thead>
     <tr>
       <th >Module </th>
-      <th >Date & Topic</th>
+      <th >Date, Topic, & {++Project Deliverables++}</th>
     </tr>
   </thead>
   <tbody>
@@ -20,9 +20,8 @@ hide:
         </td>
         <td>
             <ul style="list-style-type: none">
-                <li> 05/15: Course Overview</li>
-                <li> 05/15: Introduction to Google Colab</li>
-                <li> 05/15: Introduction to Python</li>
+                <li> 05/15: Course Overview & Introduction to Google Colab</li>
+                <li> 05/22: Introduction to Python</li>
             </ul>
         </td>
     </tr>
@@ -32,9 +31,13 @@ hide:
         </td>
         <td>
             <ul style="list-style-type: none">
-                <li>05/22: EDA - 1</li>
-                <li>05/29: EDA - 2</li>
-                <li>06/05: EDA - 3</li>
+                <li>05/29: Introduction to Polars
+                <ul style="list-style-type: none">
+                 <li>{++Project Plan++}</li>
+                 </ul>
+                </li>
+                <li>06/05: Introduction to Altair</li>
+                <li>06/12: Data Storytelling</li>
             </ul>
         </td>
     </tr>
@@ -44,10 +47,14 @@ hide:
         </td>
         <td>
             <ul style="list-style-type: none">
-                <li>06/12: Introduction to modeling workflow and scikit-learn</li>
-                <li>{==06/19: Summer-1 Finals Week Juneteenth - No classes==}</li>
-                <li>06/26: Classification and Regression</li>
-                <li>07/03: Clustering and Dimensionality Reduction</li>
+                <li>{==06/19: Summer-1 Finals Week Juneteenth - No Classes==}</li>
+                <li>06/26: Introduction to modeling workflow and scikit-learn
+                    <ul style="list-style-type: none">
+                    <li>{++Data Wrangling & EDA++}</li>
+                    </ul>
+                </li>
+                <li>07/03: Classification and Regression</li>
+                <li>07/10: Clustering and Dimensionality Reduction</li>
             </ul>
         </td>
     </tr>
@@ -57,11 +64,20 @@ hide:
         </td>
         <td>
             <ul style="list-style-type: none">
-                <li>07/10: Time Series Data</li>
-                <li>07/17: Textual Data</li>
-                <li>07/24: Graph Data</li>
-                <li>{==07/31: Finals week==}</li>
-            </ul></td>
+                <li >
+                    07/17: Time Series Data
+                    <ul style="list-style-type: none">
+                    <li>{++Modeling++}</li>
+                    </ul>
+                </li>
+                <li>07/24: Textual Data</li>
+                <li>{==07/31: Finals week - No Classes==}
+                <ul style="list-style-type: none">
+                <li> {++Optional Extra Credit++}</li>
+                </ul>
+                </li>
+            </ul>
+        </td>
     </tr>
   </tbody>
 </table>
