@@ -37,6 +37,7 @@ hide:
 - :fontawesome-regular-calendar: [__Schedule__](schedule.md)
 - :material-bookshelf: [__Course Material__](course-materials.md)
 - :material-book-check-outline: [__Grading & Evaluation__](grading.md)
-- :simple-googlegemini: [__Generative AI & Learning__](#)
+- :octicons-project-24: [__Project Guide__](project-guide.md)
+- :material-file-document-multiple-outline: [__Course Policies__](course-policies.md)
 
 </div>
