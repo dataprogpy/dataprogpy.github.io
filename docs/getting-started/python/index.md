@@ -4,7 +4,7 @@ hide:
   - toc
   - footer
 ---
-# Getting Started
+# Introduction to Python
 
 <div class="grid cards" markdown>
 
@@ -16,9 +16,5 @@ hide:
 -   [:material-numeric-5:{ .lg .middle } __Automating Tasks__](task-automation.md)
 -   [:material-numeric-6:{ .lg .middle } __Structuring Code__](code-organization.md)
 -   [:material-numeric-7:{ .lg .middle } __Next Steps__](next-steps.md)
-
-
-
-
 
 </div>
