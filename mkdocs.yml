@@ -126,10 +126,18 @@ nav:
 
   - Exploratory Data Analysis:
     - eda/index.md
+    - Data Wrangling with Polars: eda/polars.md
+    - Data Visualization with Altair: eda/altair.md
+    - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
     - modeling/index.md
+    - Modeling with scikit-learn: modeling/modeling_intro.md
+    - Supervised Learning: modeling/supervised.md
+    - Unsupervised Learning: modeling/unsupervised.md
   - Advanced Data Types:
     - adv-data-types/index.md
+    - Time Series Analysis: adv-data-types/time-series.md
+    - Text Analysis: adv-data-types/text-analysis.md
   - Resources:
     - resources/index.md
     

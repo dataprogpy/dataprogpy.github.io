@@ -19,7 +19,7 @@ hide:
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](#)
+    [:octicons-arrow-right-24: Getting started](python/why-python.md)
 
 
 </div>
