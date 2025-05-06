@@ -44,7 +44,7 @@ Learning Python provides a versatile, powerful, and highly relevant foundation f
 
 **1.4 Colab: Our Workshop**
 
-As introduced in the **[Getting Started with Google Colab](link-to-colab-page.html)** guide, we will be using **Google Colab** as our primary environment for writing and running Python code in this course.
+As introduced in the **[Getting Started with Google Colab](/getting-started/colab)** guide, we will be using **Google Colab** as our primary environment for writing and running Python code in this course.
 
 Remember, Colab:
 
@@ -53,6 +53,6 @@ Remember, Colab:
 * Provides a Python environment with many necessary libraries ready to go.
 * Integrates seamlessly with your Google Drive for saving notebooks and accessing data.
 
-If you need a quick refresher on the Colab interface (creating notebooks, cells, running code, etc.), please revisit the **[Colab Introduction](link-to-colab-page.html)** page on our course site. *(<-- Make sure to insert the actual link here)*
+If you need a quick refresher on the Colab interface (creating notebooks, cells, running code, etc.), please revisit the **[Colab Introduction](/getting-started/colab)** page on our course site. *(<-- Make sure to insert the actual link here)*
 
 Now, let's begin building our understanding of Python, starting with the fundamental ways we can model basic pieces of information.
