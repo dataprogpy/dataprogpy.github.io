@@ -23,7 +23,7 @@ hide:
     - __Meeting Times:__ Thursdays 6:20-9:20pm 
     - __Meeting Location:__ [Zoom Meeting Room](https://pitt.zoom.us/j/98751974356). See Canvas for passcode.
     - __Instructor:__ Midhu Balan
-    - __Office Hours:__ Th 3:00-5:00pm @ Mervis 247, See Canvas for Zoom details.
+    - __Virtual Office Hours:__ Th 3:00-5:00pm @ [Zoom](https://pitt.zoom.us/my/midhubalan).
     {.card}
 
 </div>

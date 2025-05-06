@@ -58,7 +58,7 @@ hide:
 
     ---
 
-    [:octicons-arrow-right-24: Starter Files](https://github.com/dataprogpy/code-samples)
+    [:octicons-arrow-right-24: Starter Files](https://github.com/dataprogpy/code-samples/tree/main/starter_files)
 
     [:octicons-arrow-right-24: Code Samples](https://github.com/dataprogpy/code-samples)
 
