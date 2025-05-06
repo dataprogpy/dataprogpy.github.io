@@ -181,4 +181,21 @@ A submission will be marked as 'Incomplete' if it meets one or more of the follo
 | **2. Analysis & Implementation** (5 pts)        | Correctly applies relevant & reasonably sophisticated analysis techniques (e.g., forecasting model; topic model, sentiment analysis). Implementation uses library functions accurately and effectively. Analysis directly addresses relevant goal (either main project goal or specific extra credit goal).                            | Correctly applies relevant basic analysis techniques. Implementation uses library functions correctly for the chosen method. Analysis is relevant.                                                                                                                                       | Attempts relevant techniques but contains minor errors in application or implementation. Analysis may be only tangentially relevant or incomplete.                                                                                                                                            | Inappropriate techniques applied **OR** major errors in implementation **OR** analysis is missing or irrelevant.                                                                                                                        |
 | **3. Interpretation & Integration** (5 pts)     | Provides insightful interpretation of advanced analysis results. Clearly explains findings and their significance. Effectively integrates/connects these findings with the main project's objectives or conclusions. Communication (markdown) within the extra credit section is clear and comprehensive.                                | Provides correct interpretation of results. Explains findings adequately. Makes a reasonable attempt to connect findings to the main project. Communication is clear.                                                                                                                    | Interpretation is superficial or partially incorrect. Explanation is unclear. Connection to main project is weak or missing. Communication lacks detail.                                                                                                                                   | Interpretation missing or incorrect. No explanation of findings. No connection made to the main project. Poor or missing communication within the section.                                                              |
 
+## Grading Scheme
 
+***Pitt's Default Canvas Grading Scheme:***
+
+| Letter Grade	| Range |
+|:---:|:---:|
+| **A**	 | 100% to 94%  |
+| **A-** | < 94% to 90% |
+| **B+** | < 90% to 87% |
+| **B**	 | < 87% to 84% |
+| **B-** | < 84% to 80% |
+| **C+** | < 80% to 77% |
+| **C**	 | < 77% to 74% |
+| **C-** | < 74% to 70% |
+| **D+** | < 70% to 67% |
+| **D**	 | < 67% to 64% |
+| **D-** | < 64% to 61% |
+| **F**	 | < 61% to 0%  | 
