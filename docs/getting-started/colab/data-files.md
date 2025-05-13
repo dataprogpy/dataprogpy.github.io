@@ -27,18 +27,18 @@ This is suitable for a quick, one-time analysis of a small file.
 
 **How-to:**
 
-1.  In the **Left Sidebar**, click the **Folder icon** to open the **File Browser**.
+1.  In the **Left Sidebar**, click the **Folder icon** :material-numeric-1-circle:{ .annotation } to open the **File Browser**.
 
-    ![Colab new notebook from file menu](/assets/images/colab_session_storage_1.png)
+    ![Colab session storage screenshot 1](/assets/images/colab_session_storage_1.png)
 
-2.  At the top of the File Browser pane that appears, click the **"Upload to session storage" button**. It usually looks like a page icon with an arrow pointing upwards.
-3.  A file selection dialog from your operating system will open. Navigate to the desired file on your local computer (e.g., `sample_data.csv`) and select it.
+2.  At the top of the File Browser pane that appears, click the **"Upload to session storage" button** :material-numeric-2-circle:{ .annotation }. It usually looks like a page icon with an arrow pointing upwards.
+3.  A file selection dialog from your operating system will open. Navigate to the desired file on your local computer (e.g., `sample_data.csv`) and select it :material-numeric-3-circle:{ .annotation }.
 
-    ![Colab new notebook from file menu](/assets/images/colab_session_storage_3.png)
+    ![Colab session storage screenshot 2](/assets/images/colab_session_storage_3.png)
 
-4.  The file will be uploaded to Colab's temporary environment, and you should see its name appear in the File Browser list. Upload speed depends on the file size and your internet connection.
+4.  The file will be uploaded to Colab's temporary environment, and you should see its name appear in the File Browser list :material-numeric-4-circle:{ .annotation }. Upload speed depends on the file size and your internet connection.
 
-    ![Colab new notebook from file menu](/assets/images/colab_session_storage_4.png)
+    ![Colab session storage screenshot 3](/assets/images/colab_session_storage_4.png)
 
 **Accessing the File in Code:**
 Once uploaded to session storage, you typically refer to the file in your Python code using just its filename as the path, because it's in the "root" directory of this temporary environment.
@@ -65,13 +65,24 @@ This is the standard and most reliable way to work with your data files for this
 
 **How-to (Mounting Your Drive):**
 
-1.  Add a **new code cell** to your notebook if you don't have one ready.
+
+1.  Add a **new code cell** to your notebook if you don't have one ready :material-numeric-1-circle:{ .annotation }.
+
+    ![Colab mounting Google Drive screenshot 1](/assets/images/colab_files_screen.png)
+
 2.  Enter the following **exact** Python code snippet into the cell:
     ```python
     from google.colab import drive
     drive.mount('/content/drive')
     ```
 3.  **Run this code cell** (e.g., Shift+Enter).
+
+    ![Colab mounting Google Drive screenshot 2](/assets/images/colab_drive_mount_permission_screen.png)
+
+    !!! warning
+
+        Authorization process is dynamic and sensitive to security settings on your Google profile, personal computer, and the browser. Most likely the instructions here may not match what you see. Follow the instructions on your screen closely. If you have trouble completing the task, please reach out.
+
 4.  **Authorization Process:** The first time you run this in a new session, Colab needs your permission to access your Google Drive. The cell's output will display:
     * A URL (e.g., `https://accounts.google.com/o/oauth2/auth?...)`.
     * An input box prompting for an `Authorization code`.
@@ -85,8 +96,8 @@ This is the standard and most reliable way to work with your data files for this
         * Press **Enter**.
     *(Suggestion for actual page: Include screenshots illustrating the output link, Google's permission screen, and pasting the code)*
 5.  **Confirmation:** After a few moments, you should see the output `Mounted at /content/drive`.
-6.  **Verify in File Browser:** Check the File Browser pane again (Folder icon). A new folder named `drive` should now be visible. If you expand it, you'll see `MyDrive`, which represents the root folder of your connected Google Drive.
-    *(Suggestion for actual page: Screenshot showing the 'drive' and 'MyDrive' folders)*
+6.  **Verify in File Browser:** Check the File Browser pane again (Folder icon). A new folder named `drive` should now be visible :material-numeric-2-circle:{ .annotation }. If you expand it, you'll see `MyDrive`, which represents the root folder of your connected Google Drive.
+    ![Colab mounting Google Drive screenshot 3](/assets/images/colab_drive_mounted_screen.png)
 
 **Accessing Files in Code:**
 Files within your mounted Google Drive are accessed via paths that *always* start with `/content/drive/MyDrive/`.
@@ -121,10 +132,18 @@ except Exception as e:
 
 Whether using session storage or mounted Drive, the **File Browser** pane (Folder icon) lets you visually navigate folders. Typing long paths, especially Drive paths, is tedious and error-prone. Use this shortcut:
 
-1.  In the File Browser, navigate to the file you need.
-2.  **Right-click** on the filename (or click the three vertical dots `⋮` next to it).
-3.  From the menu that appears, select **"Copy path"**.
-    *(Suggestion for actual page: Screenshot showing the right-click context menu with "Copy path" highlighted)*
-4.  Now, go to your code cell and paste (`Ctrl+V` or `Cmd+V`) the copied path directly into your code where the filename/path is needed (e.g., inside `pl.read_csv('PASTED_PATH_HERE')`).
+1.  In the File Browser, navigate to the file you need :material-numeric-1-circle:{ .annotation }.
+
+    ![Colab accessing files in code screenshot 1](/assets/images/colab_file_path_1.png)
+
+2.  **Right-click** on the filename (or click the three vertical dots `⋮` next to it) :material-numeric-2-circle:{ .annotation }.
+
+    ![Colab accessing files in code screenshot 1](/assets/images/colab_file_path_2.png)
+
+3.  From the menu that appears, select **"Copy path"** :material-numeric-3-circle:{ .annotation }.
+
+    ![Colab accessing files in code screenshot 1](/assets/images/colab_file_path_3.png)
+
+4.  Now, go to your code cell and paste (`Ctrl+V` or `Cmd+V`) the copied path directly into your code where the filename/path is needed :material-numeric-4-circle:{ .annotation }(e.g., inside `pl.read_csv('PASTED_PATH_HERE')`).
 
 This "Copy path" feature helps ensure you have the exact, correct path, preventing `FileNotFoundError` issues due to typos.

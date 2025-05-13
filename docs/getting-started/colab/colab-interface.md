@@ -63,7 +63,7 @@ Simply typing in a cell doesn't do anything until you **run** (or **execute**) i
 
 **The Cell Toolbar: Quick Actions**
 
-When you select a cell, or sometimes just hover over it, a small toolbar usually appears (often in the top right corner of the cell). This provides handy shortcuts for common actions:
+When you select a cell, or sometimes just hover over it, a small toolbar :material-numeric-1-circle:{ .annotation } usually appears (often in the top right corner of the cell). This provides handy shortcuts for common actions:
 
 ![Colab cell toolbar](/assets/images/colab_cell_toolbar.png)
 
