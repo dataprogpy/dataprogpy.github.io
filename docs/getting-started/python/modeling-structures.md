@@ -46,6 +46,7 @@ To use the tools (functions, classes, etc.) from a module or library, you must f
 **3.2 Lists (`list`): Ordered, Changeable Sequences**
 
 **Modeling Motivation:** How do you represent a collection of related items where the order is important?
+
 * A sequence of steps in a process.
 * Monthly sales figures recorded in chronological order.
 * A list of customer names, perhaps in the order they were acquired.
