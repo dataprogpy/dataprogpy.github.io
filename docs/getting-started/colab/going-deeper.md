@@ -12,7 +12,7 @@ A key concept for shortcuts is understanding Colab's (and Jupyter's) modes:
 
 * **Edit Mode:** You're actively typing inside a cell (usually indicated by a green border around the cell and a blinking cursor). Keystrokes insert text or code.
 * **Command Mode:** You've selected a cell but aren't typing *inside* it (usually indicated by a blue border). Keystrokes act as commands on the cell itself (like deleting it, changing its type, etc.).
-    * Press **`Esc`** to switch from Edit Mode to Command Mode.
+    * Press the ++"<prefix>"++ key combo, ++ctrl+m++ or ++esc++,to switch from Edit Mode to Command Mode.
     * Press **`Enter`** (or click inside a cell) to switch from Command Mode to Edit Mode.
 
 **Some Highly Useful Shortcuts:**
@@ -23,7 +23,7 @@ A key concept for shortcuts is understanding Colab's (and Jupyter's) modes:
     * `Shift + Enter`: Run current cell, select cell below (works in both modes).
     * `Ctrl + Enter` (`Cmd + Enter` on Mac): Run selected cell(s), keep focus here (works in both modes).
     * `Alt + Enter` (`Option + Enter` on Mac): Run current cell, insert new code cell below (works in both modes).
-* **Cell Manipulation (Command Mode - press `Esc` first):**
+* **Cell Manipulation (Command Mode):**
     * `A`: Insert new code cell **A**bove current cell.
     * `B`: Insert new code cell **B**elow current cell.
     * `D`, `D` (press `D` twice quickly): **D**elete selected cell(s) (use with care!).
@@ -40,18 +40,20 @@ A key concept for shortcuts is understanding Colab's (and Jupyter's) modes:
 
 Colab includes a library of pre-written code snippets for common tasks, which can save you time and help you discover functionalities.
 
-* **How to Access:** In the **Left Sidebar**, click the **Code Snippets icon** (often looks like `< >`).
-* **Browse & Insert:** A pane will open with searchable snippets, often categorized (e.g., "Visualization", "Importing data"). Find a snippet you need (like "Mount Google Drive" or examples for plotting libraries) and click the "Insert" button (or sometimes just click the snippet). The necessary code cell(s) will be added to your notebook.
-    *(Suggestion for actual page: Screenshot showing the Snippets icon and the pane)*
+* **How to Access:** In the **Left Sidebar**, click the **Code Snippets icon** :material-numeric-1-circle:{ .annotation } (often looks like `< >`).
+* **Browse & Insert:** A pane will open with searchable snippets, often categorized (e.g., "Visualization", "Importing data") :material-numeric-2-circle:{ .annotation }. Find a snippet you need (like "Mount Google Drive" or examples for plotting libraries) :material-numeric-3-circle:{ .annotation } and click the "Insert" button (or sometimes just click the snippet):material-numeric-4-circle:{ .annotation }. The necessary code cell(s) will be added to your notebook:material-numeric-5-circle:{ .annotation }.
+    ![Colab snippets workflow](/assets/images/colab_snippets.png)
 * **Usefulness:** Great for boilerplate code (like Drive mounting), exploring examples (especially for visualizations), or finding code for interacting with specific Google services.
 
 ## **The Command Palette**
 
 If you can't remember a keyboard shortcut or where a command is hidden in the menus, the Command Palette is a powerful search tool for actions.
 
-* **How to Access:** Press **`Ctrl + Shift + P`** (or **`Cmd + Shift + P`** on Mac).
-* **Search & Execute:** A search bar pops up. Start typing the name of the action you want (e.g., "markdown", "restart", "clear all", "table of contents"). The list filters as you type. Select the desired command using arrow keys and `Enter`, or click it.
-    *(Suggestion for actual page: Screenshot showing the command palette overlay with a search typed in)*
+* **How to Access:** Use the toolbar :material-numeric-1-circle:{ .annotation } or press **`Ctrl + Shift + P`** (or **`Cmd + Shift + P`** on Mac).
+* **Search & Execute:** A search bar pops up. Start typing the name of the action you want :material-numeric-2-circle:{ .annotation } (e.g., "markdown", "restart", "clear all", "table of contents"). The list filters as you type. Select the desired command using arrow keys and `Enter`, or click it :material-numeric-3-circle:{ .annotation }.
+
+    ![Colab command palette workflow](/assets/images/colab_command_palette.png)
+
 * **Benefit:** Allows quick keyboard access to virtually any Colab command without needing to memorize everything.
 
 ## **Understanding Resource Limits**

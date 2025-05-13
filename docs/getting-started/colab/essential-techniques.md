@@ -64,8 +64,8 @@ Understanding that libraries evolve and knowing how to consult documentation are
 
 As of mid-2025, Google Colab features integrated AI assistance, often leveraging models from the Gemini family. When used thoughtfully, this can significantly accelerate your learning and coding process.
 
-* **Accessing AI:** Look for AI-related icons directly within the cell toolbar (common icons include ✨, the Gemini logo, or similar). You might also find options within the `Tools` menu or via the Command Palette (Ctrl+Shift+P). *Note: The exact interface for AI features can evolve, so familiarize yourself with the current layout.*
-    *(Suggestion for actual page: Screenshot pointing out the current AI/Gemini access points in the Colab UI)*
+* **Accessing AI:** Look for AI-related icons directly within the cell toolbar :material-numeric-1-circle:{ .annotation }  (common icons include ✨, the Gemini logo, or similar). You might also find options within the `Tools` menu or via the Command Palette (Ctrl+Shift+P). *Note: The exact interface for AI features can evolve, so familiarize yourself with the current layout.*
+    ![Colab cell toolbar](/assets/images/colab_cell_toolbar.png)
 * **How AI Can Help You Learn:**
 
     * **Code Generation:** Ask for code snippets. *Example prompt: "Generate Python code using Polars to group the DataFrame 'df' by the 'category' column and calculate the average 'value'."* **Critically review generated code before running!**
@@ -80,7 +80,7 @@ As of mid-2025, Google Colab features integrated AI assistance, often leveraging
     * **AI is an Assistant, Not an Oracle:** AI models can make mistakes (generate incorrect code, provide inaccurate explanations). **Always think critically** about the output. Does it make logical sense? Does the code work correctly?
     * **Prioritize Understanding:** Use AI to *aid* your learning, not replace it. If AI generates code, strive to understand *why* it works that way. Ask follow-up questions.
     * **Be Mindful of Data:** Check Google's terms regarding data privacy if you are working with sensitive information.
-    * **Stay Updated:** AI features change quickly. Refer to official Google Colab documentation for the latest capabilities and usage guidelines. *(Suggestion: Add link to official Colab AI feature docs if available)*
+    * **Stay Updated:** AI features change quickly. Refer to [official Google Colab documentation](https://research.google.com/colaboratory/faq.html#aicoding-access) for the latest capabilities and usage guidelines. 
 
 ## **Basic Debugging**
 
