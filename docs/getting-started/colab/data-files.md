@@ -94,7 +94,6 @@ This is the standard and most reliable way to work with your data files for this
         * Switch back to your Colab notebook tab.
         * **Paste the copied code** into the input box in the cell's output area.
         * Press **Enter**.
-    *(Suggestion for actual page: Include screenshots illustrating the output link, Google's permission screen, and pasting the code)*
 5.  **Confirmation:** After a few moments, you should see the output `Mounted at /content/drive`.
 6.  **Verify in File Browser:** Check the File Browser pane again (Folder icon). A new folder named `drive` should now be visible :material-numeric-2-circle:{ .annotation }. If you expand it, you'll see `MyDrive`, which represents the root folder of your connected Google Drive.
     ![Colab mounting Google Drive screenshot 3](/assets/images/colab_drive_mounted_screen.png)
