@@ -4,3 +4,8 @@
     --md-primary-fg-color--dark:  #90030C;
   } */
    /* https://www.brand.pitt.edu/visual-identity/color-palettes */
+
+.annotation {
+  color: #EE0F0F;
+  font-size: larger
+}

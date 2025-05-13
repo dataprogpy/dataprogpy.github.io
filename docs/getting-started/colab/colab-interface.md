@@ -9,13 +9,13 @@ Take a look at your Colab screen. Here are the main parts:
 
 ![Colab user interface with annotation](/assets/images/colab_ui_annotated.png)
 
-* *`A: Menu Bar` (Top: File, Edit, View, Insert, Runtime, Tools, Help - Standard menu options)*
-* *`B: Toolbar` (Below Menu: Buttons for common actions like +Code, +Text, file operations, runtime status)*
-* *`C: Main Cell Area` (The large central area: This is where you'll write and run your code and text)*
-* *`D: Left Sidebar` (Contains tabs for: Table of Contents, Find/Replace, Code Snippets, Secrets, and importantly, the File Browser)*
-* *`E: Notebook Title` (Top Left: Where you renamed your notebook)*
-* *`F: Share Button` (Top Right: For sharing your notebook with others)*
-* *`G: Runtime Status / Connect Button` (Top Right near Share: Shows if you're connected to a runtime and resource usage)*
+* *:material-alpha-a-circle:{ .annotation } `Menu Bar` (Top: File, Edit, View, Insert, Runtime, Tools, Help - Standard menu options)*
+* *:material-alpha-b-circle:{ .annotation } `Toolbar` (Below Menu: Buttons for common actions like +Code, +Text, file operations, runtime status)*
+* *:material-alpha-c-circle:{ .annotation } `Main Cell Area` (The large central area: This is where you'll write and run your code and text)*
+* *:material-alpha-d-circle:{ .annotation } `Left Sidebar` (Contains tabs for: Table of Contents, Find/Replace, Code Snippets, Secrets, and importantly, the File Browser)*
+* *:material-alpha-e-circle:{ .annotation } `Notebook Title` (Top Left: Where you renamed your notebook)*
+* *:material-alpha-f-circle:{ .annotation } `Share Button` (Top Right: For sharing your notebook with others)*
+* *:material-alpha-g-circle:{ .annotation } `Runtime Status / Connect Button` (Top Right near Share: Shows if you're connected to a runtime and resource usage)*
 
 You'll spend most of your time writing in the **Main Cell Area (C)**, using the **Toolbar (B)** and **Menu Bar (A)** for actions, and the **Left Sidebar (D)** for navigation and file management.
 
