@@ -69,12 +69,17 @@ Ready to open your first notebook? It's simple:
     [https://colab.research.google.com](https://colab.research.google.com)
 3.  **Create a New Notebook:**
     * You might see a welcome pop-up window with options like viewing recent notebooks or examples. You can simply close this for now by clicking `CANCEL` or the 'X'.
-    * From the menu bar at the top, click **File -> New notebook**.
-        *(Suggestion for actual page: Insert a small screenshot highlighting the File -> New notebook menu path)*
+
+    ![Colab Welcome Screen](/assets/images/colab_landing_screen.png)
+
+    * From the menu bar at the top, click **File -> New notebook in Drive**.
+
+    ![Colab new notebook from file menu](/assets/images/colab_new_notebook_from_menu.png)
+    
+
 4.  **Name Your Notebook:**
     * The notebook will open with a default title like `Untitled0.ipynb` at the very top left of the page.
     * Click directly on this title. A rename dialog will appear. Change the name to something descriptive, like `MyFirstColabNotebook.ipynb` or `W1_Colab_Intro.ipynb`, and press Enter.
-        *(Suggestion for actual page: Insert a small screenshot highlighting where to click to rename)*
 
 **Success!** You've just created your first Colab notebook. It's automatically saved in a folder named "Colab Notebooks" within your Google Drive. You're now looking at the Colab interface, ready for the next step.
 
