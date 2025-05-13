@@ -28,12 +28,17 @@ This is suitable for a quick, one-time analysis of a small file.
 **How-to:**
 
 1.  In the **Left Sidebar**, click the **Folder icon** to open the **File Browser**.
-    *(Suggestion for actual page: Screenshot showing the Folder icon in the sidebar)*
+
+    ![Colab new notebook from file menu](/assets/images/colab_session_storage_1.png)
+
 2.  At the top of the File Browser pane that appears, click the **"Upload to session storage" button**. It usually looks like a page icon with an arrow pointing upwards.
-    *(Suggestion for actual page: Screenshot highlighting the Upload button)*
 3.  A file selection dialog from your operating system will open. Navigate to the desired file on your local computer (e.g., `sample_data.csv`) and select it.
+
+    ![Colab new notebook from file menu](/assets/images/colab_session_storage_3.png)
+
 4.  The file will be uploaded to Colab's temporary environment, and you should see its name appear in the File Browser list. Upload speed depends on the file size and your internet connection.
-    *(Suggestion for actual page: Screenshot showing the uploaded file listed in the File Browser)*
+
+    ![Colab new notebook from file menu](/assets/images/colab_session_storage_4.png)
 
 **Accessing the File in Code:**
 Once uploaded to session storage, you typically refer to the file in your Python code using just its filename as the path, because it's in the "root" directory of this temporary environment.
