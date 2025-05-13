@@ -7,7 +7,7 @@ Now that you have a fresh notebook open, let's get familiar with the main areas 
 
 Take a look at your Colab screen. Here are the main parts:
 
-*(Suggestion: Insert an annotated screenshot of a fresh Colab notebook here. Annotations should point out:)*
+![Colab user interface with annotation](/assets/images/colab_ui_annotated.png)
 
 * *`A: Menu Bar` (Top: File, Edit, View, Insert, Runtime, Tools, Help - Standard menu options)*
 * *`B: Toolbar` (Below Menu: Buttons for common actions like +Code, +Text, file operations, runtime status)*
@@ -32,16 +32,28 @@ The core components of any Jupyter-style notebook, including Colab, are **cells*
     * They use a simple formatting syntax called **Markdown**. When you "run" a text cell, Colab renders the Markdown into nicely formatted text (bold, italics, lists, headings, etc.). We'll look closer at Markdown in section 2.5.
         *(Suggestion: Small screenshot of a text cell with some Markdown source, and another showing the rendered output)*
 
-**Switching Between Cell Types:** You can easily change a cell from Code to Text or vice-versa. When a cell is selected (you'll see a border around it), you can use the main menu (`Insert` -> `Convert cell type` or similar options) or keyboard shortcuts (`Esc` then `M` for Markdown/Text; `Esc` then `Y` for Code).
+**Switching Between Cell Types:** You can easily change a cell from Code to Text or vice-versa. When a cell is selected (you'll see a border around it), you can use the command pallette  or keyboard shortcuts 
+
+!!! note
+
+    - To invoke commands via keyboard shortcuts, you need to press the ++"prefix"++ combo before the key for the command.
+    - The ++"prefix"++ combo in Windows/Linux/ChromeOS is ++ctrl+m++ and in MacOS it is ++cmd+m++
+    - To turn a cell into a markdown/text cell press ++"prefix"++then ++m++. 
+    - To turn a cell into a code cell press ++"prefix"++ then ++y++. 
+    - You can review all keyboard shortcuts available by pressing ++"prefix"++ then ++h++.
 
 ## **Running Cells: Bringing Notebooks to Life**
 
 Simply typing in a cell doesn't do anything until you **run** (or **execute**) it. Here are the most common ways to run the currently selected cell:
 
-* **`Shift + Enter`:** (Most Common) Executes the current cell and automatically selects the next cell below it. If you're at the last cell, it often creates a new code cell. *Use this to flow through your notebook.*
-* **`Ctrl + Enter`** (or **`Cmd + Enter`** on Mac): Executes the current cell but *keeps the focus on the same cell*. Useful if you want to re-run the same code multiple times quickly.
-* **`Alt + Enter`** (or **`Option + Enter`** on Mac): Executes the current cell and *inserts a brand new code cell* immediately below it. Handy for adding quick tests or explorations.
-* **The 'Play' Icon:** When you hover your mouse pointer to the left of a *code cell*, a circular 'play' button icon appears. Clicking this runs only that specific cell.
+* ++shift++ + ++enter++ 
+    - Executes the current cell and automatically selects the next cell below it. If you're at the last cell, it often creates a new code cell. *Use this to flow through your notebook.*
+* ++ctrl++ + ++enter++ on Windows and Linux / ++cmd++ + ++enter++ on MacOS 
+    - Executes the current cell but *keeps the focus on the same cell*. Useful if you want to re-run the same code multiple times quickly.
+* ++alt++ + ++enter++ / ++opt++ + ++enter++ 
+    - Executes the current cell and *inserts a brand new code cell* immediately below it. Handy for adding quick tests or explorations.
+* :material-play-circle: Play Icon
+    - When you hover your mouse pointer to the left of a *code cell*, a circular 'play' button icon appears. Clicking this runs only that specific cell.
     *(Suggestion: Small screenshot showing the Play icon next to a code cell)*
 
 ## **What happens when you run a cell?**
@@ -53,11 +65,10 @@ Simply typing in a cell doesn't do anything until you **run** (or **execute**) i
 
 When you select a cell, or sometimes just hover over it, a small toolbar usually appears (often in the top right corner of the cell). This provides handy shortcuts for common actions:
 
-*(Suggestion: Screenshot highlighting this dynamic cell toolbar)*
+![Colab cell toolbar](/assets/images/colab_cell_toolbar.png)
 
 Look for icons like:
 
-* `+ Code` / `+ Text`: To quickly insert new cells below the current one.
 * Arrows (Up/Down): To move the selected cell up or down in the notebook sequence.
 * Trash Can: To delete the current cell (use with caution!).
 * Link Icon: To get a direct URL link to that specific cell.
@@ -80,14 +91,17 @@ As your analyses become more involved, your notebooks can get quite long. Effect
 * Start lines with `-` or `*` for bullet points.
 * Start lines with `1.`, `2.`, etc., for numbered lists.
 
-*(Suggestion: Link to a concise Markdown cheatsheet here - many good ones exist online)*
+!!! note
+
+    Review this [Markdown Guide](https://colab.research.google.com/notebooks/markdown_guide.ipynb) from Google for a bite-sized tutorial and a list of references on this topic.
 
 **Leverage the Table of Contents:** Colab automatically creates a navigable Table of Contents based on the Markdown headings in your text cells.
 
 * Find the **Table of Contents icon** (usually looks like three horizontal lines or a bulleted list) in the **Left Sidebar**. Click it.
 * A pane will appear showing your headings, nested according to their level (`#`, `##`, etc.).
 * **Click any heading in this pane to jump directly to that section** of your notebook. This is incredibly useful for navigation!
-    *(Suggestion: Screenshot showing the ToC icon and the resulting pane with clickable headings)*
+
+![Colab cell toolbar](/assets/images/colab_toc.png)
 
 **Recommendation:** Make it a habit to use Markdown headings (`#`, `##`) to structure *all* your notebooks (labs, projects). It dramatically improves readability and navigation for yourself and anyone you share your work with.
 
