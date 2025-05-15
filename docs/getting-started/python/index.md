@@ -9,6 +9,7 @@ hide:
 <div class="grid cards" markdown>
 
 
+-   [:material-numeric-0:{ .lg .middle } __Starter Colab Notebook__](https://colab.research.google.com/github/dataprogpy/code-samples/blob/main/starter_files/02_intro_to_python.ipynb){:target="_blank"}
 -   [:material-numeric-1:{ .lg .middle } __Why Python?__](why-python.md)
 -   [:material-numeric-2:{ .lg .middle } __Modeling Information__](modeling-information.md)
 -   [:material-numeric-3:{ .lg .middle } __Modeling Structures__](modeling-structures.md)
