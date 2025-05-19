@@ -11,11 +11,11 @@ hide:
 <div class="grid cards" markdown>
 
 
--   [:simple-polars:{ .lg .middle } __Data Wrangling with Polars__](/eda/polars)
+-   [:simple-polars:{ .lg .middle } __Data Wrangling with Polars__](/eda/data-wrangling/)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/eda/polars)
+    [:octicons-arrow-right-24: Introduction to Data Wrangling](/eda/data-wrangling/intro-to-wrangling)
 
 -   [:material-chart-line:{ .lg .middle } __Data Visualization with Altair__](/eda/altair)
 

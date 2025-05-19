@@ -135,7 +135,7 @@ nav:
       - Essential Techniques: getting-started/colab/essential-techniques.md
       - Going Deeper: getting-started/colab/going-deeper.md
       - Best Practice & Getting Help: getting-started/colab/best-practice.md
-    - Introduction to Pyhon:
+    - Introduction to Python:
       - getting-started/python/index.md
       - Why Python?: getting-started/python/why-python.md
       - Modeling Information: getting-started/python/modeling-information.md
@@ -147,7 +147,14 @@ nav:
 
   - Exploratory Data Analysis:
     - eda/index.md
-    - Data Wrangling with Polars: eda/polars.md
+    - Data Wrangling with Polars: 
+      - eda/data-wrangling/index.md
+      - Introduction to Data Wrangling: eda/data-wrangling/intro-to-wrangling.md
+      - Data Exploration: eda/data-wrangling/data-exploration.md 
+      - Core Polars Concepts: eda/data-wrangling/core-polars-concepts.md
+      - Data Transformation: eda/data-wrangling/data-transformation.md
+      - Data Aggregation: eda/data-wrangling/data-aggregation.md
+      - Stitching and Saving Data: eda/data-wrangling/stitching-and-saving.md
     - Data Visualization with Altair: eda/altair.md
     - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
