@@ -1,4 +1,6 @@
-
+--- 
+icon: material/numeric-4
+---
 # **Working with Data & Files**
 
 Data analysis naturally starts with data! A common first step is loading data from files (like CSVs, Excel files, etc.) into your programming environment. Colab provides two primary ways to access files within your notebook session. Understanding the difference is key to managing your data effectively.

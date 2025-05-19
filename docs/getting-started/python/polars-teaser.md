@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-4
+---
+
 # Polars Teaser
 
 **Part 4: Teaser - Connecting to Data Analysis Tools**

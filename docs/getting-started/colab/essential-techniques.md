@@ -1,4 +1,6 @@
-
+--- 
+icon: material/numeric-5
+---
 # **Essential Techniques**
 
 Beyond the basic interface and file handling, here are a few more tools and techniques crucial for your work in Colab.

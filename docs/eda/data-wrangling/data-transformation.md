@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-4
+---
 # Data Transformation
 
 Okay, let's dive into **Module 5: Transforming Data - Selection, Filtering, and Modification**. This is a substantial module where students will learn the core operations for reshaping and cleaning data using Polars expressions within various execution contexts.

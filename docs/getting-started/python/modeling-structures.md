@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-3
+---
+
 # Modeling Structures
 
 **Part 3: Modeling Structures - Organizing Related Information**

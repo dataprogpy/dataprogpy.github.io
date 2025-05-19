@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-7
+---
+
 # Next Steps
 
 **Part 7: Summary & Next Steps**

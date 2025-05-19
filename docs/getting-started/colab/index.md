@@ -1,4 +1,5 @@
 ---
+icon: simple/googlecolab
 hide:
   - navigation
   - toc

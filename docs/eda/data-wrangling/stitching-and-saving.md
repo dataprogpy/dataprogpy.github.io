@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-6
+---
 # Stiching and Saving Data
 
 That's a sensible approach to consolidate the remaining topics. Combining "Combining DataFrames" (Module 7) and "Saving Data & Recap" (Module 8) into a single module, perhaps titled **"Module 7: Stitching, Saving Data, and Next Steps"** or simply **"Module 7: Stitching and Saving Data,"** can work well.

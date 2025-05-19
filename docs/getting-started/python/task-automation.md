@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-5
+---
+
 # Task Automation
 
 **Part 5: Automating Tasks - Making Code Work for You**

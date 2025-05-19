@@ -1,4 +1,5 @@
 ---
+icon: simple/python
 hide:
   - navigation
   - toc

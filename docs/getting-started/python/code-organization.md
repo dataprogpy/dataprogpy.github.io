@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-6
+---
+
 **Part 6: Structuring Code - For Reusability and Clarity**
 
 As your analysis tasks become more complex, you'll want ways to organize your code to make it more readable, maintainable, and reusable. Copying and pasting blocks of code is generally a bad practice – if you find a mistake or need to make an update, you have to change it in multiple places! Python offers structures like functions and leverages the concepts of objects and classes to help manage complexity.

@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-5
+---
 # Data Aggregation
 
 That's a great mindset for approaching Module 5, as it truly is foundational. Using it for "show-and-tell" and reinforcing earlier concepts during live sessions will be very effective.

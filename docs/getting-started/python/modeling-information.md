@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-2
+---
+
 # Modeling Information
 
 **Part 2: Modeling Information - The Basic Building Blocks**

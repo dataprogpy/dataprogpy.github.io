@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-7
+---
 # **Best Practices & Getting Help**
 
 You've now toured the essential features and concepts for using Google Colab in our "Data Programming Essentials with Python" course. To ensure a smooth learning experience, keep these best practices in mind and know where to turn for help.

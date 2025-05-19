@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-2
+---
 # Data Exploration
 
 

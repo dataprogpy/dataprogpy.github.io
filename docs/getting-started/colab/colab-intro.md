@@ -1,3 +1,7 @@
+--- 
+icon: material/numeric-1
+---
+
 # **Colab: Your Coding Environment**
 
 Welcome to the world of data programming! Before we dive into Python itself, let's get familiar with the main tool we'll be using throughout this course: **Google Colaboratory**, or **Colab**. Think of it as your digital workbench for all things data science in this class.

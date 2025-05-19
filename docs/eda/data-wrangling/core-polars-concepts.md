@@ -1,3 +1,6 @@
+--- 
+icon: material/numeric-3
+---
 # Core Polars Concepts
 
 Great, let's proceed to **Module 4: Core Polars Concepts - The Building Blocks**.
