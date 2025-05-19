@@ -1,7 +1,7 @@
 customer_id,name,registration_date,city,age
 101,Alice Wonderland,2022-01-15,New York,28
 102,Bob The Builder,2022-03-22,London,35
-103,Charlie Brown,2022-05-10,Paris,,45
+103,Charlie Brown,2022-05-10,Paris,45
 104,Diana Prince,2022-07-01,New York,3000
 105,Evan Almighty,2022-08-19,London,42
 106,Fiona Gallagher,2023-01-20,New York,29
