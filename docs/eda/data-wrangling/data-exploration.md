@@ -225,43 +225,50 @@ The data exploration step is where an analyst develops a deeper understanding of
 import polars as pl
 
 # Assuming 'customers.csv' and 'orders.csv' are in the current working directory:
-# customers_df = pl.read_csv('customers.csv')
-# orders_df = pl.read_csv('orders.csv')
-
-# For the examples below, we'll assume customers_df and orders_df are already loaded.
-# If you are starting a new session, uncomment and run the lines above.
-# To make examples runnable, let's create placeholder DataFrames if they don't exist.
-# In a real notebook, these would be loaded from files as in Module 2.
-try:
-    _ = customers_df.shape # Check if exists
-except NameError:
-    print("Placeholder: customers_df not loaded. Creating a minimal example.")
-    customers_df = pl.DataFrame({
-        "customer_id": [101, 102, 107, 110, 104],
-        "name": ["Alice Wonderland", "Bob The Builder", "George Jetson", "Jane Doe", "Diana Prince"],
-        "registration_date": ["2022-01-15", "2022-03-22", None, "2023-07-21", "2022-07-01"],
-        "city": ["New York", "London", "Paris", "New York", "New York"],
-        "age": [28, 35, 50, None, 3000]
-    }).with_columns(pl.col("age").cast(pl.Int64, strict=False)) # Ensure age is int for describe
-
-try:
-    _ = orders_df.shape # Check if exists
-except NameError:
-    print("Placeholder: orders_df not loaded. Creating a minimal example.")
-    orders_df = pl.DataFrame({
-        "order_id": [201, 202, 203, 207, 208],
-        "customer_id": [101, 102, 101, 105, 101],
-        "order_date": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-04-22 16:20:30", "2023-05-01 10:00:00"],
-        "product_category": ["Books", "Tools", "Electronics", "Electronics", "Books"],
-        "quantity": [2, 1, 1, None, 3],
-        "unit_price": [15.99, 199.50, 799.00, 99.99, 10.00],
-        "discount_applied": [0.05, 0.10, None, 0.05, None]
-    }).with_columns([
-        pl.col("quantity").cast(pl.Int64, strict=False),
-        pl.col("unit_price").cast(pl.Float64, strict=False),
-        pl.col("discount_applied").cast(pl.Float64, strict=False)
-    ])
+customers_df = pl.read_csv('customers.csv')
+orders_df = pl.read_csv('orders.csv')
 ```
+
+??? info "Error handling code"
+
+    If you stored your data files on the session stroage previously and 
+    encountered `NameError`, try the code below:
+    
+    ```py
+    # For the examples below, we'll assume customers_df and orders_df are already loaded.
+    # If you are starting a new session, uncomment and run the lines above.
+    # To make examples runnable, let's create placeholder DataFrames if they don't exist.
+    # In a real notebook, these would be loaded from files as in Module 2.
+    try:
+        _ = customers_df.shape # Check if exists
+    except NameError:
+        print("Placeholder: customers_df not loaded. Creating a minimal example.")
+        customers_df = pl.DataFrame({
+            "customer_id": [101, 102, 107, 110, 104],
+            "name": ["Alice Wonderland", "Bob The Builder", "George Jetson", "Jane Doe", "Diana Prince"],
+            "registration_date": ["2022-01-15", "2022-03-22", None, "2023-07-21", "2022-07-01"],
+            "city": ["New York", "London", "Paris", "New York", "New York"],
+            "age": [28, 35, 50, None, 3000]
+        }).with_columns(pl.col("age").cast(pl.Int64, strict=False)) # Ensure age is int for describe
+
+    try:
+        _ = orders_df.shape # Check if exists
+    except NameError:
+        print("Placeholder: orders_df not loaded. Creating a minimal example.")
+        orders_df = pl.DataFrame({
+            "order_id": [201, 202, 203, 207, 208],
+            "customer_id": [101, 102, 101, 105, 101],
+            "order_date": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-04-22 16:20:30", "2023-05-01 10:00:00"],
+            "product_category": ["Books", "Tools", "Electronics", "Electronics", "Books"],
+            "quantity": [2, 1, 1, None, 3],
+            "unit_price": [15.99, 199.50, 799.00, 99.99, 10.00],
+            "discount_applied": [0.05, 0.10, None, 0.05, None]
+        }).with_columns([
+            pl.col("quantity").cast(pl.Int64, strict=False),
+            pl.col("unit_price").cast(pl.Float64, strict=False),
+            pl.col("discount_applied").cast(pl.Float64, strict=False)
+        ])
+    ```
 
 **1. Understanding DataFrame Structure: Dimensions**
 

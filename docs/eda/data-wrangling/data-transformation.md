@@ -3,50 +3,48 @@ icon: material/numeric-4
 ---
 # Data Transformation
 
-Okay, let's dive into **Module 5: Transforming Data - Selection, Filtering, and Modification**. This is a substantial module where students will learn the core operations for reshaping and cleaning data using Polars expressions within various execution contexts.
-
 We'll use the `customers_df` and `orders_df` DataFrames. For realistic examples, especially for date parsing and missing value handling, ensure these DataFrames reflect the structure and "messiness" of the original CSV files.
 
-```python
-# Prerequisites: Ensure Polars is imported and selectors if used.
-import polars as pl
-import polars.selectors as cs # For using column selectors like cs.numeric()
+??? note "Prerequisite"
 
-# --- Placeholder DataFrames (mimicking loaded CSVs for standalone module execution) ---
-# These should reflect the structure from your customers.csv and orders.csv,
-# including mixed date formats, missing values, etc.
+    ```python
+    # Prerequisites: Ensure Polars is imported and selectors if used.
+    import polars as pl
+    import polars.selectors as cs # For using column selectors like cs.numeric()
 
-customers_df = pl.DataFrame({
-    "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
-    "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
-    "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
-    "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
-    "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
-}).with_columns(pl.col("age").cast(pl.Int64, strict=False)) # Cast age to Int64, allowing nulls
+    # --- Placeholder DataFrames (mimicking loaded CSVs for standalone module execution) ---
+    # These should reflect the structure from your customers.csv and orders.csv,
+    # including mixed date formats, missing values, etc.
 
-orders_df = pl.DataFrame({
-    "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
-    "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115],
-    "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
-    "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
-    "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
-    "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00],
-    "discount_applied": [0.05, 0.10, None, 0.0, 0.15, 0.0, 0.05, None, 0.10, 0.0, 0.05, 0.10, None, 0.05, 0.0, 0.0, 0.15, 0.0]
-}).with_columns([
-    pl.col("quantity").cast(pl.Int64, strict=False), # Ensure numeric types, allowing nulls
-    pl.col("unit_price").cast(pl.Float64, strict=False),
-    pl.col("discount_applied").cast(pl.Float64, strict=False)
-])
+    customers_df = pl.DataFrame({
+        "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
+        "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
+        "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
+        "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
+        "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
+    }).with_columns(pl.col("age").cast(pl.Int64, strict=False)) # Cast age to Int64, allowing nulls
 
-```
+    orders_df = pl.DataFrame({
+        "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
+        "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115],
+        "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
+        "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
+        "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
+        "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00],
+        "discount_applied": [0.05, 0.10, None, 0.0, 0.15, 0.0, 0.05, None, 0.10, 0.0, 0.05, 0.10, None, 0.05, 0.0, 0.0, 0.15, 0.0]
+    }).with_columns([
+        pl.col("quantity").cast(pl.Int64, strict=False), # Ensure numeric types, allowing nulls
+        pl.col("unit_price").cast(pl.Float64, strict=False),
+        pl.col("discount_applied").cast(pl.Float64, strict=False)
+    ])
+    ```
 
------
 
-**Module 5: Transforming Data - Selection, Filtering, and Modification (Approx. 60-75 mins)**
+**Transforming Data - Selection, Filtering, and Modification**
 
 This module covers the primary operations for transforming data: selecting specific columns, creating or modifying columns, filtering rows, changing data types, handling missing values, and sorting data. These operations are fundamental to preparing data for analysis.
 
-**1. Introduction to Data Transformation Contexts**
+## **1. Introduction to Data Transformation Contexts**
 
 As previewed in Module 4, Polars expressions are executed within specific DataFrame methods (contexts):
 
@@ -54,7 +52,7 @@ As previewed in Module 4, Polars expressions are executed within specific DataFr
   * `with_columns()`: For adding new columns or modifying existing ones, keeping all other columns.
   * `filter()`: For selecting a subset of rows based on conditions.
 
-**2. Column Selection and Manipulation with `select`**
+## **2. Column Selection and Manipulation with `select`**
 
 The `select()` method is used when you want to create a new DataFrame with a specific subset or transformation of columns from an existing DataFrame.
 
@@ -84,7 +82,7 @@ The `select()` method is used when you want to create a new DataFrame with a spe
     print(renamed_customers_df.head())
     ```
 
-  * **Using Polars Selectors (Briefly):**
+  * **Using Polars Selectors:**
     Polars offers powerful column selectors via the `cs` module (imported as `import polars.selectors as cs`). These allow selection based on patterns or data types.
 
     ```python
@@ -106,7 +104,7 @@ The `select()` method is used when you want to create a new DataFrame with a spe
 
     Selectors are very useful for DataFrames with many columns.
 
-**3. Adding or Modifying Columns with `with_columns`**
+## **3. Adding or Modifying Columns with `with_columns`**
 
 When you want to add new columns or change existing ones while keeping all other columns, `with_columns()` is the appropriate method. It takes a list of expressions.
 
@@ -140,7 +138,7 @@ When you want to add new columns or change existing ones while keeping all other
     print(customers_upper_name_df.head())
     ```
 
-**4. Filtering Rows with `filter`**
+## **4. Filtering Rows with `filter`**
 
 The `filter()` method is used to select rows that meet certain criteria, defined by one or more boolean expressions.
 
@@ -198,7 +196,7 @@ The `filter()` method is used to select rows that meet certain criteria, defined
     print(customers_from_selected_cities_df.select(["name", "city"]))
     ```
 
-**5. Data Type Conversion (Casting)**
+## **5. Data Type Conversion (Casting)**
 
 Often, data is not in the correct type (e.g., numbers read as strings, dates as strings). Use `pl.col().cast(DataType)` within `with_columns` to convert types.
 
@@ -279,7 +277,7 @@ Often, data is not in the correct type (e.g., numbers read as strings, dates as 
 
         `strict=False` allows parsing to return `null` on failure for a given format, letting `coalesce` try the next one.
 
-**6. Handling Missing Values**
+## **6. Handling Missing Values**
 
   * **Filling Nulls with `fill_null()`:**
     You can fill missing values using a literal value or a defined strategy.
@@ -328,7 +326,7 @@ Often, data is not in the correct type (e.g., numbers read as strings, dates as 
 
     *Business Context:* Discuss implications: Dropping an order because quantity is missing might be acceptable if quantity is essential for all analyses. Dropping a customer due to a missing registration date might be undesirable if other customer information is valuable.
 
-**7. Sorting Data with `sort()`**
+## **7. Sorting Data with `sort()`**
 
 The `sort()` method orders the DataFrame by one or more columns.
 
@@ -352,9 +350,3 @@ sorted_orders_df = orders_enhanced_df.sort(
 print("\nOrders sorted by product_category (asc) then total_price (desc):")
 print(sorted_orders_df.select(["product_category", "order_id", "total_price"]).head(10))
 ```
-
------
-
-This module provides a comprehensive overview of essential data transformation techniques in Polars. By combining these operations, students can perform sophisticated data cleaning and preparation tasks. The emphasis on using expressions within the appropriate contexts (`select`, `with_columns`, `filter`) is key to mastering Polars.
-
-This is a very dense module. How does the content and pacing feel for this section?

@@ -9,36 +9,38 @@ icon: material/numeric-3
 
 Having learned how to load and perform initial inspections on your data, we now focus on the core data structures and the expression API that form the foundation of Polars.
 
-```python
-# Prerequisite: Ensure Polars is imported.
-import polars as pl
+??? note "Prerequisite"
 
-# We will use customers_df and orders_df from previous modules.
-# For stand-alone execution of this module's examples,
-# ensure these DataFrames are loaded or use placeholders.
-try:
-    _ = customers_df.shape # Check if exists
-except NameError:
-    print("Placeholder: customers_df not loaded. Creating a minimal example.")
-    customers_df = pl.DataFrame({
-        "customer_id": [101, 102, 103, 104],
-        "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince"],
-        "city": ["New York", "London", "Paris", "New York"],
-        "age": [28, 35, 45, 28] # Added more variety for filtering
-    })
+    ```python
+    # Prerequisite: Ensure Polars is imported.
+    import polars as pl
 
-try:
-    _ = orders_df.shape # Check if exists
-except NameError:
-    print("Placeholder: orders_df not loaded. Creating a slightly more diverse example for context demonstration.")
-    orders_df = pl.DataFrame({
-        "order_id": [201, 202, 203, 204, 205, 206],
-        "customer_id": [101, 102, 101, 103, 102, 104],
-        "product_category": ["Books", "Tools", "Books", "Home Goods", "Books", "Electronics"],
-        "quantity": [2, 1, 3, 1, 1, 2],
-        "unit_price": [15.99, 199.50, 10.00, 25.00, 12.00, 79.99]
-    })
-```
+    # We will use customers_df and orders_df from previous modules.
+    # For stand-alone execution of this module's examples,
+    # ensure these DataFrames are loaded or use placeholders.
+    try:
+        _ = customers_df.shape # Check if exists
+    except NameError:
+        print("Placeholder: customers_df not loaded. Creating a minimal example.")
+        customers_df = pl.DataFrame({
+            "customer_id": [101, 102, 103, 104],
+            "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince"],
+            "city": ["New York", "London", "Paris", "New York"],
+            "age": [28, 35, 45, 28] # Added more variety for filtering
+        })
+
+    try:
+        _ = orders_df.shape # Check if exists
+    except NameError:
+        print("Placeholder: orders_df not loaded. Creating a slightly more diverse example for context demonstration.")
+        orders_df = pl.DataFrame({
+            "order_id": [201, 202, 203, 204, 205, 206],
+            "customer_id": [101, 102, 101, 103, 102, 104],
+            "product_category": ["Books", "Tools", "Books", "Home Goods", "Books", "Electronics"],
+            "quantity": [2, 1, 3, 1, 1, 2],
+            "unit_price": [15.99, 199.50, 10.00, 25.00, 12.00, 79.99]
+        })
+    ```
 
 ## **Polars DataFrame Revisited**
 
