@@ -4,7 +4,7 @@ icon: material/numeric-2
 # Data Exploration
 
 
-**Getting Data In - Data IO**
+## **Getting Data In - Data IO**
 
 The ability to import data from various sources is often the first step in data analysis. Polars provides efficient functions to read data from common file types directly into its primary data structure, the DataFrame.
 
@@ -32,8 +32,8 @@ CSV files are one of the most common formats for storing and exchanging tabular 
     orders_df = pl.read_csv('orders.csv')
 
     # You can then display the first few rows to verify
-    # print(customers_df.head())
-    # print(orders_df.head())
+    print(customers_df.head())
+    print(orders_df.head())
     ```
 
   * **Common Parameters for `pl.read_csv()`:**
@@ -46,6 +46,54 @@ CSV files are one of the most common formats for storing and exchanging tabular 
       * There are many other parameters for handling various CSV complexities (e.g.,  `null_values` for defining strings that should be interpreted as nulls), which you can explore in the Polars documentation as needed.
 
   * **Specifying or Overriding Data Types (Schema) with `dtypes`**
+
+    ??? note "What is a schema and why should you care?"
+
+        In the context of data science and business analytics, a **schema** refers to the formal definition or blueprint of a dataset's structure. Think of it as the architectural plan for your data, outlining what the data looks like and how it's organized.
+
+        Specifically, a schema typically defines:
+
+        1.  **Column Names:** The labels or identifiers for each piece of information in the dataset (e.g., "CustomerID", "ProductName", "TransactionDate", "SalesAmount").
+        2.  **Data Types:** The nature of the data stored in each column. Common data types include:
+            * **Integers:** Whole numbers (e.g., for counts like `QuantityOrdered`).
+            * **Floating-Point Numbers (Decimals):** Numbers with decimal points (e.g., for `UnitPrice` or `Revenue`).
+            * **Strings (Text):** Alphanumeric characters (e.g., for `CustomerName` or `ProductDescription`).
+            * **Booleans:** True or False values (e.g., for `IsActiveCustomer`).
+            * **Dates and Timestamps:** Specific points in time (e.g., for `OrderDate` or `RegistrationTimestamp`).
+            * **Categorical/Enum:** A fixed set of predefined values (e.g., `SalesRegion` being "North," "South," "East," or "West").
+        3.  **Relationships (in relational databases):** How different datasets or tables link together (e.g., how a `CustomerID` in an orders table relates to a `CustomerID` in a customer details table).
+        4.  **Constraints (sometimes):** Rules applied to the data, such as whether a value can be missing (null), if values must be unique (like an `OrderID`), or if they must fall within a specific range.
+
+        **Why is Understanding and Defining a Schema Important in a Business Context?**
+
+        A clear and accurate schema is not merely a technical detail; it is fundamental to effective data utilization and decision-making in business for several critical reasons:
+
+        1.  **Ensuring Data Integrity and Quality:**
+            * A schema acts as a first line of defense for data quality. By defining that `SalesAmount` must be a numerical value, any attempt to input text (e.g., "One Thousand Dollars") would be flagged as an error or an inconsistency that needs addressing. This prevents the "garbage in, garbage out" problem, leading to more reliable data.
+            * It helps identify data collection or entry errors early. If a `TransactionDate` column, defined as a date type, contains values that cannot be interpreted as valid dates, it signals a problem in the data pipeline.
+
+        2.  **Enabling Accurate Analysis and Reporting:**
+            * Correct data types are essential for any meaningful computation. For example, you cannot accurately calculate total revenue if the `SalesAmount` column is mistakenly treated as text. Trend analysis based on dates requires the `OrderDate` column to be a proper date type, not just a string of characters.
+            * It ensures that analytical operations like sums, averages, minimums, maximums, and comparisons yield correct and trustworthy results, which are the bedrock of informed business decisions.
+
+        3.  **Facilitating Effective Data Integration:**
+            * Businesses often need to combine data from disparate sources (e.g., CRM systems, sales databases, marketing analytics platforms). A clear understanding of the schema for each source is vital to correctly join or merge these datasets. Mismatched data types or misinterpretation of column meanings (e.g., joining on an ID that has different formats in two tables) can lead to failed integrations or, worse, subtly incorrect combined datasets.
+
+        4.  **Supporting System Compatibility and Interoperability:**
+            * Data frequently moves between different software systems—from operational databases to data warehouses, analytics tools (like Polars), and business intelligence dashboards. A well-defined schema ensures that data is interpreted consistently across these platforms, maintaining its meaning and usability.
+            * For regulatory reporting or data exchange with partners, adherence to a predefined schema is often a requirement.
+
+        5.  **Improving Efficiency in Data Processing:**
+            * When data processing tools and databases are aware of the schema, they can optimize data storage and query execution. For example, operations on numerical data are generally faster and more memory-efficient than on text data if the system knows the type in advance.
+            * When loading data, explicitly defining the schema can significantly speed up the import process and reduce memory consumption, as the system doesn't need to infer data types.
+
+        6.  **Promoting Clear Communication and Collaboration:**
+            * The schema serves as a common language and a point of reference for all stakeholders involved with the data—from data engineers and analysts to business managers. It provides clear documentation on what each data field represents and its expected format.
+
+        7.  **Forming a Basis for Data Governance:**
+            * Schema definitions are integral to data governance frameworks. These frameworks establish policies for data quality, security, and compliance. A well-understood schema helps enforce these policies and manage data as a valuable organizational asset.
+
+        In essence, the schema provides the necessary structure and rules that allow businesses to transform raw data into reliable information, which in turn supports insightful analysis and strategic decision-making. Neglecting the schema can lead to significant errors, inefficiencies, and ultimately, flawed business intelligence.
 
     While Polars does a good job of inferring data types automatically, there are several reasons why you might want to explicitly define the schema when reading a CSV:
 
@@ -75,9 +123,8 @@ CSV files are one of the most common formats for storing and exchanging tabular 
     # Load the customers dataset with the specified schema
     customers_custom_schema_df = pl.read_csv('customers.csv', dtypes=customer_schema)
 
-    # You can inspect the data types in Module 3 (e.g., using customers_custom_schema_df.dtypes)
-    # print(customers_custom_schema_df.dtypes)
-    # print(customers_custom_schema_df.head())
+    print(customers_custom_schema_df.dtypes)
+    print(customers_custom_schema_df.head())
     ```
 
     **Common Polars Data Types for Schema Definition:**
@@ -88,7 +135,7 @@ CSV files are one of the most common formats for storing and exchanging tabular 
       * Strings: `pl.Utf8`
       * Booleans: `pl.Boolean`
       * Dates/Times: `pl.Date`, `pl.Datetime`, `pl.Duration`, `pl.Time`
-      * Categorical: `pl.Categorical` (for columns with a limited set of unique string values)
+      * Categorical: `pl.Enum`, `pl.Categorical` (for columns with a limited set of unique string values)
 
     For a comprehensive list, refer to the official Polars documentation on data types. Note that for complex date/time parsing directly within `read_csv` when formats are inconsistent, it's often more robust to read the column as `pl.Utf8` and then use Polars' specialized string-to-date conversion functions (covered in Module 5). The `try_parse_dates=True` parameter can be an alternative for simpler cases.
 
@@ -110,7 +157,7 @@ Polars can also read CSV files directly from a URL, which is convenient for acce
     # Load data from the URL
     airline_passengers_df = pl.read_csv(airline_passengers_url)
 
-    # print(airline_passengers_df.head())
+    print(airline_passengers_df.head())
     ```
 
     *Note for students:* When working with data from URLs, ensure you have an active internet connection. The availability and content of external URLs can change.
@@ -163,234 +210,17 @@ While CSV and JSON are common, Polars supports reading various other file format
 
 These options provide flexibility in accessing data from diverse enterprise sources. For this course, we will primarily focus on CSV and JSON.
 
----
-Okay, let's move forward to **Module 3: First Look - Initial Data Exploration & Understanding**.
+## **First Look - Initial Data Exploration**
 
-Once data is loaded into a Polars DataFrame, the next crucial step is to perform an initial exploration. This involves understanding the data's structure, content, and basic statistical properties, which helps in identifying data quality issues and informs subsequent cleaning and analysis strategies.
-
------
-
-**Module 3: First Look - Initial Data Exploration & Understanding (Approx. 30-40 mins)**
-
-This module will guide you through the fundamental Polars functions and techniques used to inspect and understand your DataFrames. We will primarily use the `customers_df` and `orders_df` DataFrames that would have been loaded in Module 2. Ensure you have these DataFrames available.
+The data exploration step is where an analyst develops a deeper understanding of the structural characteristics of the ingested data, identifies the sequence of casting, transformation, and cleaning tasks that need to be performed, and implements the identified changes. This section will guide you through the fundamental Polars functions and techniques used to inspect and understand your DataFrames. We will primarily use the `customers_df` and `orders_df` DataFrames. Ensure you have these DataFrames available.
 
 ```python
-# Prerequisite: Ensure Polars is imported and your DataFrames are loaded.
-import polars as pl
-
-# Assuming 'customers.csv' and 'orders.csv' are in the current working directory:
-# customers_df = pl.read_csv('customers.csv')
-# orders_df = pl.read_csv('orders.csv')
-
-# For the examples below, we'll assume customers_df and orders_df are already loaded.
-# If you are starting a new session, uncomment and run the lines above.
-# To make examples runnable, let's create placeholder DataFrames if they don't exist.
-# In a real notebook, these would be loaded from files as in Module 2.
-try:
-    customers_df.shape
-except NameError:
-    print("Placeholder: customers_df not loaded. Creating a minimal example.")
-    customers_df = pl.DataFrame({
-        "customer_id": [101, 102, 107, 110, 104],
-        "name": ["Alice Wonderland", "Bob The Builder", "George Jetson", "Jane Doe", "Diana Prince"],
-        "registration_date": ["2022-01-15", "2022-03-22", None, "2023-07-21", "2022-07-01"],
-        "city": ["New York", "London", "Paris", "New York", "New York"],
-        "age": [28, 35, 50, None, 3000]
-    })
-
-try:
-    orders_df.shape
-except NameError:
-    print("Placeholder: orders_df not loaded. Creating a minimal example.")
-    orders_df = pl.DataFrame({
-        "order_id": [201, 202, 203, 207, 208],
-        "customer_id": [101, 102, 101, 105, 101],
-        "order_date": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-04-22 16:20:30", "2023-05-01 10:00:00"],
-        "product_category": ["Books", "Tools", "Electronics", "Electronics", "Books"],
-        "quantity": [2, 1, 1, None, 3],
-        "unit_price": [15.99, 199.50, 799.00, 99.99, 10.00],
-        "discount_applied": [0.05, 0.10, None, 0.05, None]
-    })
-```
-
-**1. Understanding DataFrame Structure: Dimensions**
-
-The first thing to ascertain about your DataFrame is its size – how many rows (observations) and columns (variables or features) it contains.
-
-  * **`.shape` Attribute:**
-    The `.shape` attribute returns a tuple representing the dimensions of the DataFrame: `(number_of_rows, number_of_columns)`.
-
-    ```python
-    # Get the dimensions of the customers DataFrame
-    customer_dimensions = customers_df.shape
-    print(f"Customers DataFrame - Rows: {customer_dimensions[0]}, Columns: {customer_dimensions[1]}")
-
-    # Get the dimensions of the orders DataFrame
-    order_dimensions = orders_df.shape
-    print(f"Orders DataFrame - Rows: {order_dimensions[0]}, Columns: {order_dimensions[1]}")
-    ```
-
-    This output directly informs you about the scale of your dataset. For instance, `(15, 5)` for `customers_df` would indicate 15 customer records and 5 attributes for each.
-
-**2. Inspecting Data Content: First and Last Rows**
-
-To get a quick look at the actual data values and column headers, you can view the first few or last few rows.
-
-  * **`.head(n)` Method:**
-    Displays the first `n` rows of the DataFrame. If `n` is not specified, it defaults to 5.
-
-    ```python
-    # Display the first 3 rows of the customers DataFrame
-    print("First 3 rows of customers_df:")
-    print(customers_df.head(3))
-    ```
-
-  * **`.tail(n)` Method:**
-    Displays the last `n` rows of the DataFrame. If `n` is not specified, it defaults to 5.
-
-    ```python
-    # Display the last 3 rows of the orders DataFrame
-    print("\nLast 3 rows of orders_df:")
-    print(orders_df.tail(3))
-    ```
-
-    Reviewing the head and tail can help verify that the data loaded as expected and provide an initial sense of its content and format.
-
-**3. Examining Data Types and Schema**
-
-Understanding the data type of each column is essential for appropriate analysis and operations. For example, numerical operations cannot be directly applied to columns misinterpreted as strings.
-
-  * **`.dtypes` Attribute:**
-    Returns a list of `DataType` for each column in the DataFrame.
-
-    ```python
-    # Get the data types of columns in customers_df
-    print("Data types for customers_df:")
-    print(customers_df.dtypes)
-    ```
-
-    This output confirms how Polars has interpreted (or been instructed to interpret, if a schema was provided during `read_csv`) each column. For example, you might see `Int64`, `Float64`, `Utf8` (for strings), `Boolean`, `Date`, `Datetime`, or `Categorical`.
-
-  * **`.schema` Attribute:**
-    Provides a more structured view of the column names and their corresponding Polars `DataType`.
-
-    ```python
-    # Get the schema of the orders_df
-    print("\nSchema for orders_df:")
-    print(orders_df.schema)
-    ```
-
-    The schema is particularly useful for programmatically accessing column names and types.
-
-**4. Obtaining Descriptive Statistics and a Quick Overview**
-
-Summary statistics provide a quantitative overview of your data, particularly for numerical columns.
-
-  * **`.describe()` Method:**
-    Computes and displays summary statistics for the numerical columns in the DataFrame. These statistics typically include count, null count, mean, standard deviation, minimum, maximum, and percentile values (25th, 50th/median, 75th).
-
-    ```python
-    # Get descriptive statistics for the orders DataFrame
-    print("Descriptive statistics for orders_df:")
-    print(orders_df.describe())
-    ```
-
-    Analyzing the output of `.describe()` can help identify potential outliers (e.g., via min/max values like the `age: 3000` in `customers_df`), understand the central tendency and dispersion of your data, and note the extent of missing values in numerical fields. For instance, a `mean` significantly different from the `median` (50th percentile) can indicate skewness in the distribution.
-
-  * **`.glimpse()` Method:**
-    Provides a transposed view of the DataFrame, showing each column name, its data type, and the first few values. This is a convenient way to get a quick, comprehensive snapshot.
-
-    ```python
-    # Get a glimpse of the customers DataFrame
-    print("\nGlimpse of customers_df:")
-    customers_df.glimpse() # glimpse prints directly, does not return a string for print()
-
-    print("\nGlimpse of orders_df:")
-    orders_df.glimpse()
-    ```
-
-**5. Identifying and Quantifying Missing Values**
-
-Missing data is a common issue that can significantly impact analysis if not handled correctly.
-
-  * **`.is_null()` Method:**
-    Returns a DataFrame of the same shape, containing boolean values: `True` where a value is null (missing) and `False` otherwise.
-
-  * **Chaining `.is_null().sum()`:**
-    To get a count of null values per column, you can chain the `.sum()` method after `.is_null()`.
-
-    ```python
-    # Count missing values in each column of customers_df
-    missing_customers = customers_df.is_null().sum()
-    print("Missing values per column in customers_df:")
-    print(missing_customers)
-
-    # Count missing values in each column of orders_df
-    missing_orders = orders_df.is_null().sum()
-    print("\nMissing values per column in orders_df:")
-    print(missing_orders)
-    ```
-
-    This output directly quantifies missing data, helping you prioritize columns for imputation or other handling strategies. For example, `customers_df` shows missing values in `registration_date` and `age`. `orders_df` shows them in `product_category`, `quantity`, and `discount_applied` based on the example CSVs.
-
-**6. Analyzing Unique Values in Columns**
-
-Understanding the unique values within a column is particularly useful for:
-
-  * Identifying the diversity of data in a column.
-
-  * Assessing categorical columns for the number of distinct categories.
-
-  * Checking if an ID column is indeed a unique identifier.
-
-  * **`.n_unique()` Method (on a DataFrame or selected Series):**
-    Returns the number of unique values in each column (if applied to a DataFrame) or in a specific column (if applied to a Series/Expression).
-
-    ```python
-    # Get the number of unique values for each column in customers_df
-    print("Number of unique values per column in customers_df:")
-    print(customers_df.n_unique())
-
-    # Get the number of unique values in the 'city' column of customers_df
-    # To apply to a single column (Series), select it first
-    unique_cities_count = customers_df.select(pl.col('city').n_unique())
-    print("\nNumber of unique cities in customers_df:")
-    print(unique_cities_count)
-    # Alternatively, for a single column as a series:
-    # print(customers_df['city'].n_unique())
-    ```
-
-  * **`.unique()` Method (on a Series/Expression):**
-    Returns a Series containing only the unique values from the specified column.
-
-    ```python
-    # Get the unique values in the 'product_category' column of orders_df
-    unique_product_categories = orders_df.select(pl.col('product_category').unique())
-    print("\nUnique product categories in orders_df:")
-    print(unique_product_categories)
-    # Alternatively, for a single column as a series:
-    # print(orders_df['product_category'].unique())
-    ```
-
-    For business students, analyzing unique values in columns like `city` or `product_category` can inform market segmentation or product assortment strategies.
-
------
-
-This module equips students with the initial toolkit for data exploration in Polars. By applying these functions, they can gain a solid understanding of their dataset's characteristics, which is a prerequisite for effective data wrangling and analysis.
-
-How does this look for Module 3?
----
-You've made an excellent point. Emphasizing the Polars expression API from the outset, even if it seems more verbose initially, is key to helping students understand Polars' core philosophy and how it builds and optimizes queries. This will be beneficial as they move to more complex transformations.
-
-Let's revise the code examples in **Module 3** to use the expression API more explicitly where applicable. For some inspection methods (like `.shape` or `.head()`), direct DataFrame attributes or methods are standard and don't have a natural expression-based alternative for their primary purpose. However, for computations like counting nulls or getting unique values, we can certainly be more explicit with expressions.
-
------
-
-**Module 3: First Look - Initial Data Exploration & Understanding (Approx. 30-40 mins)**
-
-This module will guide you through the fundamental Polars functions and techniques used to inspect and understand your DataFrames. We will primarily use the `customers_df` and `orders_df` DataFrames that would have been loaded in Module 2. Ensure you have these DataFrames available.
-
-```python
+# If you are using a local or non-Colab development environment,
+# you may need to run the code below on your notebook or use a 
+# dependency manager to install polars to your environment
+# 
+# !pip install polars
+#
 # Prerequisite: Ensure Polars is imported and your DataFrames are loaded.
 import polars as pl
 
@@ -588,7 +418,3 @@ Understanding unique values helps characterize your data.
     The result of `pl.col().unique()` is a column containing only the unique, non-null values.
 
 -----
-
-This revision for Module 3 now more explicitly uses the Polars expression API for counting nulls and analyzing unique values, using the `select` context with `pl.all()` or `pl.col()`. This should help students build a stronger foundational understanding of how expressions are used in Polars, even for these initial exploratory tasks.
-
-How does this revised Module 3 look?
