@@ -417,4 +417,3 @@ Understanding unique values helps characterize your data.
 
     The result of `pl.col().unique()` is a column containing only the unique, non-null values.
 
------
