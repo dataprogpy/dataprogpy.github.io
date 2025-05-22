@@ -3,51 +3,48 @@ icon: material/numeric-5
 ---
 # Data Aggregation
 
-That's a great mindset for approaching Module 5, as it truly is foundational. Using it for "show-and-tell" and reinforcing earlier concepts during live sessions will be very effective.
 
-Let's move on to **Module 6: Aggregating & Reshaping Data - Summarizing for Insights**. This module focuses on how to derive summary statistics from your data using group-by operations and briefly touches upon reshaping techniques like pivoting and the concept of window functions.
-
------
-
-**Module 6: Aggregating & Reshaping Data - Summarizing for Insights (Approx. 40-50 mins)**
+**Aggregating & Reshaping Data - Summarizing for Insights**
 
 After cleaning and transforming individual data points, the next step is often to aggregate data to extract higher-level insights and summaries. This module covers grouping data and applying aggregation functions, along with a brief introduction to pivoting and window functions.
 
-```python
-# Prerequisites: Ensure Polars is imported.
-import polars as pl
+??? note "Prerequisites"
 
-# --- Placeholder DataFrames (consistent with those used/modified in Module 5) ---
-# Re-establishing them here for clarity if this module is run standalone.
-# In a continuous notebook, these would carry over.
+    ```python
+    # Prerequisites: Ensure Polars is imported.
+    import polars as pl
 
-customers_df = pl.DataFrame({
-    "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
-    "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
-    "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
-    "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
-    "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
-}).with_columns(
-    pl.when(pl.col("age") > 100).then(None).otherwise(pl.col("age")).cast(pl.Int64, strict=False).alias("age_cleaned") # Cleaned age
-)
+    # --- Placeholder DataFrames (consistent with those used/modified in Module 5) ---
+    # Re-establishing them here for clarity if this module is run standalone.
+    # In a continuous notebook, these would carry over.
 
-orders_df = pl.DataFrame({
-    "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
-    "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115],
-    "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
-    "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
-    "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
-    "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00],
-    "discount_applied": [0.05, 0.10, None, 0.0, 0.15, 0.0, 0.05, None, 0.10, 0.0, 0.05, 0.10, None, 0.05, 0.0, 0.0, 0.15, 0.0]
-}).with_columns([
-    pl.col("quantity").cast(pl.Int64, strict=False),
-    pl.col("unit_price").cast(pl.Float64, strict=False),
-    pl.col("discount_applied").cast(pl.Float64, strict=False),
-    pl.col("order_date_str").str.to_datetime(format="%Y-%m-%d %H:%M:%S", strict=False).alias("order_datetime") # Parse date
-])
-```
+    customers_df = pl.DataFrame({
+        "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
+        "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
+        "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
+        "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
+        "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
+    }).with_columns(
+        pl.when(pl.col("age") > 100).then(None).otherwise(pl.col("age")).cast(pl.Int64, strict=False).alias("age_cleaned") # Cleaned age
+    )
 
-**1. Group By and Aggregations (`.group_by().agg()`)**
+    orders_df = pl.DataFrame({
+        "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
+        "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115],
+        "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
+        "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
+        "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
+        "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00],
+        "discount_applied": [0.05, 0.10, None, 0.0, 0.15, 0.0, 0.05, None, 0.10, 0.0, 0.05, 0.10, None, 0.05, 0.0, 0.0, 0.15, 0.0]
+    }).with_columns([
+        pl.col("quantity").cast(pl.Int64, strict=False),
+        pl.col("unit_price").cast(pl.Float64, strict=False),
+        pl.col("discount_applied").cast(pl.Float64, strict=False),
+        pl.col("order_date_str").str.to_datetime(format="%Y-%m-%d %H:%M:%S", strict=False).alias("order_datetime") # Parse date
+    ])
+    ```
+
+## **1. Group By and Aggregations**
 
 The "group by" operation is a common data manipulation pattern often described as "split-apply-combine":
 
@@ -115,7 +112,7 @@ In Polars, this is primarily achieved using `df.group_by("key_column").agg([...]
     print(customer_category_sales_df.head(10))
     ```
 
-**2. (Optional/Brief) Pivoting Data with `df.pivot()`**
+## **2. Pivoting Data with `df.pivot()`**
 
 Pivoting is a way to reshape data from a "long" format to a "wide" format, where unique values from one column become new column headers.
 
@@ -155,7 +152,7 @@ Pivoting is a way to reshape data from a "long" format to a "wide" format, where
 
     *Business Context:* This wide format can be useful for reports or visualizations where you want to compare categories side-by-side over years.
 
-**3. (Mention as Advanced) Window Functions**
+## **3. Window Functions**
 
 Window functions perform calculations across a set of table rows that are somehow related to the current row – this set is called a "window." Unlike `group_by().agg()` operations which typically reduce the number of rows, window functions compute a value for *each* row based on its window.
 
@@ -183,9 +180,3 @@ Window functions perform calculations across a set of table rows that are someho
     ```
 
     *Note for Students:* Window functions are very powerful but have a steeper learning curve. They are mentioned here for awareness. For many business reporting tasks, standard group-by aggregations are often sufficient.
-
------
-
-This module covers essential techniques for summarizing and deriving insights from data. Group-by operations are a daily tool for analysts, while pivoting and window functions offer more advanced ways to reshape and analyze data for specific reporting needs.
-
-This completes the main data transformation and aggregation topics. How does this content for Module 6 look?

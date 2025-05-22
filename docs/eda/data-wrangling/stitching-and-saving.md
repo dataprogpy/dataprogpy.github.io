@@ -3,61 +3,57 @@ icon: material/numeric-6
 ---
 # Stiching and Saving Data
 
-That's a sensible approach to consolidate the remaining topics. Combining "Combining DataFrames" (Module 7) and "Saving Data & Recap" (Module 8) into a single module, perhaps titled **"Module 7: Stitching, Saving Data, and Next Steps"** or simply **"Module 7: Stitching and Saving Data,"** can work well.
-
-Let's focus on the core aspects: joining and saving, and then we can add concise notes on workflow and lazy execution as outlined.
-
------
-
-**Module 7: Stitching and Saving Data (Approx. 25-35 mins if recap is brief)**
+**Stitching and Saving Data**
 
 In real-world scenarios, data often resides in multiple tables or files. This module covers how to "stitch" these related datasets together using joins. We will also cover how to save your processed DataFrames to files for future use or sharing. Finally, we'll briefly touch upon some workflow concepts.
 
-```python
-# Prerequisites: Ensure Polars is imported.
-import polars as pl
+??? note "Prerequisites"
 
-# --- Placeholder DataFrames (consistent with those used/modified in previous modules) ---
-# Re-establishing them here for clarity if this module is run standalone.
+    ```python
+    # Prerequisites: Ensure Polars is imported.
+    import polars as pl
 
-customers_df = pl.DataFrame({
-    "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
-    "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
-    "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
-    "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
-    "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
-}).with_columns(
-    pl.when(pl.col("age") > 100).then(None).otherwise(pl.col("age")).cast(pl.Int64, strict=False).alias("age_cleaned")
-)
+    # --- Placeholder DataFrames (consistent with those used/modified in previous modules) ---
+    # Re-establishing them here for clarity if this module is run standalone.
 
-orders_df = pl.DataFrame({
-    "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
-    "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115], # Includes customer_id 111 not in current customers_df for left join illustration
-    "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
-    "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
-    "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
-    "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00]
-}).with_columns([
-    pl.col("quantity").cast(pl.Int64, strict=False),
-    pl.col("unit_price").cast(pl.Float64, strict=False),
-    # For simplicity, assuming discount_applied and order_datetime are handled if needed later
-])
+    customers_df = pl.DataFrame({
+        "customer_id": [101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115],
+        "name": ["Alice Wonderland", "Bob The Builder", "Charlie Brown", "Diana Prince", "Evan Almighty", "Fiona Gallagher", "George Jetson", "Hannah Montana", "Ian Malcolm", "Jane Doe", "Kevin McCallister", "Laura Palmer", "Michael Scott", "Nancy Drew", "Oscar Grouch"],
+        "registration_date_str": ["2022-01-15", "2022-03-22", "2022-05-10", "2022-07-01", "2022-08-19", "2023-01-20", None, "2023-04-05", "2023-06-12", "2023-07-21", "2023-09-01", "2023-10-15", "2024-02-10", "03/15/2024", "2024-05-01"],
+        "city": ["New York", "London", "Paris", "New York", "London", "New York", "Paris", "Berlin", "London", "New York", "Chicago", "Twin Peaks", "Scranton", "River Heights", "New York"],
+        "age": [28, 35, 45, 3000, 42, 29, 50, 22, 55, None, 12, 17, 48, 18, 60]
+    }).with_columns(
+        pl.when(pl.col("age") > 100).then(None).otherwise(pl.col("age")).cast(pl.Int64, strict=False).alias("age_cleaned")
+    )
 
-# Let's refine customers_df to ensure all customer_ids in orders_df are present if we want to avoid nulls in inner joins
-# Or, keep it as is to demonstrate how different joins handle mismatches.
-# For this example, let's keep customers_df as is to show how left join differs.
-# Example customer_id in orders_df (e.g., 105) might not be in a shortened customers_df if it was trimmed.
-# The current customer_df includes 101-115. orders_df has customer_ids within this range.
-# Let's adjust orders_df slightly to have a customer_id that *might not* be in customers_df if it were a subset
-# For a clean join demonstration, we will use the full customers_df and orders_df where customer_ids align.
-# The `customers_df` covers 101-115. `orders_df` uses customer_ids within this range.
-# To illustrate left join better where left has unmatched, let's assume an order from customer 999
-# orders_df = orders_df.vstack(pl.DataFrame({"order_id": [999], "customer_id": [999], ...})) # this is complex for now
-# Instead, we'll focus on cases where customers might not have orders.
+    orders_df = pl.DataFrame({
+        "order_id": [201, 202, 203, 204, 205, 206, 207, 208, 209, 210, 211, 212, 213, 214, 215, 216, 217, 218],
+        "customer_id": [101, 102, 101, 103, 104, 102, 105, 101, 106, 108, 103, 107, 110, 111, 102, 113, 101, 115], # Includes customer_id 111 not in current customers_df for left join illustration
+        "order_date_str": ["2023-01-20 10:30:00", "2023-02-15 11:05:30", "2023-02-28 14:12:55", "2023-03-10 09:00:15", "2023-03-12 17:45:00", "2023-04-05 12:00:00", "2023-04-22 16:20:30", "2023-05-01 10:00:00", "2023-05-15 08:55:10", "2023-06-01 11:30:00", "2023-06-20 13:40:00", "2023-07-01 00:00:00", "2023-07-25 10:10:10", "2023-09-10 14:20:30", "2023-11-05 19:00:00", "2024-02-15 09:30:00", "2024-03-01 10:00:00", "2024-05-05 12:12:12"],
+        "product_category": ["Books", "Tools", "Electronics", "Home Goods", "Antiques", "Books", "Electronics", "Books", "Beauty", "Music", "Home Goods", "Electronics", "Clothing", "Toys", "Tools", "Office Supplies", "Electronics", "Home Goods"],
+        "quantity": [2, 1, 1, 3, 1, 1, None, 3, 2, 5, 1, 1, 2, 3, 1, 10, 1, 1],
+        "unit_price": [15.99, 199.50, 799.00, 25.00, 2500.00, 12.50, 99.99, 10.00, 45.75, 9.99, 150.00, 499.50, 75.00, 29.99, 75.00, 4.99, 1200.00, 12.00]
+    }).with_columns([
+        pl.col("quantity").cast(pl.Int64, strict=False),
+        pl.col("unit_price").cast(pl.Float64, strict=False),
+        # For simplicity, assuming discount_applied and order_datetime are handled if needed later
+    ])
 
-```
+    # Let's refine customers_df to ensure all customer_ids in orders_df are present if we want to avoid nulls in inner joins
+    # Or, keep it as is to demonstrate how different joins handle mismatches.
+    # For this example, let's keep customers_df as is to show how left join differs.
+    # Example customer_id in orders_df (e.g., 105) might not be in a shortened customers_df if it was trimmed.
+    # The current customer_df includes 101-115. orders_df has customer_ids within this range.
+    # Let's adjust orders_df slightly to have a customer_id that *might not* be in customers_df if it were a subset
+    # For a clean join demonstration, we will use the full customers_df and orders_df where customer_ids align.
+    # The `customers_df` covers 101-115. `orders_df` uses customer_ids within this range.
+    # To illustrate left join better where left has unmatched, let's assume an order from customer 999
+    # orders_df = orders_df.vstack(pl.DataFrame({"order_id": [999], "customer_id": [999], ...})) # this is complex for now
+    # Instead, we'll focus on cases where customers might not have orders.
 
-**1. Stitching Data: Joining DataFrames with `.join()`**
+    ```
+
+## **1. Stitching Data: Joining DataFrames with `.join()`**
 
 Often, the data you need for a comprehensive analysis is spread across multiple tables or files. For instance, you might have order details in one DataFrame and customer information in another. Joining allows you to combine these DataFrames based on common key columns.
 
@@ -112,7 +108,7 @@ Often, the data you need for a comprehensive analysis is spread across multiple 
 
     *Business Context:* An inner join might be used to analyze only confirmed sales linked to known customers. A left join (e.g., `customers_df.join(orders_df, ..., how="left")`) is crucial for analyses like identifying customers who haven't placed an order.
 
-**2. Saving DataFrames to Files**
+## **2. Saving DataFrames to Files**
 
 After performing your data wrangling tasks—cleaning, transforming, joining—you'll often want to save the resulting DataFrame. This allows you to persist your work for later use, share it with colleagues, or use it as input for other tools or models.
 
@@ -151,7 +147,7 @@ After performing your data wrangling tasks—cleaning, transforming, joining—y
 
     Polars' `write_json` can also produce column-oriented JSON if `row_oriented=False`.
 
-**3. Workflow and Execution Notes (Briefly)**
+## **3. Workflow and Execution Notes**
 
   * **Method Chaining for Cleaner Pipelines:**
     Polars encourages chaining multiple operations together to create concise and readable data transformation pipelines.
@@ -200,9 +196,3 @@ After performing your data wrangling tasks—cleaning, transforming, joining—y
     ```
 
     For many operations in an introductory context, Polars feels "eager," but its lazy core is always there for optimization.
-
------
-
-This combined module covers the essentials of joining DataFrames to create richer datasets and saving the results for persistence. The brief notes on method chaining and lazy execution provide a glimpse into more advanced Polars workflows.
-
-This should effectively cover the remaining topics from your outline.

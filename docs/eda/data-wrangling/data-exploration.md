@@ -233,8 +233,8 @@ orders_df = pl.read_csv('orders.csv')
 
     If you stored your data files on the session stroage previously and 
     encountered `NameError`, try the code below:
-    
-    ```py
+
+    ```python
     # For the examples below, we'll assume customers_df and orders_df are already loaded.
     # If you are starting a new session, uncomment and run the lines above.
     # To make examples runnable, let's create placeholder DataFrames if they don't exist.

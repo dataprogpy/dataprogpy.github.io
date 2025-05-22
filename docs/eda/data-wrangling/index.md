@@ -9,7 +9,7 @@ hide:
 
 <div class="grid cards" markdown>
 
--   [:material-numeric-0:{ .lg .middle } __Starter Colab Notebook__](https://colab.research.google.com/github/dataprogpy/code-samples/blob/main/starter_files/01_intro_to_colab.ipynb){:target="_blank"}
+-   [:material-numeric-0:{ .lg .middle } __Starter Colab Notebook__](https://colab.research.google.com/github/dataprogpy/code-samples/blob/main/starter_files/03_introduction_to_polars.ipynb){:target="_blank"}
 - [ :material-numeric-1:{ .lg .middle } __Introduction to Data Wrangling__](intro-to-wrangling.md) 
 - [ :material-numeric-2:{ .lg .middle } __Data Exploration__](data-exploration.md) 
 - [ :material-numeric-3:{ .lg .middle } __Core Polars Concepts__](core-polars-concepts.md) 
