@@ -31,7 +31,7 @@ hide:
 
     [:octicons-arrow-right-24: Coming soon](#)
 
--   :material-lock-open-outline:{ .lg .middle } __Open Datasets__
+-   :material-lock-open-outline:{ .lg .middle } [__Open Datasets__](open-data.md)
 
     ---
 

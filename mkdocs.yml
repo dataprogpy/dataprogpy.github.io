@@ -168,4 +168,5 @@ nav:
     - Text Analysis: adv-data-types/text-analysis.md
   - Resources:
     - resources/index.md
+    - Data Sources: resources/open-data.md
     
