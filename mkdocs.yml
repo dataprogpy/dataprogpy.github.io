@@ -155,7 +155,8 @@ nav:
       - Data Transformation: eda/data-wrangling/data-transformation.md
       - Data Aggregation: eda/data-wrangling/data-aggregation.md
       - Stitching and Saving Data: eda/data-wrangling/stitching-and-saving.md
-    - Data Visualization with Altair: eda/altair.md
+    - Data Visualization with Altair: 
+      - eda/data-visualization/index.md
     - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
     - modeling/index.md
