@@ -69,10 +69,12 @@ hide:
 
     [:octicons-arrow-right-24: Course Materials](/syllabus/course-materials/)
 
-    [:octicons-arrow-right-24: Polars](https://docs.pola.rs/user-guide/getting-started/)
+    [:octicons-arrow-right-24: List of Data Sources](/resources/open-data/)
 
-    [:octicons-arrow-right-24: Altair](https://altair-viz.github.io/user_guide/data.html)
+    [:octicons-arrow-right-24: Polars Docs](https://docs.pola.rs/user-guide/getting-started/)
 
-    [:octicons-arrow-right-24: scikit-learn](https://scikit-learn.org/stable/user_guide.html)
+    [:octicons-arrow-right-24: Altair Docs](https://altair-viz.github.io/user_guide/data.html)
+
+    [:octicons-arrow-right-24: scikit-learn Docs](https://scikit-learn.org/stable/user_guide.html)
 
 </div>

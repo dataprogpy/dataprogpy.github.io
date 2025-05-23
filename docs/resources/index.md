@@ -36,8 +36,6 @@ hide:
     ---
 
 
-    [:octicons-arrow-right-24: Coming soon](#)
-
 </div>
 
 ## 
