@@ -21,8 +21,11 @@ Consider **Anscombe's Quartet**, a set of four distinct datasets created by stat
 
 Based on these numbers, the datasets appear remarkably similar! However, visualization tells a dramatically different story.
 
-*(Image: A 2x2 grid displaying scatter plots of Anscombe's Quartet. Each plot should clearly show the distinct distribution: I - linear, II - non-linear curve, III - linear with outlier, IV - vertical line with one outlier on X.)*
-*Caption: Anscombe's Quartet visualized. Each dataset, while having nearly identical summary statistics, exhibits a unique visual pattern.*
+<figure>
+    <img src="/assets/images/viz_anscombe.png" alt="Anscombe's Quartet">
+    <figcaption>Anscombe's Quartet visualized. Each dataset, while having nearly identical summary statistics, exhibits a unique visual pattern.</figcaption>
+</figure>
+
 
 This powerful example underscores why data visualization is crucial. It helps us to:
 * Identify patterns, trends, anomalies, and relationships within datasets to guide further analysis.
@@ -77,7 +80,7 @@ Let's break this down:
 
 To use Altair, you'll need to install it and its dependencies. For this course, we'll also use `vega_datasets` for sample data and `polars`.
 
-**Installation** (typically done once in your environment or at the start of a Colab session):
+**Installation**: This step is **not** required for Google Colab. All three packages are preinstalled. If you are using a different coding environment, you may need to execute this command.
 ```bash
 pip install altair vega_datasets polars
 ```
@@ -105,6 +108,3 @@ alt.renderers.enable('colab')
 # alt.renderers.enable('default')
 ```
 In this course, we'll primarily use Google Colab, so `alt.renderers.enable('colab')` will be our standard.
-```
-
-Ready to proceed to Section 2: "Your First Plots with Altair"?
