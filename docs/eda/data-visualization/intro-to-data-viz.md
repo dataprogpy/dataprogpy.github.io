@@ -1,5 +1,6 @@
 ---
 title: Introduction to Data Visualization with Altair
+icon: material/numeric-1
 ---
 
 # Introduction to Data Visualization with Altair

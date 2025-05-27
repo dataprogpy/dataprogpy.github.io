@@ -157,6 +157,8 @@ nav:
       - Stitching and Saving Data: eda/data-wrangling/stitching-and-saving.md
     - Data Visualization with Altair: 
       - eda/data-visualization/index.md
+      - Introduction to Data Visualization with Altair: eda/data-visualization/intro-to-data-viz.md
+      - First Plots with Altair: eda/data-visualization/first-plots.md
     - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
     - modeling/index.md
