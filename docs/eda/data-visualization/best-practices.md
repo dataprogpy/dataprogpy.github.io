@@ -1,16 +1,6 @@
-Okay, let's create the content for **Section 6: Best Practices & Data Storytelling Workflow**.
-
-This section shifts focus from technical "how-to" to the more conceptual "why" and "what makes a good visualization," which is crucial for business students.
-
----
-## **Section 6: Best Practices & Data Storytelling Workflow**
-
----
-### **Material for MkDocs Site Content (Page: `06_best_practices_storytelling.md`)**
-
-```markdown
 ---
 title: Best Practices & Data Storytelling Workflow
+icon: material/numeric-6 
 ---
 
 Creating visualizations is both an art and a science. Beyond knowing the syntax of a library like Altair, effective data visualization involves critical thinking, understanding your audience, and following established best practices to tell a clear and compelling story with your data.

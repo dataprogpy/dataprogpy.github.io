@@ -1,16 +1,6 @@
-Okay, let's dive into **Section 4: Interactive Visualizations**.
-
-Interactivity can significantly enhance the exploratory power of visualizations, allowing users to engage with the data more dynamically.
-
----
-## **Section 4: Interactive Visualizations**
-
----
-### **Material for MkDocs Site Content (Page: `04_interactive_visualizations.md`)**
-
-```markdown
 ---
 title: Interactive Visualizations with Altair
+icon: material/numeric-4
 ---
 
 Static charts are informative, but interactive charts can transform how users explore and understand data. Altair provides a powerful way to add interactivity through **selections**. Selections allow users to highlight, filter, or otherwise interact with the data points directly on the chart.

@@ -159,6 +159,10 @@ nav:
       - eda/data-visualization/index.md
       - Introduction to Data Visualization with Altair: eda/data-visualization/intro-to-data-viz.md
       - First Plots with Altair: eda/data-visualization/first-plots.md
+      - Enhancing Your Visualization: eda/data-visualization/decorations.md
+      - Interactive Visualization: eda/data-visualization/interactive-visualization.md
+      - Data Transformation: eda/data-visualization/data-transformations.md
+      - Best Practices & Data Storytelling Workflow: eda/data-visualization/best-practices.md
     - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
     - modeling/index.md

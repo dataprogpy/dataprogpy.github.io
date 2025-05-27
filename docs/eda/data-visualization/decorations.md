@@ -1,15 +1,5 @@
-Okay, let's develop the content for **Section 3: Enhancing Your Visualizations**.
-
-This section focuses on making plots more informative, readable, and presentable.
-
 ---
-## **Section 3: Enhancing Your Visualizations**
-
----
-### **Material for MkDocs Site Content (Page: `03_enhancing_visualizations.md`)**
-
-```markdown
----
+icon: material/numeric-3
 title: Enhancing Your Visualizations
 ---
 

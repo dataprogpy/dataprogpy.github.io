@@ -117,7 +117,7 @@ avg_mpg_bar_chart = alt.Chart(cars_pl_df.drop_nulls(subset=['Miles_per_Gallon', 
 )
 ```
 Alternatively, you can pre-aggregate with Polars:
-```python
+```python 
 # Polars aggregation
 avg_mpg_origin_pl = cars_pl_df.drop_nulls(subset=['Miles_per_Gallon', 'Origin']) \
     .group_by('Origin') \
@@ -145,7 +145,7 @@ Line charts are ideal for showing trends over a continuous or ordered sequence, 
 
 **Example (Seattle Weather - Max Temperature Over Time):**
 We'll use the `seattle-weather` dataset.
-```python
+```python linenums="1"
 # Load seattle_weather data
 weather_pd_df = vega_data.seattle_weather()
 weather_pl_df = pl.from_pandas(weather_pd_df)
@@ -171,10 +171,17 @@ Histograms visualize the distribution of a single quantitative variable by divid
     * `y='count():Q'` (Altair automatically computes the count for histograms).
 
 **Example (Distribution of Horsepower):**
-```python
-histogram = alt.Chart(cars_pl_df.drop_nulls(subset=['Horsepower'])).mark_bar().encode(
-    alt.X('Horsepower:Q', bin=alt.Bin(maxbins=20), title='Horsepower Bins'), # Explicit binning
-    y='count():Q',
+
+``` py linenums="1"
+alt.Chart(
+    cars_pl_df.drop_nulls(subset=['Horsepower'])
+    ).mark_bar().encode(
+    alt.X(
+        'Horsepower:Q', 
+        bin=alt.Bin(maxbins=20), 
+        title='Horsepower Bins',
+        ), 
+    alt.Y('count():Q'),
     tooltip=[alt.Tooltip('Horsepower:Q', bin=True), 'count():Q']
 ).properties(
     title='Distribution of Car Horsepower',
@@ -191,4 +198,3 @@ When building visualizations, especially complex ones:
 3.  **Refine Properties**: Adjust titles, labels, sizes, and scales last.
 4.  **Tweak DataFrame**: Tweak the DataFrame using Polars if you want to adjust properties that are strongly coupled to datapoints from the dataset. For example, the legend labels for categorical variables are easier to change in Polars than in Altair.
 This iterative approach makes debugging easier and helps you build intuition for how each component affects the final visualization.
-```

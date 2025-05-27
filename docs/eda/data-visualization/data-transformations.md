@@ -1,16 +1,6 @@
-Okay, let's move on to **Section 5: Data Transformations for Visualization**.
-
-This section is crucial for bridging data manipulation skills (which students have started with Polars) directly to the needs of effective visualization.
-
----
-## **Section 5: Data Transformations for Visualization**
-
----
-### **Material for MkDocs Site Content (Page: `05_data_transformations.md`)**
-
-```markdown
 ---
 title: Data Transformations for Visualization
+icon: material/numeric-5
 ---
 
 Often, your raw data isn't in the perfect shape or format for the visualization you have in mind. You might need to filter it, create new categories, or calculate summary statistics before you can effectively plot it. Both Polars (your primary data manipulation tool) and Altair offer ways to perform these transformations.
