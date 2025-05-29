@@ -1,12 +1,12 @@
---- 
+---
 icon: material/numeric-6
 ---
 
-**Part 6: Structuring Code - For Reusability and Clarity**
+# **Part 6: Structuring Code - For Reusability and Clarity**
 
 As your analysis tasks become more complex, you'll want ways to organize your code to make it more readable, maintainable, and reusable. Copying and pasting blocks of code is generally a bad practice – if you find a mistake or need to make an update, you have to change it in multiple places! Python offers structures like functions and leverages the concepts of objects and classes to help manage complexity.
 
-**6.1 Functions: Creating Reusable Commands**
+## **6.1 Functions: Creating Reusable Commands**
 
 **Motivation:** Imagine you need to perform the same specific calculation (like calculating a standardized score or cleaning text in a particular way) at several different points in your analysis. Instead of writing the same lines of code repeatedly, you can package that logic into a **function**.
 
@@ -48,10 +48,127 @@ returned_value = function_name(100, 5) # 100 is passed to parameter1, 5 to param
 
 print(f"The function returned: {returned_value}")
 # Expected output based on example def:
-# Inside the function! Received: 100, 5
+# Function received: 100, 5
 # The function returned: 20.0
 ```
 
+---
+## 6.2 More on Calling Functions: Understanding Signatures and Argument Passing
+
+When you use functions from libraries (or even your own more complex functions), you'll find that there are specific rules about how you can pass arguments. The "signature" of a function defines the parameters it accepts and how arguments must be provided. Understanding these conventions is crucial for using libraries effectively.
+
+### Function Signatures
+A function's signature includes its name and the parameters it can accept. Library designers can enforce certain ways arguments are passed to ensure clarity and correctness.
+
+### Positional and Keyword Arguments
+You've already seen positional arguments, where the order matters: `function_name(value1, value2)`. You can also often pass arguments using their parameter names; these are called **keyword arguments**:
+
+```python
+def describe_pet(animal_type, pet_name):
+    print(f"I have a {animal_type} named {pet_name}.")
+
+describe_pet("hamster", "Harry") # Positional arguments
+describe_pet(pet_name="Lucy", animal_type="dog") # Keyword arguments
+describe_pet("cat", pet_name="Whiskers") # Mix of positional and keyword
+```
+Once you use a keyword argument, all subsequent arguments in that call must also be keyword arguments.
+
+### Keyword-Only Arguments
+Some functions or methods might be designed so that certain arguments *must* be passed as keyword arguments. This is often used to improve code readability when a function has many parameters, or to make it clear what a particular value represents.
+
+* **How it's defined (for your understanding):**
+    A `*` in the function definition indicates that all parameters after it are keyword-only.
+    ```python
+    def create_user(username, *, preferred_language, send_newsletter):
+        print(f"User: {username}, Language: {preferred_language}, Newsletter: {send_newsletter}")
+    ```
+* **How to call it:**
+    You *must* use keywords for `preferred_language` and `send_newsletter`.
+    ```python
+    create_user("john_doe", preferred_language="English", send_newsletter=True)
+    # create_user("john_doe", "English", True) # This would cause an error
+    ```
+    Library providers might use this to ensure optional configuration parameters are explicitly named.
+
+### Positional-Only Arguments
+Less commonly for users to define but possible to encounter, some arguments might be required to be positional *only*.
+
+* **How it's defined (for your understanding):**
+    A `/` in the function definition indicates that all parameters before it are positional-only.
+    ```python
+    def item_price(item_id, quantity, / , currency="USD"):
+        print(f"ID: {item_id}, Qty: {quantity}, Currency: {currency}")
+    ```
+* **How to call it:**
+    `item_id` and `quantity` *must* be positional.
+    ```python
+    item_price(101, 5)
+    item_price(102, 3, currency="EUR")
+    # item_price(item_id=101, quantity=5) # This would cause an error for item_id and quantity
+    ```
+    Often, you'll see functions that have a few *required positional arguments* at the beginning, followed by optional keyword arguments.
+
+### Arbitrary Positional Arguments (`*args`)
+Sometimes, you want a function to accept an arbitrary number of positional arguments without defining each one. This is where `*args` comes in. Inside the function, `args` becomes a tuple containing all the extra positional arguments.
+
+```python
+def print_all_items(fixed_arg, *items):
+    print(f"Fixed argument: {fixed_arg}")
+    print("Additional items:")
+    for item in items:
+        print(f"- {item}")
+
+print_all_items("Shopping List", "milk", "eggs", "bread")
+# Output:
+# Fixed argument: Shopping List
+# Additional items:
+# - milk
+# - eggs
+# - bread
+
+print_all_items("Tasks") # No additional items
+# Output:
+# Fixed argument: Tasks
+# Additional items:
+```
+Many library functions use `*args` to allow you to pass multiple column names, values, or objects.
+
+### Arbitrary Keyword Arguments (`**kwargs`)
+Similarly, `**kwargs` allows a function to accept any number of keyword arguments that are not explicitly defined in the function's signature. Inside the function, `kwargs` becomes a dictionary containing these additional keyword arguments.
+
+```python
+def configure_system(main_setting, **options):
+    print(f"Main setting: {main_setting}")
+    print("Other options:")
+    for key, value in options.items():
+        print(f"- {key}: {value}")
+
+configure_system("active", debug_mode=True, log_level="info", retries=3)
+# Output:
+# Main setting: active
+# Other options:
+# - debug_mode: True
+# - log_level: info
+# - retries: 3
+
+configure_system("inactive")
+# Output:
+# Main setting: inactive
+# Other options:
+```
+This is extremely common in data science libraries for passing various optional parameters, configurations, or styling attributes to functions and methods (e.g., `polars.read_csv(source, **read_options)`, `altair.Chart(data, **chart_properties)`).
+
+### The Importance of Documentation 📖
+Functions in libraries can combine all these types of parameters. For example:
+`def complex_function(pos1, pos2, /, pos_or_kw1, *, kw_only1, **kwargs):`
+
+You are **not expected to memorize** the exact signature of every function or method you use. **The most crucial skill is to consult the official documentation** for the library function or method you are calling. The documentation will always specify:
+* Required positional arguments.
+* Optional arguments and their default values.
+* Whether arguments are positional-only, keyword-only, or can be either.
+* If `*args` or `**kwargs` are accepted and for what purpose.
+
+---
 **Example: Reusable Age Calculation Function**
 Let's turn our earlier "Age from Date of Birth" logic into a reusable function. (Remember to `import datetime as dt` usually at the top of your notebook!)
 
@@ -104,7 +221,8 @@ print(f"Someone born 1975-07-01 is Age: {calculate_age(dt.date(1975, 7, 1))}")
 ```
 Functions are essential tools for writing cleaner, more organized, and more efficient Python code.
 
-**6.2 A Glimpse into Objects & Classes (Understanding Our Libraries)**
+---
+## **6.3 A Glimpse into Objects & Classes (Understanding Our Libraries)**
 
 **Motivation Revisited:** Our `calculate_age` function works well, but notice that the function logically "belongs" with the date-of-birth data it operates on. This idea of bundling data together with the functions (actions) that are relevant to that data is the core concept behind **Object-Oriented Programming (OOP)**.
 
@@ -114,12 +232,12 @@ You've already been using objects extensively!
 * `[10, 20, 30]` is an **object** of the `list` type.
 * `dt.date(2025, 5, 2)` creates an **object** of the `date` type from the `datetime` module.
 
-**Class vs. Object (Blueprint vs. Instance):**
+### **Class vs. Object (Blueprint vs. Instance):**
 
 * A **Class** is like a blueprint, template, or category definition. It specifies what *kind* of data (called **attributes**) objects of this class will hold, and what *kind* of actions (called **methods**) they can perform. Examples of classes we've seen: `str`, `int`, `list`, `dict`, `datetime.date`. When we use libraries like Polars, we'll encounter classes like `DataFrame` and `Series`.
 * An **Object** is a specific *instance* created from a Class blueprint. Each object holds its own specific data values based on the blueprint. Examples: `my_name = "Bob"` is an object (instance) of the `str` class. `sales_figures = [100, 200]` is an object (instance) of the `list` class. `d1 = dt.date(2025, 5, 2)` is an object (instance) of the `date` class.
 
-**Attributes and Methods (An Object's Data and Actions):**
+### **Attributes and Methods (An Object's Data and Actions):**
 
 Objects typically encapsulate both data and actions. You interact with these using **dot notation (`.`):**
 
@@ -137,6 +255,7 @@ Objects typically encapsulate both data and actions. You interact with these usi
     ```
 
 2.  **Methods:** Functions that are "attached" to the object and typically operate on the object's data or perform an action related to the object's purpose. You **call** methods using `object_name.method_name(arguments)` – notice the crucial **parentheses `()`** at the end (even if there are no arguments).
+    Methods follow the same calling conventions discussed for functions in section 6.1.1, including the use of positional, keyword, `*args`, and `**kwargs` arguments. Always check the method's documentation for specific calling requirements.
 
     ```python
     my_text = "  needs cleaning  "
@@ -152,7 +271,8 @@ Objects typically encapsulate both data and actions. You interact with these usi
     # sorted_data = some_dataframe.sort('column_name')       # Calling the sort() method
     ```
 
-**The Key Takeaway for This Course (Practical OOP):**
+---
+### **The Key Takeaway for This Course (Practical OOP):**
 
 You **do not need to become an expert** in designing or writing your own elaborate classes from scratch in this introductory course.
 
@@ -160,11 +280,12 @@ However, it is **absolutely essential** that you:
 
 1.  Understand the concept that **objects bundle data (attributes) and actions (methods)**.
 2.  Become comfortable with the **dot notation syntax** for accessing attributes (`object.attribute`) and calling methods (`object.method()`).
+3.  Recognize the different ways arguments can be passed to functions and methods (positional, keyword, `*args`, `**kwargs`) and **prioritize checking library documentation** for their specific requirements.
 
 Why? Because the powerful data science libraries we will rely on – **Polars, Altair, Scikit-learn** – are fundamentally object-oriented. Your entire workflow will involve:
 
 * Creating library objects (DataFrames, Series, Charts, Models, etc.).
 * Inspecting their data using attributes (e.g., `my_df.columns`, `my_model.feature_names_in_`).
-* Telling them what to do by calling their methods (e.g., `my_df.select(...)`, `my_chart.save(...)`, `my_model.fit(...)`, `my_model.predict(...)`).
+* Telling them what to do by calling their methods (e.g., `my_df.select(...)`, `my_chart.save(...)`, `my_model.fit(...)`, `my_model.predict(...)`), paying close attention to how arguments need to be supplied.
 
-Grasping this user-level interaction with objects and their methods/attributes is the "practical OOP" you need to unlock the power of these essential data science tools.
+Grasping this user-level interaction with objects and their methods/attributes, along with understanding function calling conventions, is the "practical OOP" you need to unlock the power of these essential data science tools.
