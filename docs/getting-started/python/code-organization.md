@@ -163,6 +163,7 @@ Functions in libraries can combine all these types of parameters. For example:
 `def complex_function(pos1, pos2, /, pos_or_kw1, *, kw_only1, **kwargs):`
 
 You are **not expected to memorize** the exact signature of every function or method you use. **The most crucial skill is to consult the official documentation** for the library function or method you are calling. The documentation will always specify:
+
 * Required positional arguments.
 * Optional arguments and their default values.
 * Whether arguments are positional-only, keyword-only, or can be either.
