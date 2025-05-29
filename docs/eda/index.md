@@ -17,11 +17,11 @@ hide:
 
     [:octicons-arrow-right-24: Introduction to Data Wrangling](/eda/data-wrangling/intro-to-wrangling)
 
--   [:material-chart-line:{ .lg .middle } __Data Visualization with Altair__](/eda/altair)
+-   [:material-chart-line:{ .lg .middle } __Data Visualization with Altair__](/eda/data-visualization/)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/eda/altair)
+    [:octicons-arrow-right-24: Introduction to Data Visualization](/eda/data-visualization/intro-to-data-viz/)
 
 -   [:material-chart-bar-stacked:{ .lg .middle } __Data Storytelling__](/eda/data_storytelling)
 
