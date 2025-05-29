@@ -24,12 +24,15 @@ Because these diverse systems serve different primary functions, the data they p
   **Illustrative Data Challenges:**
     The provided datasets, [`customers.csv`](/assets/data/customers.csv){:target="_blank"}and [`orders.csv`](/assets/data/orders.csv){:target="_blank"}, exemplify common issues addressed during data wrangling on a small scale:
 
-* In `customers.csv`:
-          * Inconsistent `registration_date` formats (e.g., `YYYY-MM-DD` and `MM/DD/YYYY`) and missing entries hinder time-series analysis.
-          * Missing `age` values and a significant outlier (`3000`) can distort statistical summaries if not handled.
-* In `orders.csv`:
-          * Missing `product_category` or `quantity` values can lead to incomplete or biased analytical results.
-          * Ambiguity in missing `discount_applied` values (zero discount vs. unrecorded data) requires clarification or consistent imputation.
+- In `customers.csv`:
+
+    1. Inconsistent `registration_date` formats (e.g., `YYYY-MM-DD` and `MM/DD/YYYY`) and missing entries hinder time-series analysis.
+    1. Missing `age` values and a significant outlier (`3000`) can distort statistical summaries if not handled.
+
+- In `orders.csv`:
+
+    1. Missing `product_category` or `quantity` values can lead to incomplete or biased analytical results.
+    1. Ambiguity in missing `discount_applied` values (zero discount vs. unrecorded data) requires clarification or consistent imputation.
 Addressing such issues is fundamental to the integrity of any subsequent analysis.
 
 ## **Introduction to Polars: A High-Performance DataFrame Library**
