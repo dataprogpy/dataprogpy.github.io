@@ -163,6 +163,7 @@ nav:
       - Interactive Visualization: eda/data-visualization/interactive-visualization.md
       - Data Transformation: eda/data-visualization/data-transformations.md
       - Best Practices & Data Storytelling Workflow: eda/data-visualization/best-practices.md
+      - Wrap-up & Next Steps: eda/data-visualization/wrap-up.md
     - Data Storytelling: eda/data_storytelling.md
   - Introduction to Modeling:
     - modeling/index.md

@@ -16,6 +16,5 @@ hide:
 - [ :material-numeric-4:{ .lg .middle } __Data Transformation__](data-transformation.md) 
 - [ :material-numeric-5:{ .lg .middle } __Data Aggregation__](data-aggregation.md) 
 - [ :material-numeric-6:{ .lg .middle } __Stitching & Saving Data__](stitching-and-saving.md) 
-- [ :material-numeric-7:{ .lg .middle } __Best Practice__](#) 
 
 </div>

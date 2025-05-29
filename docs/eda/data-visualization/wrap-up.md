@@ -1,15 +1,5 @@
-Okay, let's finalize the lesson plan with **Section 7: Wrap-up & Next Steps**.
-
-This section will consolidate the learning and provide clear paths for students to continue practicing and applying their new skills.
-
 ---
-## **Section 7: Wrap-up & Next Steps**
-
----
-### **Material for MkDocs Site Content (Page: `07_wrap_up_next_steps.md`)**
-
-```markdown
----
+icon: material/numeric-7
 title: Wrap-up & Next Steps
 ---
 
@@ -45,7 +35,7 @@ Being able to "see" your data and model outputs will greatly enhance your unders
 
 ## Things to Try: Continue Your Learning Journey!
 
-The best way to solidify your understanding and build confidence is through practice. The starter Jupyter Notebook (`xx_altair_visualization_notebook.ipynb`) contains a list of "Things to Try" exercises. These challenges encourage you to:
+The best way to solidify your understanding and build confidence is through practice. The [starter Jupyter Notebook](`https://colab.research.google.com/github/dataprogpy/code-samples/blob/main/starter_files/04_introduction_to_altair.ipynb`) contains a list of "Things to Try" exercises. These challenges encourage you to:
 
 * Explore new datasets.
 * Recreate charts you find in the wild.
@@ -53,7 +43,7 @@ The best way to solidify your understanding and build confidence is through prac
 * Combine your Polars and Altair skills.
 * Practice data storytelling.
 
-We strongly encourage you to work through these activities. Don't hesitate to consult the Altair documentation, online resources, or leverage generative AI tools strategically to help you along the way. Remember, the goal is to become comfortable applying these powerful data programming techniques to your own professional challenges and personal projects.
+I strongly encourage you to work through these activities. Don't hesitate to consult the Altair documentation, online resources, or leverage generative AI tools strategically to help you along the way. Remember, the goal is to become comfortable applying these powerful data programming techniques to your own professional challenges and personal projects.
 ```
 
 ---
