@@ -164,7 +164,8 @@ nav:
       - Data Transformation: eda/data-visualization/data-transformations.md
       - Best Practices & Data Storytelling Workflow: eda/data-visualization/best-practices.md
       - Wrap-up & Next Steps: eda/data-visualization/wrap-up.md
-    - Data Storytelling: eda/data_storytelling.md
+    - Data Storytelling: 
+      - eda/data_storytelling/index.md
   - Introduction to Modeling:
     - modeling/index.md
     - Modeling with scikit-learn: modeling/modeling_intro.md

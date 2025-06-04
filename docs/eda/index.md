@@ -23,10 +23,10 @@ hide:
 
     [:octicons-arrow-right-24: Introduction to Data Visualization](/eda/data-visualization/intro-to-data-viz/)
 
--   [:material-chart-bar-stacked:{ .lg .middle } __Data Storytelling__](/eda/data_storytelling)
+-   [:material-chart-bar-stacked:{ .lg .middle } __Data Storytelling__](/eda/data-storytelling)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/eda/data_storytelling)
+    [:octicons-arrow-right-24: Getting started](/eda/data-storytelling)
 
 </div>
