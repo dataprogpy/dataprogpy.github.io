@@ -80,6 +80,7 @@ extra_css:
 
 markdown_extensions:
   - md_in_html
+  - tables
   - toc:
       permalink: true
       title: On this page
@@ -166,6 +167,8 @@ nav:
       - Wrap-up & Next Steps: eda/data-visualization/wrap-up.md
     - Data Storytelling: 
       - eda/data_storytelling/index.md
+      - Data Storytelling Workflow: eda/data_storytelling/storytelling-intro.md
+      - Data Dictionary: eda/data_storytelling/data-dictionary.md
   - Introduction to Modeling:
     - modeling/index.md
     - Modeling with scikit-learn: modeling/modeling_intro.md
