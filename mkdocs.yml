@@ -166,9 +166,12 @@ nav:
       - Best Practices & Data Storytelling Workflow: eda/data-visualization/best-practices.md
       - Wrap-up & Next Steps: eda/data-visualization/wrap-up.md
     - Data Storytelling: 
-      - eda/data_storytelling/index.md
-      - Data Storytelling Workflow: eda/data_storytelling/storytelling-intro.md
-      - Data Dictionary: eda/data_storytelling/data-dictionary.md
+      - eda/data-storytelling/index.md
+      - Data Storytelling Workflow: eda/data-storytelling/storytelling-intro.md
+      - Data Dictionary: eda/data-storytelling/data-dictionary.md
+      - Analytical Goal Setting: eda/data-storytelling/analytical-goal-setting.md
+      - Task Planning: eda/data-storytelling/task-planning.md
+      - Iterative Execution: eda/data-storytelling/iterative-execution.md
   - Introduction to Modeling:
     - modeling/index.md
     - Modeling with scikit-learn: modeling/modeling_intro.md

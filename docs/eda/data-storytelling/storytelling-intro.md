@@ -1,5 +1,5 @@
 ---
-icon: material/numberic-1
+icon: material/numeric-1
 ---
 
 Okay, let's start developing the content for the lesson. We'll go section by section based on the outline.
