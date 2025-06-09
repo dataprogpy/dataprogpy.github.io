@@ -173,7 +173,7 @@ nav:
       - Iterative Execution: eda/data-storytelling/iterative-execution.md
       - Narrative Development: eda/data-storytelling/narrative-development.md
       - Review & Validation: eda/data-storytelling/review-validation.md
-      - Task Planning: eda/data-storytelling/task-planning.md
+      - Conclusion: eda/data-storytelling/conclusion.md
   - Introduction to Modeling:
     - modeling/index.md
     - Modeling with scikit-learn: modeling/modeling_intro.md

@@ -3,11 +3,11 @@ icon: material/numeric-6
 ---
 
 
-### 6. Phase 5: Review and Validation
+# Review and Validation
 
 You've put in the hard work of planning, exploring, cleaning, visualizing, and narrating. This final phase is about ensuring your efforts culminate in a data story that is clear, accurate, and impactful for your intended audience.
 
-#### Step 10: Checking Against Goals ✅🎯
+## Step 10: Checking Against Goals ✅🎯
 
 The primary purpose of this step is to objectively assess your data story against the initial objectives and analytical questions you defined way back in **Step 2**. It's easy to get caught up in the technical details of data wrangling and chart creation, so this is your chance to ensure the final product aligns with your original intent.
 
@@ -47,53 +47,6 @@ Ask yourself these questions as you review your sequence of visuals (from Step 8
     * Is all the text necessary, or can some be trimmed for brevity without losing meaning?
     * Are the visuals uncluttered and easy to interpret? (This relates back to effective vertical development in Step 7).
 
-**The Goal: Honesty and Constructive Self-Criticism**
-
-Be honest with yourself during this review. It's better to identify areas for improvement now than for your audience to be confused or unconvinced later. This step might lead you to:
-
-* **Refine your narrative text:** Clarify explanations, strengthen transitions, or sharpen your key messages.
-* **Tweak your visuals:** Make small adjustments to titles, labels, colors, or annotations for better clarity.
-* **Re-order visuals:** If the flow isn't quite right, you might decide to change the sequence.
-* **Add or remove a visual:** You might realize a gap in your story or that a particular visual isn't adding enough value.
-* **(In rare cases) Revisit earlier steps:** If a major flaw is uncovered that relates to data cleaning or a fundamental misunderstanding, you might need to briefly go back. This is less common at this stage if the previous steps were followed diligently, but it's part of the iterative nature of the work.
-
-This review ensures your data story doesn't just present data, but effectively communicates the intended insights to the intended audience, achieving the purpose you set out to fulfill.
-
----
-
-> **💡 Activity: Review Your Data Story Draft**
->
-> Take your assembled "mini-story" – the sequence of 2-3 visuals you outlined in Step 8, along with the narrative text and annotation ideas you drafted in Step 9.
->
-> 1.  **Re-read your analytical questions and persona description** from Step 2. Keep them clearly in mind.
-> 2.  **Critically review your mini-story** using the "Key Questions for Your Review" listed above.
-> 3.  **Jot down your honest answers and observations.**
->     * What works well?
->     * Where are there potential weaknesses or areas for improvement regarding:
->         * Answering your analytical questions?
->         * Meeting your persona's needs?
->         * Clarity of the key message?
->         * Logical flow?
->         * Support from data?
->         * Overall clarity and conciseness?
-> 4.  Based on your review, list **1-3 specific, actionable refinements** you would make to your mini-story if you had more time (e.g., "Reword the title of Chart 2 for clarity," "Add a sentence to explain the dip in X," "Ensure the color legend is more prominent").
->
-> This structured self-review is a vital skill for any data professional.
-
----
-This step provides a structured way for students to evaluate their own work against their initial goals. The next, and final, content step in this phase is Step 11: "Final Polish and Presentation Considerations," followed by the overall lesson conclusion.
-
-How does Step 10 look?
-That's an excellent and highly practical point to bring in, especially for working professionals! The concept of a Minimum Viable Product (MVP) is very relevant to data storytelling. It's about ensuring the core message gets across effectively, even if further polishes are saved for later.
-
-Let's incorporate this into Step 10.
-
----
-
-#### Step 10: Checking Against Goals ✅🎯 (Continued)
-
-*(This follows the "Key Questions for Your Review" section)*
-
 **The Goal: Honesty, Constructive Self-Criticism, and the MVP Mindset**
 
 Be honest with yourself during this review. It's better to identify areas for improvement now than for your audience to be confused or unconvinced later. This step might lead you to identify several potential refinements.
@@ -118,33 +71,25 @@ This review ensures your data story doesn't just present data, but effectively c
 
 ---
 
-> **💡 Activity: Review Your Data Story Draft (MVP Focus)**
->
-> Take your assembled "mini-story" – the sequence of 2-3 visuals you outlined in Step 8, along with the narrative text and annotation ideas you drafted in Step 9.
->
-> 1.  **Re-read your analytical questions and persona description** from Step 2. Keep them clearly in mind.
-> 2.  **Critically review your mini-story** using the "Key Questions for Your Review" listed above.
-> 3.  **Jot down your honest answers and observations.**
->     * What works well?
->     * Where are there potential weaknesses or areas for improvement?
-> 4.  **Prioritize with an MVP Mindset:**
->     * Identify the **"must-have" changes** needed for your story to clearly and accurately answer your core analytical questions for your persona (this forms your "Minimum Viable Story").
->     * List any **"nice-to-have" refinements** that would enhance the story further but are not critical to its core message.
-> 5.  Based on your review, list **1-2 specific, actionable "must-have" refinements** you would make to ensure your mini-story is a solid MVP.
->
-> This structured self-review, with an eye towards delivering a viable core story, is a vital skill for any data professional.
+???+ activity "**💡 Activity: Review Your Data Story Draft (MVP Focus)**"
 
----
+     Take your assembled "mini-story" – the sequence of 2-3 visuals you outlined in Step 8, along with the narrative text and annotation ideas you drafted in Step 9.
+    
+     1.  **Re-read your analytical questions and persona description** from Step 2. Keep them clearly in mind.
+     2.  **Critically review your mini-story** using the "Key Questions for Your Review" listed above.
+     3.  **Jot down your honest answers and observations.**
+         * What works well?
+         * Where are there potential weaknesses or areas for improvement?
+     4.  **Prioritize with an MVP Mindset:**
+         * Identify the **"must-have" changes** needed for your story to clearly and accurately answer your core analytical questions for your persona (this forms your "Minimum Viable Story").
+         * List any **"nice-to-have" refinements** that would enhance the story further but are not critical to its core message.
+     5.  Based on your review, list **1-2 specific, actionable "must-have" refinements** you would make to ensure your mini-story is a solid MVP.
+    
+     This structured self-review, with an eye towards delivering a viable core story, is a vital skill for any data professional.
 
-This addition provides a practical lens for students to evaluate their work, encouraging them to focus on effectiveness and prioritize essential changes, which is highly relevant in professional contexts.
 
-We have one more brief step (Step 11: "Final Polish and Presentation Considerations") before the overall lesson conclusion. Ready for Step 11?
 
-Okay, you've reviewed your data story against your core goals and even prioritized refinements with an MVP mindset. You're almost there! The final step in our workflow before concluding is to give your story a last polish, considering how it will be presented.
-
----
-
-#### Step 11: Final Polish and Presentation Considerations ✨
+## Step 11: Final Polish and Presentation Considerations ✨
 
 This step is about taking that last look to ensure your data story is presented in the most clear, professional, and effective manner possible. Think of it as the final proofread and visual tidy-up. While major content issues should have been addressed in Step 10, this is where you catch the small things that can make a big difference to the audience's experience.
 
@@ -181,75 +126,18 @@ The primary goal here is to ensure that nothing in the final presentation distra
 
 ---
 
-> **💡 Activity: Your Final Polish Checklist**
->
-> Before you consider your "mini-story" ready for sharing (even hypothetically), run through this quick final checklist:
->
-> 1.  **Simplicity:** Is there anything I can remove from my charts to make them simpler without losing information?
-> 2.  **Consistency:** Are my titles, labels, and color schemes reasonably consistent?
-> 3.  **Accuracy:** Have I double-checked key numbers and labels in my visuals and text?
-> 4.  **Proofreading:** Have I read all text for typos or grammatical errors?
-> 5.  **Flow (for MkDocs):** If I were to put this on a webpage, does the sequence of text and visuals make sense?
->
-> Make any quick fixes identified. This is about ensuring a professional finish.
+???+ activity "**💡 Activity: Your Final Polish Checklist**"
+
+     Before you consider your "mini-story" ready for sharing (even hypothetically), run through this quick final checklist:
+    
+     1.  **Simplicity:** Is there anything I can remove from my charts to make them simpler without losing information?
+     2.  **Consistency:** Are my titles, labels, and color schemes reasonably consistent?
+     3.  **Accuracy:** Have I double-checked key numbers and labels in my visuals and text?
+     4.  **Proofreading:** Have I read all text for typos or grammatical errors?
+     5.  **Flow (for MkDocs):** If I were to put this on a webpage, does the sequence of text and visuals make sense?
+    
+     Make any quick fixes identified. This is about ensuring a professional finish.
 
 ---
 
 And with that final polish, you've completed the core data storytelling workflow for your mini-story! You've taken raw data, formulated questions, explored, cleaned, visualized, built a narrative, and reviewed your work.
-
-Next, we'll have a brief conclusion to wrap up the entire lesson and reflect on the key takeaways from this workflow. How does this final step in Phase 5 look?
-
-Excellent! We've walked through the entire data storytelling workflow, from understanding the initial data dictionary to applying the final polish to our mini-story. Let's wrap up with a conclusion that summarizes what we've learned and reinforces some best practices.
-
----
-
-### 7. Conclusion & Best Practices
-
-Congratulations! You've successfully navigated a simulated end-to-end data storytelling workflow. Throughout this lesson, we've aimed to demonstrate that crafting compelling data narratives is not just about technical skill with tools like Python, Polars, and Altair, but also about a structured, thoughtful, and iterative process.
-
-**Recap of Our Data Storytelling Workflow:**
-
-We journeyed through several key phases and steps:
-
-1.  **Phase 1: Understanding the Landscape & Defining Goals**
-    * **Step 1:** Understanding the Data Dictionary.
-    * **Step 2:** Articulating Analytical Goals & Research Questions (using Personas and guiding techniques).
-    * **Step 3:** Creating an Initial Data Visualization Task List (applying the Grammar of Graphics).
-2.  **Phase 2: Data Ingestion and Initial Exploration**
-    * **Step 4:** Ingesting Data with Polars and performing initial inspections (including a "smoke test").
-    * **Step 5:** The "Reality Check" of the first pass visualization and identifying "Uh-Oh" moments.
-3.  **Phase 3: Iterative Cleaning and Visualization**
-    * **Step 6:** Developing a Responsive Data Cleaning Task List based on visualization needs and analytical goals.
-    * **Step 7:** Executing Cleaning with Polars and practicing "Vertical Visual Development" with Altair, while updating task lists.
-4.  **Phase 4: Building the Narrative - Horizontal Development**
-    * **Step 8:** Creating a Cohesive Set of Visuals (the "Comic Strip" or "Horizontal Development"), potentially using Altair's concatenation.
-    * **Step 9:** Adding Narrative Text and Annotations to guide the audience and explain insights.
-5.  **Phase 5: Review and Validation**
-    * **Step 10:** Checking Against Goals and adopting an MVP (Minimum Viable Product/Story) mindset.
-    * **Step 11:** Applying Final Polish and considering presentation.
-
-**Key Best Practices and Takeaways:**
-
-* **Audience-Centricity is Paramount:** Always start by thinking about your audience (your persona). Their needs, questions, and level of understanding should guide every decision you make, from formulating analytical questions to choosing chart types and crafting your narrative.
-* **The Power of a Plan (and an Iterative One!):**
-    * Explicitly listing your analytical questions, visualization tasks, and data cleaning tasks is crucial for **focus, project management, and avoiding scope creep.**
-    * Embrace iteration. Your initial plans are hypotheses. Be prepared to revisit and refine them as you learn more from the data. The "Uh-Oh" moments are learning opportunities, not failures.
-* **Visualization as Communication and Guidance:** Remember that data visualization is not just about presenting data; it's about **communicating insights and strategically guiding your audience's attention** to what matters most.
-    * **Vertical development** (layering within a chart) helps build rich, informative individual visuals.
-    * **Horizontal development** (sequencing charts) helps build a coherent narrative flow.
-* **Clean with Purpose:** Data cleaning should be responsive to your visualization needs and analytical goals. Don't aim for a "perfectly clean" dataset in a vacuum; aim for data that is *fit for your specific storytelling purpose*.
-* **The Grammar of Graphics Provides Structure:** Thinking in terms of data, marks, and encodings (as Altair encourages) gives you a powerful and flexible framework for designing effective visualizations.
-* **Words Complete the Story:** Visuals are powerful, but narrative text (titles, captions, explanations, transitions) and annotations provide essential context, clarify insights, and ensure your message lands effectively.
-* **Embrace the MVP Mindset:** Focus on delivering a clear and accurate core message that answers your primary questions first. Nice-to-have refinements can come later. This is especially important in professional settings with deadlines.
-
-**Data Storytelling: A Skill Honed Through Practice**
-
-The workflow and principles we've discussed provide a strong foundation. Like any craft, data storytelling is a skill that improves with practice. The more you apply this process to different datasets and different analytical challenges, the more intuitive it will become.
-
-We encourage you to take this workflow and adapt it to your own projects. Start with a question, understand your audience, plan your approach, embrace the iterative process of exploration and refinement, and always aim to communicate your findings with clarity and impact.
-
-Thank you for engaging with this lesson! We hope it has equipped you with a valuable framework for your future data programming and storytelling endeavors.
-
----
-
-This conclusion aims to tie everything together, reinforce the main messages, and provide a sense of completion and encouragement. How does this final piece of content for the lesson look?
