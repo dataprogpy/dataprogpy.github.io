@@ -168,7 +168,6 @@ nav:
     - Data Storytelling: 
       - eda/data-storytelling/index.md
       - Data Storytelling Workflow: eda/data-storytelling/storytelling-intro.md
-      - Data Dictionary: eda/data-storytelling/data-dictionary.md
       - Analytical Goal Setting: eda/data-storytelling/analytical-goal-setting.md
       - Task Planning: eda/data-storytelling/task-planning.md
       - Iterative Execution: eda/data-storytelling/iterative-execution.md
