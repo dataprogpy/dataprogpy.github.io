@@ -3,7 +3,7 @@ icon: material/numeric-2
 ---
 
 
-# Phase 1: Understanding the Landscape & Defining Goals
+# Understanding the Landscape & Defining Goals
 
 Every data story begins with understanding the raw material: your data. But data alone doesn't speak; we need to give it a voice by asking the right questions and defining clear goals for our narrative. This phase is about laying that crucial groundwork.
 
