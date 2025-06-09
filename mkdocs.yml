@@ -169,8 +169,9 @@ nav:
       - eda/data-storytelling/index.md
       - Data Storytelling Workflow: eda/data-storytelling/storytelling-intro.md
       - Analytical Goal Setting: eda/data-storytelling/analytical-goal-setting.md
-      - Task Planning: eda/data-storytelling/task-planning.md
+      - Initial Exploration: eda/data-storytelling/ingest-explore.md
       - Iterative Execution: eda/data-storytelling/iterative-execution.md
+      - Task Planning: eda/data-storytelling/task-planning.md
   - Introduction to Modeling:
     - modeling/index.md
     - Modeling with scikit-learn: modeling/modeling_intro.md
