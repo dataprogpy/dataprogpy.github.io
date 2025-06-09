@@ -171,6 +171,8 @@ nav:
       - Analytical Goal Setting: eda/data-storytelling/analytical-goal-setting.md
       - Initial Exploration: eda/data-storytelling/ingest-explore.md
       - Iterative Execution: eda/data-storytelling/iterative-execution.md
+      - Narrative Development: eda/data-storytelling/narrative-development.md
+      - Review & Validation: eda/data-storytelling/review-validation.md
       - Task Planning: eda/data-storytelling/task-planning.md
   - Introduction to Modeling:
     - modeling/index.md

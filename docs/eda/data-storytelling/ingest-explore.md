@@ -87,7 +87,7 @@ Once the data is loaded, the very next step is to perform some initial inspectio
 
 This initial inspection is vital. It helps you confirm the data integrity at a high level and identify areas that might need attention before you can effectively visualize or analyze it. For instance, if `price` was loaded as a string, you'd need to convert it to a number before creating a price distribution histogram.
 
-???+ question "**💡 Activity: Initial Data Check**"
+???+ activity "**💡 Activity: Initial Data Check**"
 
     1.  Run the code snippets above to load and inspect the `kc_house_data.csv` dataset.
     2.  Review the output of `.head()`, `.schema`, and `.describe()`.
@@ -156,7 +156,7 @@ If these basic smoke tests reveal significant problems (e.g., a critical column 
 
 Passing these smoke tests doesn't guarantee the data is perfect, but it gives you reasonable confidence that the fundamentals are in place for you to start the more detailed work of visualization and iterative cleaning.
 
-???+ question "**💡 Activity: Run Your Smoke Test**"
+???+ activity "**💡 Activity: Run Your Smoke Test**"
 
     1.  Adapt and run some of the smoke test code snippets above on the housing dataset.
     2.  Focus on variables that are key to the first 1-2 visualizations you planned in your Step 3 Task List.
@@ -266,7 +266,7 @@ If your first plot looks messy, is uninformative, or throws errors – **don't w
 These observations directly feed into the next phase: **Iterative Cleaning and Visualization**. The "problems" you see now, and the reflections on your initial plan, will help you create a more informed data cleaning task list and refine your visualization task list (creating a V2).
 
 
-???+ question "**💡 Activity: Your First Visualization Attempt, Reality Check & Plan Reflection**"
+???+ activity "**💡 Activity: Your First Visualization Attempt, Reality Check & Plan Reflection**"
 
     1.  Choose **one** visualization task from the list you created at the end of Step 3.
     2.  Write the Python and Altair code to generate this visualization using the `housing_df`.

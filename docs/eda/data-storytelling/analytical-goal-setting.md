@@ -58,7 +58,7 @@ Take a moment to look through this data dictionary.
 * Are there any variables whose meaning isn't immediately obvious?
 * What kind of audience might be interested in insights from this data? (e.g., potential homebuyers, sellers, real estate agents, urban planners).
 
-???+ question "**💡 Activity: Initial Variable Brainstorm**"
+???+ activity "**💡 Activity: Initial Variable Brainstorm**"
 
     Jot down 3-5 variables from this list that you think could be central to understanding housing prices or trends in this area. Consider why each might be important. We'll use this as a starting point for formulating questions.
 
@@ -104,7 +104,7 @@ You don't need an elaborate persona for every analysis, but even a simple one ca
 
 By defining "Sarah," we can now look at our data dictionary (from Step 1) and select variables that are most pertinent to her needs (e.g., `price`, `bedrooms`, `bathrooms`, `sqft_liv`, `zipcode`, `condition`, `grade`, `waterfront`). Variables like `Shape_leng` or `Shape_Area` might be less immediately relevant to Sarah, so we might deprioritize them for a story aimed at her.
 
-???+ question "**💡 Activity: Define Your Audience Persona**"
+???+ activity "**💡 Activity: Define Your Audience Persona**"
 
     Before we move on to brainstorming specific research questions, take 5 minutes to sketch out a simple persona for whom you might be analyzing this housing data.
 
@@ -196,7 +196,7 @@ Another approach is to start with broad themes relevant to your persona and data
 
 It's okay to brainstorm many questions initially. You'll prioritize them later based on relevance to your story and feasibility.
 
-???+ question "**💡 Activity: Draft Your Analytical Questions**"
+???+ activity "**💡 Activity: Draft Your Analytical Questions**"
 
     Based on the persona you created and the techniques above (revisiting persona needs, user stories, or brainstorming themes/questions):
 
@@ -321,7 +321,7 @@ Now it's time to formalize these ideas into an initial task list. This list will
 
     This is perfectly normal! Your task list is a **living document** that you will update and refine.
 
-???+ question "**💡 Activity: Draft Your Initial Visualization Task List**"
+???+ activity "**💡 Activity: Draft Your Initial Visualization Task List**"
 
     Take the 2-3 analytical questions you drafted in Step 2. For each question:
 
