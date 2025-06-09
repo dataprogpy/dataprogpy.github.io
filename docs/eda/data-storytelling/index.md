@@ -17,6 +17,6 @@ hide:
 - [ :material-numeric-4:{ .lg .middle } __Iterative Execution__](iterative-execution.md) 
 - [ :material-numeric-5:{ .lg .middle } __Narrative Development__](narrative-development.md) 
 - [ :material-numeric-6:{ .lg .middle } __Review & Validation__](review-validation.md) 
-- [ :material-numeric-7:{ .lg .middle } __Wrap-up & Next Steps__](wrap-up.md) 
+- [ :material-numeric-7:{ .lg .middle } __Conclusion__](conclusion.md) 
 
 </div>

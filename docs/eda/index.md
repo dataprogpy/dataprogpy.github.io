@@ -27,6 +27,6 @@ hide:
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/eda/data-storytelling)
+    [:octicons-arrow-right-24: What is Data Storytelling and Why a Workflow?](/eda/data-storytelling/storytelling-intro)
 
 </div>
