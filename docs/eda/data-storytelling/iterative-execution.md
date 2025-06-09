@@ -105,7 +105,7 @@ This step is where the "iterative" part of the "Iterative Cleaning and Visualiza
 
 You might go through this cycle multiple times for a single visualization or a set of related ones.
 
-##### **1. Executing Cleaning Tasks with Polars**
+### **1. Executing Cleaning Tasks with Polars**
 
 Let's take some common tasks from the "Example Data Cleaning Task List" in Step 6 and see how we might implement them in Polars. You should adapt these to the specific tasks on *your* list.
 
@@ -186,7 +186,7 @@ else:
     print("Columns 'price' or 'sqft_liv' not found or not numeric. Skipping 'price_per_sqft'.")
 ```
 
-##### **2. Vertical Visual Development with Altair (Post-Cleaning)**
+### **2. Vertical Visual Development with Altair (Post-Cleaning)**
 
 Once you've performed a relevant cleaning or transformation task, revisit the visualization that prompted it. Now, you can also focus on **vertical visual development**: building up a single chart layer by layer to enhance its clarity and communicative power.
 
@@ -247,7 +247,7 @@ else:
 * **Annotations:** Add text or line marks to highlight specific points or trends (e.g., `mark_text()`, `mark_rule()`).
 * **Legends:** Customize legend titles and appearance for clarity.
 
-##### **3. Updating Your Data Visualization Task List (V2, V3, ...)**
+### **3. Updating Your Data Visualization Task List (V2, V3, ...)**
 
 As you clean your data and refine your visuals, your understanding deepens. This often leads to changes in your visualization plan:
 
