@@ -18,18 +18,26 @@ Let's assume our data is in a CSV file named `kc_house_data.csv`.
 
 import polars as pl
 
+# If you are constantly working across OS platforms, tools like Path will 
+# help you write robust code
+# for purely Colab based development environment, this is an overkill.
+
+from pathlib import Path
+
 # Define the path to your dataset
-# (Adjust this path to where your file is located)
-file_path = 'kc_house_data.csv'
+# data root directory is typically where you place all your data file for a project.
+# Some kind of thoughtful directory hierarchy that takes your project specifc 
+# workflow into account would be save you a ton of time. 
+# Adjust this path to where your file is located.
+
+data_root = Path("/content/drive/MyDrive/dataprogpy/data")
+house_data_path = Path("kc_house_data.csv")
+county_file_path = Path("kingcounty/King_county_zip.shp")
+schdst_file_path = Path("School_Districts_in_King_County___schdst_area/School_Districts_in_King_County___schdst_area.shp")
 
 # Load the CSV file into a Polars DataFrame
-try:
-    housing_df = pl.read_csv(file_path)
-    print("Dataset loaded successfully!")
-except Exception as e:
-    print(f"Error loading dataset: {e}")
-    # In a real scenario, you might exit or handle this more gracefully
-    housing_df = pl.DataFrame() # Create an empty DataFrame to avoid further errors in lesson
+housing_df = pl.read_csv(data_root / house_data_path)
+
 ```
 
 Once the data is loaded, the very next step is to perform some initial inspections to ensure it loaded correctly and to get a feel for its structure and contents. Polars provides several helpful methods for this:
@@ -39,11 +47,7 @@ Once the data is loaded, the very next step is to perform some initial inspectio
 
     ```python
     # Display the first 5 rows of the DataFrame
-    if housing_df.height > 0: # Check if DataFrame is not empty
-        print("First 5 rows of the dataset:")
-        print(housing_df.head())
-    else:
-        print("DataFrame is empty. Cannot display head.")
+    print(housing_df.head())
     ```
     *Look at the output. Do the column names match our data dictionary? Do the data values look reasonable at first glance?*
 
@@ -51,9 +55,7 @@ Once the data is loaded, the very next step is to perform some initial inspectio
     This attribute shows each column's name and its inferred data type. This is crucial because the data type affects how you can operate on a column (e.g., you can't perform mathematical calculations on a string type without conversion).
 
     ```python
-    if housing_df.height > 0:
-        print("\nSchema of the dataset (column names and data types):")
-        print(housing_df.schema)
+    print(housing_df.schema)
     ```
     *Pay close attention to the data types. For example:*
 
@@ -65,15 +67,13 @@ Once the data is loaded, the very next step is to perform some initial inspectio
     This method provides descriptive statistics for numerical columns, such as count, mean, standard deviation, min, max, and quartiles. It's a great way to get a quick overview of the distribution and range of your numerical data and spot potential anomalies.
 
     ```python
-    if housing_df.height > 0:
-        print("\nSummary statistics for numerical columns:")
-        print(housing_df.describe())
+    print(housing_df.describe())
     ```
     *What can you learn from this?*
 
     * *For `price`:* What are the min, max, and mean prices? Does the standard deviation suggest a wide spread?
     * *For `bedrooms` or `bathrooms`:* Do the min/max values make sense? (e.g., a house with 0 bedrooms, or an unusually high number).
-    * *For `sqft_liv`, `sqft_lot`:* What are the typical sizes? Are there extreme values?
+    * *For `sqft_living`, `sqft_lot`:* What are the typical sizes? Are there extreme values?
     * *For `yr_built`*: What's the range of construction years?
     * *Look for columns with a `null_count` greater than 0 in the `describe` output; this indicates missing values.*
 
@@ -81,8 +81,7 @@ Once the data is loaded, the very next step is to perform some initial inspectio
     This attribute returns a tuple `(height, width)` representing the number of rows and columns.
 
     ```python
-    if housing_df.height > 0:
-        print(f"\nThe dataset has {housing_df.height} rows and {housing_df.width} columns.")
+    print(f"\nThe dataset has {housing_df.height} rows and {housing_df.width} columns.")
     ```
 
 This initial inspection is vital. It helps you confirm the data integrity at a high level and identify areas that might need attention before you can effectively visualize or analyze it. For instance, if `price` was loaded as a string, you'd need to convert it to a number before creating a price distribution histogram.
@@ -103,49 +102,40 @@ Before we even attempt our first chart, it's wise to perform a quick "smoke test
 Here are some common smoke tests you can perform with Polars, building on what you've already seen:
 
 1.  **Check for Unexpected Nulls in Critical Columns:**
-    While `.describe()` gives you `null_count`, you might want to specifically check columns crucial for your initial visualizations (from your Step 3 task list). For example, if `price` or `sqft_liv` are key to your first few charts:
+    While `.describe()` gives you `null_count`, you might want to specifically check columns crucial for your initial visualizations (from your Step 3 task list). For example, if `price` or `sqft_living` are key to your first few charts:
 
     ```python
-    if housing_df.height > 0:
-        critical_cols = ['price', 'sqft_liv', 'bedrooms', 'bathrooms']
-        for col_name in critical_cols:
-            if col_name in housing_df.columns:
-                null_count = housing_df[col_name].is_null().sum()
-                if null_count > 0:
-                    print(f"Warning: Column '{col_name}' has {null_count} null values.")
-            else:
-                print(f"Warning: Expected critical column '{col_name}' not found.")
+    critical_cols = ['price', 'sqft_living', 'bedrooms', 'bathrooms']
+    housing_df.select(
+        pl.col(critical_cols).is_null().sum().name.suffix("_nulls")
+    )
     ```
 
 2.  **Basic Sanity Check on Numerical Ranges:**
     Does `price` contain negative values or zeros where it shouldn't? Are there impossible values for `bedrooms` (e.g., 0 if that's unexpected, or an extremely high number like 50)?
 
     ```python
-    if housing_df.height > 0 and 'price' in housing_df.columns:
-        # Example: Check for non-positive prices if they are not expected
-        non_positive_prices = housing_df.filter(pl.col('price') <= 0).height
-        if non_positive_prices > 0:
-            print(f"Warning: Found {non_positive_prices} records with non-positive prices.")
+    # Example: Check for non-positive prices if they are not expected
+    non_positive_prices = housing_df.filter(pl.col('price') <= 0).height
+    if non_positive_prices > 0:
+        print(f"Warning: Found {non_positive_prices} records with non-positive prices.")
 
-    if housing_df.height > 0 and 'bedrooms' in housing_df.columns:
-        # Example: Check for an unusually high number of bedrooms
-        unusual_bedrooms = housing_df.filter(pl.col('bedrooms') > 20).height # Assuming >20 is unusual
-        if unusual_bedrooms > 0:
-            print(f"Warning: Found {unusual_bedrooms} records with more than 20 bedrooms.")
+    # Example: Check for an unusually high number of bedrooms
+    unusual_bedrooms = housing_df.filter(pl.col('bedrooms') > 20).height # Assuming >20 is unusual
+    if unusual_bedrooms > 0:
+        print(f"Warning: Found {unusual_bedrooms} records with more than 20 bedrooms.")
     ```
 
 3.  **Check Unique Values for Key Categorical/Boolean-like Columns:**
     For columns like `waterfront` (expected to be 0 or 1) or `condition` (expected 1-5), quickly check their unique values.
 
     ```python
-    if housing_df.height > 0 and 'waterfront' in housing_df.columns:
-        unique_waterfront = housing_df['waterfront'].unique().sort()
-        print(f"\nUnique values in 'waterfront': {unique_waterfront.to_list()}")
-        # Expected: [0, 1] or similar based on data dictionary
+    unique_waterfront = housing_df['waterfront'].unique().sort()
+    print(f"\nUnique values in 'waterfront': {unique_waterfront.to_list()}")
+    # Expected: [0, 1] or similar based on data dictionary
 
-    if housing_df.height > 0 and 'condition' in housing_df.columns:
-        unique_condition = housing_df['condition'].unique().sort()
-        print(f"Unique values in 'condition': {unique_condition.to_list()}")
+    unique_condition = housing_df['condition'].unique().sort()
+    print(f"Unique values in 'condition': {unique_condition.to_list()}")
         # Expected: [1, 2, 3, 4, 5]
     ```
 
@@ -177,7 +167,7 @@ Suppose from our Step 3 Visualization Task List, we had the following task, aime
 
 | Research Question                      | Data Variables                     | Mark Type | Key Encodings (X, Y, Color, Size, Tooltip, etc.)                                        | Anticipated Chart Type |
 | :------------------------------------- | :--------------------------------- | :-------- | :------------------------------------------------------------------------------------ | :--------------------- |
-| How does `sqft_liv` relate to `price`? | `price`, `sqft_liv`                | `point`   | `x: sqft_liv (Q)`, `y: price (Q)`, `tooltip: [price, sqft_liv, bedrooms, bathrooms]` | Scatter Plot           |
+| How does `sqft_living` relate to `price`? | `price`, `sqft_living`                | `point`   | `x: sqft_living (Q)`, `y: price (Q)`, `tooltip: [price, sqft_living, bedrooms, bathrooms]` | Scatter Plot           |
 
 Now, let's try to code this in Altair using our `housing_df` Polars DataFrame:
 
@@ -185,33 +175,26 @@ Now, let's try to code this in Altair using our `housing_df` Polars DataFrame:
 import altair as alt
 # Assuming housing_df is your Polars DataFrame loaded in Step 4
 
-# Ensure Polars data can be directly used by Altair
-# (Altair typically expects pandas DataFrames or dict/list of dicts,
-# but can often work with objects that support the __dataframe__ protocol, which Polars does)
-# For explicit conversion if needed: housing_pandas_df = housing_df.to_pandas()
+alt.data_transformers.disable_max_rows()
+# By default, Altair has a transformer that limits the number of rows it will process for performance reasons.
+# The .disable_max_rows() method turns off this default behavior.
+# This is useful when you have a large dataset and want to ensure all data points are considered for your visualization, although it might impact performance.
 
-if housing_df.height > 0:
-    try:
-        scatter_plot = alt.Chart(housing_df).mark_point().encode(
-            x=alt.X('sqft_liv:Q', title='Living Area (sq ft)'), # :Q denotes Quantitative
-            y=alt.Y('price:Q', title='Sale Price (USD)', axis=alt.Axis(format='$,.0f')),
-            tooltip=['price', 'sqft_liv', 'bedrooms', 'bathrooms']
-        ).properties(
-            title='Price vs. Living Area',
-            width=600,
-            height=400
-        ).interactive() # Adds panning and zooming
+scatter_plot = alt.Chart(housing_df).mark_point().encode(
+    x=alt.X('sqft_living:Q', title='Living Area (sq ft)'), # :Q denotes Quantitative
+    y=alt.Y('price:Q', title='Sale Price (USD)', axis=alt.Axis(format='$,.0f')),
+    tooltip=['price', 'sqft_living', 'bedrooms', 'bathrooms']
+).properties(
+    title='Price vs. Living Area',
+    width=600,
+    height=400
+).interactive() # Adds panning and zooming
 
-        # To display the chart in many environments (like a Jupyter notebook or an IDE with an Altair renderer):
-        scatter_plot.show()
-        # In MkDocs, you might save it to a JSON file and embed it, or use a Python-to-JS bridge.
-        # For now, we'll assume you can display it or inspect its structure.
-        print("Scatter plot generated (or attempted).")
-
-    except Exception as e:
-        print(f"Error generating scatter plot: {e}")
-else:
-    print("DataFrame is empty. Cannot generate scatter plot.")
+# To display the chart in many environments (like a Jupyter notebook or an IDE with an Altair renderer):
+scatter_plot.show()
+# In MkDocs, you might save it to a JSON file and embed it, or use a Python-to-JS bridge.
+# For now, we'll assume you can display it or inspect its structure.
+print("Scatter plot generated (or attempted).")
 
 ```
 
@@ -220,13 +203,13 @@ else:
 You run the code. What might you see? This is where the "reality check" happens. Here are some common scenarios:
 
 1.  **Error Messages:**
-    * **Incorrect Data Types:** If `price` or `sqft_liv` were accidentally loaded as strings (`pl.Utf8`) and you didn't convert them to numerical types (`pl.Float64` or `pl.Int64`), Altair (or the underlying Vega-Lite) would likely complain or produce an incorrect chart.
+    * **Incorrect Data Types:** If `price` or `sqft_living` were accidentally loaded as strings (`pl.Utf8`) and you didn't convert them to numerical types (`pl.Float64` or `pl.Int64`), Altair (or the underlying Vega-Lite) would likely complain or produce an incorrect chart.
         * *Uh-Oh Example:* Your `price` axis might show alphabetical sorting if it's a string, or the plot might fail entirely.
-    * **Column Not Found:** A typo in a column name (`'sqft_living'` instead of `'sqft_liv'`) will cause an error.
+    * **Column Not Found:** A typo in a column name (`'sqft_liv'` instead of `'sqft_living'`) will cause an error.
 
 2.  **The "Blob" / Overplotting:**
     * With many thousands of houses in our dataset, a simple scatter plot might just look like a dense, unreadable blob of points, especially in areas with many similarly priced/sized homes. You can't distinguish individual points or see the density clearly.
-        * *Uh-Oh Example:* Our `price` vs. `sqft_liv` plot will almost certainly suffer from this.
+        * *Uh-Oh Example:* Our `price` vs. `sqft_living` plot will almost certainly suffer from this.
 
 3.  **Skewed Distributions & Outliers:**
     * The `price` variable, in particular, is often right-skewed (many houses at lower-to-mid prices, and a few very expensive ones). These outliers can "squish" the majority of data points into a small area of the chart, making it hard to see patterns among them.
