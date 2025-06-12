@@ -21,7 +21,7 @@ For this lesson, we'll be working with a dataset containing information about ho
 | `price`       | Sale price of the house.                                                                                                                                                                                | Float/Integer (e.g., 221900.0) |
 | `bedrooms`    | Number of bedrooms.                                                                                                                                                                                     | Integer (e.g., 3)           |
 | `bathrooms`   | Number of bathrooms (can be fractional, e.g., 0.5 represents a half bath).                                                                                                                               | Float (e.g., 1.0, 2.5)      |
-| `sqft_liv`    | Square footage of the interior living space.                                                                                                                                                            | Integer (e.g., 1180)        |
+| `sqft_living`    | Square footage of the interior living space.                                                                                                                                                            | Integer (e.g., 1180)        |
 | `sqft_lot`    | Square footage of the land lot.                                                                                                                                                                         | Integer (e.g., 5650)        |
 | `floors`      | Total number of floors (levels) in the house.                                                                                                                                                           | Float (e.g., 1.0, 1.5)      |
 | `waterfront`  | Indicates if the property has a waterfront view. `1` if yes, `0` if no.                                                                                                                                     | Integer (0 or 1)            |
@@ -42,7 +42,7 @@ For this lesson, we'll be working with a dataset containing information about ho
 
 **Why spend time on this?**
 
-* **Identify Key Variables:** Which variables seem most relevant to potential questions about housing? (e.g., `price`, `sqft_liv`, `bedrooms`, `zipcode`, `waterfront`).
+* **Identify Key Variables:** Which variables seem most relevant to potential questions about housing? (e.g., `price`, `sqft_living`, `bedrooms`, `zipcode`, `waterfront`).
 * **Understand Data Types:** Knowing if a variable is numerical (integer, float) or categorical (like `zipcode`, even if it looks like a number) is crucial for choosing appropriate analysis and visualization methods. For instance, you might calculate an average `price` (numerical) but you wouldn't average `zipcode`s.
 * **Spot Potential Issues:**
     * Are there missing values or placeholder values (like `0` for `yr_renov`) that need special handling?
@@ -96,13 +96,13 @@ You don't need an elaborate persona for every analysis, but even a simple one ca
 * **Key Questions:**
 
     * What is the general price distribution for houses?
-    * How much does `sqft_liv`, `bedrooms`, or `bathrooms` impact `price`?
+    * How much does `sqft_living`, `bedrooms`, or `bathrooms` impact `price`?
     * Are there significant price differences between `zipcode`s?
     * Is a `waterfront` property completely out of reach? What's the premium?
     * How much does the `condition` or `grade` of a house influence its value?
 * **Data Familiarity:** Comfortable with basic charts, but prefers clear takeaways. Not a data scientist.
 
-By defining "Sarah," we can now look at our data dictionary (from Step 1) and select variables that are most pertinent to her needs (e.g., `price`, `bedrooms`, `bathrooms`, `sqft_liv`, `zipcode`, `condition`, `grade`, `waterfront`). Variables like `Shape_leng` or `Shape_Area` might be less immediately relevant to Sarah, so we might deprioritize them for a story aimed at her.
+By defining "Sarah," we can now look at our data dictionary (from Step 1) and select variables that are most pertinent to her needs (e.g., `price`, `bedrooms`, `bathrooms`, `sqft_living`, `zipcode`, `condition`, `grade`, `waterfront`). Variables like `Shape_leng` or `Shape_Area` might be less immediately relevant to Sarah, so we might deprioritize them for a story aimed at her.
 
 ???+ activity "**💡 Activity: Define Your Audience Persona**"
 
@@ -123,7 +123,7 @@ Look back at the persona you just created.
 * What are their primary goals?
 * What key questions did you list for them?
 
-These directly inform your analytical objectives. If Sarah the Savvy Homebuyer wants to "understand the general price distribution," then a primary analytical goal for you is to explore and summarize house prices. Her question, "How much does `sqft_liv` impact `price`?" points directly to an analysis of the relationship between these two variables.
+These directly inform your analytical objectives. If Sarah the Savvy Homebuyer wants to "understand the general price distribution," then a primary analytical goal for you is to explore and summarize house prices. Her question, "How much does `sqft_living` impact `price`?" points directly to an analysis of the relationship between these two variables.
 
 ### **Approach 2: Crafting Simplified User Stories**
 
@@ -142,8 +142,8 @@ Let's try this with our "Sarah the Savvy Homebuyer" persona and the housing data
 
 * **Example 2 (Focus on Key Features):**
 
-    * "As **Sarah the Savvy Homebuyer**, I want to **see how features like the number of `bedrooms`, `bathrooms`, and `sqft_liv` affect the `price`** so that I can **evaluate trade-offs and identify properties that meet my needs and budget**."
-    * *This suggests exploring relationships between `price` and `bedrooms`, `bathrooms`, `sqft_liv`.*
+    * "As **Sarah the Savvy Homebuyer**, I want to **see how features like the number of `bedrooms`, `bathrooms`, and `sqft_living` affect the `price`** so that I can **evaluate trade-offs and identify properties that meet my needs and budget**."
+    * *This suggests exploring relationships between `price` and `bedrooms`, `bathrooms`, `sqft_living`.*
 
 * **Example 3 (Focus on Location):**
 
@@ -172,7 +172,7 @@ Another approach is to start with broad themes relevant to your persona and data
 
 * **Theme: Price Drivers**
     * How is `price` distributed overall?
-    * What is the relationship between `sqft_liv` and `price`?
+    * What is the relationship between `sqft_living` and `price`?
     * Is there a significant price difference for properties with `waterfront` access?
     * How does the number of `bedrooms` or `bathrooms` correlate with `price`?
     * Does `yr_built` or `yr_renov` have a noticeable impact on `price`?
@@ -181,7 +181,7 @@ Another approach is to start with broad themes relevant to your persona and data
     * What are the average/median prices per `zipcode`?
     * Are houses closer to certain amenities (if we could infer this from `lat`/`long`) more expensive? (This might be an advanced question requiring external data).
 * **Theme: Property Characteristics**
-    * What are the typical ranges for `bedrooms`, `bathrooms`, `sqft_liv`?
+    * What are the typical ranges for `bedrooms`, `bathrooms`, `sqft_living`?
     * How common are basements (`sqft_basmt` > 0)?
 * **Theme: Value for Money**
     * How does `condition` affect `price`, controlling for size?
@@ -277,20 +277,20 @@ Now, let's take the analytical questions you drafted in Step 2 and translate eac
 
 **Let's walk through an example using one of Sarah the Savvy Homebuyer's potential questions:**
 
-* **Research Question:** "How does the size of the living area (`sqft_liv`) relate to the sale `price`?"
+* **Research Question:** "How does the size of the living area (`sqft_living`) relate to the sale `price`?"
 
     1.  **Data Variables:**
         * `price` (numerical)
-        * `sqft_liv` (numerical)
+        * `sqft_living` (numerical)
         * *(Potentially others for adding layers, e.g., `waterfront` (categorical) or `grade` (ordinal) to see if they modify the relationship)*
 
     2.  **Mark Type:**
         * Since we want to see the relationship between two numerical variables for individual houses, `mark_point()` is a strong candidate. Each point will represent a single house.
 
     3.  **Key Encodings:**
-        * `x`: `alt.X('sqft_liv', type='quantitative', title='Living Area (sq ft)')`
+        * `x`: `alt.X('sqft_living', type='quantitative', title='Living Area (sq ft)')`
         * `y`: `alt.Y('price', type='quantitative', title='Sale Price (USD)', axis=alt.Axis(format='$,.0f'))`
-        * `tooltip`: `['price', 'sqft_liv', 'bedrooms', 'bathrooms']` (to show details on hover)
+        * `tooltip`: `['price', 'sqft_living', 'bedrooms', 'bathrooms']` (to show details on hover)
         * *Optional further encoding (to explore more nuance):*
             * `color`: `alt.Color('waterfront:N', title='Waterfront')` (to see if waterfront properties show a different pattern). The `:N` tells Altair to treat `waterfront` as a Nominal (categorical) variable.
 
@@ -308,7 +308,7 @@ Now it's time to formalize these ideas into an initial task list. This list will
 | Research Question                                       | Data Variables                     | Mark Type    | Key Encodings (X, Y, Color, Size, Tooltip, etc.)                                                                        | Anticipated Chart Type | Notes / Potential Challenges                                    |
 | :------------------------------------------------------ | :--------------------------------- | :----------- | :-------------------------------------------------------------------------------------------------------------------- | :--------------------- | :-------------------------------------------------------------- |
 | How is `price` distributed overall?                     | `price`                            | `bar`        | `x: price` (binned), `y: count()`                                                                                     | Histogram              | Might need to handle outliers or try log scale for price.       |
-| How does `sqft_liv` relate to `price`?                | `price`, `sqft_liv`, `waterfront`  | `point`      | `x: sqft_liv (Q)`, `y: price (Q)`, `color: waterfront (N)`, `tooltip: [price, sqft_liv, bedrooms]`                    | Scatter Plot           | Large number of points might cause overplotting.                |
+| How does `sqft_living` relate to `price`?                | `price`, `sqft_living`, `waterfront`  | `point`      | `x: sqft_living (Q)`, `y: price (Q)`, `color: waterfront (N)`, `tooltip: [price, sqft_living, bedrooms]`                    | Scatter Plot           | Large number of points might cause overplotting.                |
 | What's the average `price` by number of `bedrooms`?   | `price`, `bedrooms`                | `bar`        | `x: bedrooms (O)`, `y: mean(price) (Q)`, `tooltip: [mean(price), count()]`                                              | Bar Chart              | Ensure `bedrooms` is treated as ordinal/discrete. Consider outliers. |
 
 !!! warning "**Emphasis: This is Version 1!**"
