@@ -43,13 +43,13 @@ Based on the kinds of issues we discussed in Step 5, here are typical cleaning t
     * **Observation (Step 5):** An existing variable isn't quite in the form you need, or a new derived metric could be more insightful.
     * **Potential Cleaning Tasks:**
         * **Extraction:** Pull out parts of a variable. *Example: Extract `year` and `month` from our parsed `date` column to analyze seasonality or yearly trends.*
-        * **Calculation:** Create new features from existing ones. *Example: Calculate `price_per_sqft` (`price` / `sqft_liv`) to normalize for size.*
+        * **Calculation:** Create new features from existing ones. *Example: Calculate `price_per_sqft` (`price` / `sqft_living`) to normalize for size.*
         * **Binning/Discretization:** Convert a continuous numerical variable into a categorical one. *Example: Bin `yr_built` into decades like "1950-1959", "1960-1969", etc., to see price trends by age category.*
         * **Creating Flags:** Make boolean indicators. *Example: Create an `is_renovated` column (`1` if `yr_renov > 0`, else `0`).*
     * **Polars Hint:** `.with_columns()`, string functions (`.str.extract()`, `.str.strptime()`), date functions (`.dt.year()`, `.dt.month()`), mathematical operations, `pl.cut()` for binning.
 
 4.  **Handling Outliers:**
-    * **Observation (Step 5):** A few extreme values in a numerical column (e.g., `price`, `sqft_liv`) are "squishing" your plot, making it hard to see patterns in the majority of the data.
+    * **Observation (Step 5):** A few extreme values in a numerical column (e.g., `price`, `sqft_living`) are "squishing" your plot, making it hard to see patterns in the majority of the data.
     * **Potential Cleaning Tasks (use with caution and transparency):**
         * **Identification:** Use statistical methods (e.g., Z-score, IQR) or visualization (box plots) to identify outliers.
         * **Capping/Winsorizing:** Limit extreme values to a certain percentile (e.g., cap all values above the 99th percentile at the 99th percentile value).
@@ -74,7 +74,7 @@ Similar to your visualization task list, document the cleaning tasks you identif
 | "Uh-Oh" / Observation (from Step 5)                      | Data Variable(s) | Proposed Cleaning Task                                     | Rationale / Why is this needed? (**Link to Step 2 Goal**)                                     | Polars Function(s) (Hint)    | Priority |
 | :------------------------------------------------------- | :--------------- | :--------------------------------------------------------- | :-------------------------------------------------------------------------------------------- | :--------------------------- | :------- |
 | `date` column is string ("20141013T000000"), cannot plot trend | `date`           | Parse to datetime objects. Extract `year` and `month`.     | Enable time-series analysis for Sarah's question about price changes over time.                 | `pl.to_datetime()`, `.dt.year()` | High     |
-| Scatter plot of `price` vs `sqft_liv` is a blob.         | `price`, `sqft_liv`| Try log transformation on `price` and possibly `sqft_liv`. | Reduce skew for better visibility, helping Sarah understand the `price`/`sqft_liv` relationship. | `pl.col().log()`             | High     |
+| Scatter plot of `price` vs `sqft_living` is a blob.         | `price`, `sqft_living`| Try log transformation on `price` and possibly `sqft_living`. | Reduce skew for better visibility, helping Sarah understand the `price`/`sqft_living` relationship. | `pl.col().log()`             | High     |
 | `yr_renov` has `0` for no renovation. Want a clear flag. | `yr_renov`       | Create `is_renovated` (1 if `yr_renov` > 0, else 0).     | Easier for Sarah to see if renovations impact value when grouping or coloring.              | `.is_greater()`, `.cast()`   | Medium   |
 | `bedrooms` has some high outliers (e.g. 33).             | `bedrooms`       | Investigate these outliers. For initial viz, filter to < N. | Prevent extreme outliers from skewing plots or summary stats for typical house comparisons. | `.filter()`                  | Medium   |
 | `notes_column` (hypothetical) has messy text.            | `notes_column`   | *No action for now.* | This column is not related to any of Sarah's current questions or our planned visuals.      | N/A                          | Low/None |
@@ -163,43 +163,43 @@ else:
 * **Rationale:** A useful metric for comparing value, normalizing for house size.
 
 ```python
-# Ensure 'price' and 'sqft_liv' exist and are numeric
-if 'price' in housing_df.columns and 'sqft_liv' in housing_df.columns and \
+# Ensure 'price' and 'sqft_living' exist and are numeric
+if 'price' in housing_df.columns and 'sqft_living' in housing_df.columns and \
    housing_df['price'].dtype in pl.NUMERIC_DTYPES and \
-   housing_df['sqft_liv'].dtype in pl.NUMERIC_DTYPES:
+   housing_df['sqft_living'].dtype in pl.NUMERIC_DTYPES:
     try:
         housing_df = housing_df.with_columns(
-            (pl.col('price') / pl.col('sqft_liv')).alias('price_per_sqft')
+            (pl.col('price') / pl.col('sqft_living')).alias('price_per_sqft')
         )
-        # Handle cases where sqft_liv might be 0 to avoid division by zero
+        # Handle cases where sqft_living might be 0 to avoid division by zero
         housing_df = housing_df.with_columns(
-            pl.when(pl.col('sqft_liv') > 0)
-            .then(pl.col('price') / pl.col('sqft_liv'))
+            pl.when(pl.col('sqft_living') > 0)
+            .then(pl.col('price') / pl.col('sqft_living'))
             .otherwise(None) # Or some other appropriate fill value
             .alias('price_per_sqft')
         )
         print("Creation of 'price_per_sqft' successful.")
-        # print(housing_df.select(['price', 'sqft_liv', 'price_per_sqft']).head())
+        # print(housing_df.select(['price', 'sqft_living', 'price_per_sqft']).head())
     except Exception as e:
         print(f"Error creating 'price_per_sqft': {e}")
 else:
-    print("Columns 'price' or 'sqft_liv' not found or not numeric. Skipping 'price_per_sqft'.")
+    print("Columns 'price' or 'sqft_living' not found or not numeric. Skipping 'price_per_sqft'.")
 ```
 
 ### **2. Vertical Visual Development with Altair (Post-Cleaning)**
 
 Once you've performed a relevant cleaning or transformation task, revisit the visualization that prompted it. Now, you can also focus on **vertical visual development**: building up a single chart layer by layer to enhance its clarity and communicative power.
 
-Let's refine our `price` vs. `sqft_liv` scatter plot from Step 5, assuming we've now created `price_log`.
+Let's refine our `price` vs. `sqft_living` scatter plot from Step 5, assuming we've now created `price_log`.
 
 ```python
 import altair as alt
 
 # Assuming housing_df now contains 'price_log' and other cleaned columns
-if 'price_log' in housing_df.columns and 'sqft_liv' in housing_df.columns:
+if 'price_log' in housing_df.columns and 'sqft_living' in housing_df.columns:
     # Layer 1: Basic scatter plot with transformed data
     base_scatter = alt.Chart(housing_df).mark_point(opacity=0.3).encode( # Added opacity for overplotting
-        x=alt.X('sqft_liv:Q', title='Living Area (sq ft)'),
+        x=alt.X('sqft_living:Q', title='Living Area (sq ft)'),
         y=alt.Y('price_log:Q', title='Log of Sale Price (USD)') # Using log-transformed price
     )
 
@@ -207,7 +207,7 @@ if 'price_log' in housing_df.columns and 'sqft_liv' in housing_df.columns:
     base_scatter_with_tooltips = base_scatter.encode(
         tooltip=[
             alt.Tooltip('price:Q', title='Price', format='$,.0f'), # Show original price in tooltip
-            'sqft_liv:Q',
+            'sqft_living:Q',
             'bedrooms:O', # :O for Ordinal or discrete numeric
             'bathrooms:Q'
         ]
@@ -225,7 +225,7 @@ if 'price_log' in housing_df.columns and 'sqft_liv' in housing_df.columns:
     # or you'd pre-calculate regression line data.
     # For simplicity in this example, we'll skip adding a live regression line
     # but you could add a pre-calculated one or use a loess line.
-    # Example: final_scatter_plot + final_scatter_plot.transform_loess('sqft_liv', 'price_log').mark_line(color='red')
+    # Example: final_scatter_plot + final_scatter_plot.transform_loess('sqft_living', 'price_log').mark_line(color='red')
 
 
     # Display the chart

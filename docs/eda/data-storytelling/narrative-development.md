@@ -78,17 +78,17 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 
 **Visual 2: Price vs. Key Feature (Living Area)**
 
-* **Chart Type:** Scatter plot of `price_log` vs. `sqft_liv`, perhaps with `grade` encoded by color.
+* **Chart Type:** Scatter plot of `price_log` vs. `sqft_living`, perhaps with `grade` encoded by color.
 * **Purpose:** Show Sarah how a primary feature (living area) relates to price, and if construction grade plays a role.
 * **Key Insight:** Generally, as living area increases, price increases. Higher grade houses tend to command higher prices for similar sizes.
 
     ```python
     # (Conceptual Altair code)
     # price_vs_sqft_scatter = alt.Chart(housing_df).mark_point(opacity=0.3).encode(
-    #     alt.X('sqft_liv:Q', title='Living Area (sq ft)'),
+    #     alt.X('sqft_living:Q', title='Living Area (sq ft)'),
     #     alt.Y('price_log:Q', title='Log of Sale Price'),
     #     alt.Color('grade:O', title='Construction Grade', scale=alt.Scale(scheme='viridis')), # :O for Ordinal
-    #     tooltip=[alt.Tooltip('price:Q', title='Price', format='$,.0f'), 'sqft_liv', 'grade']
+    #     tooltip=[alt.Tooltip('price:Q', title='Price', format='$,.0f'), 'sqft_living', 'grade']
     # ).properties(
     #     title='Price vs. Living Area by Construction Grade',
     #     width=500, height=300
@@ -136,13 +136,13 @@ This sequence tells a story: "Here's the overall market (Visual 1), here's how a
 
 Part of horizontal development can also involve showing different "slices" or "facets" of your data to provide deeper insights or comparisons.
 
-* **Filtering:** You might show a general trend, then show the same chart filtered for a specific subgroup (e.g., "Here's `price` vs. `sqft_liv` for all houses, and now here it is just for `waterfront` properties").
-* **Faceting (Small Multiples):** Instead of multiple separate charts, you can use faceting (e.g., `facet` or `row`/`column` encodings in Altair) to create a grid of charts that show the same relationship broken down by different categories. For example, you could facet the `price` vs. `sqft_liv` scatter plot by `bedrooms`. This allows for easy comparison across categories.
+* **Filtering:** You might show a general trend, then show the same chart filtered for a specific subgroup (e.g., "Here's `price` vs. `sqft_living` for all houses, and now here it is just for `waterfront` properties").
+* **Faceting (Small Multiples):** Instead of multiple separate charts, you can use faceting (e.g., `facet` or `row`/`column` encodings in Altair) to create a grid of charts that show the same relationship broken down by different categories. For example, you could facet the `price` vs. `sqft_living` scatter plot by `bedrooms`. This allows for easy comparison across categories.
 
     ```python
     # (Conceptual Altair code for faceting)
     # price_vs_sqft_faceted = alt.Chart(housing_df).mark_point(opacity=0.4).encode(
-    #     alt.X('sqft_liv:Q', title='Living Area (sq ft)'),
+    #     alt.X('sqft_living:Q', title='Living Area (sq ft)'),
     #     alt.Y('price_log:Q', title='Log of Sale Price'),
     #     alt.Column('bedrooms:O', title='Number of Bedrooms') # Facet by bedrooms
     # ).properties(
@@ -165,7 +165,7 @@ The goal is to create a journey for your audience, leading them logically from o
     3.  **Outline this sequence:**
 
         * For each visual in the sequence:
-            * Briefly describe the chart (e.g., "Histogram of log prices," "Scatter of price vs. sqft_liv colored by grade").
+            * Briefly describe the chart (e.g., "Histogram of log prices," "Scatter of price vs. sqft_living colored by grade").
             * What is the key insight or piece of information this specific visual contributes to the mini-story?
             * How does it connect to the previous visual (if any) and lead to the next?
     4.  (Optional) Think about whether filtering or faceting could enhance part of your mini-story.
@@ -221,13 +221,13 @@ Annotations are textual or graphical elements placed *directly onto a chart* to 
     Altair allows for annotations, often by layering additional marks like `mark_text()` or `mark_rule()`.
 
     * **Highlighting a specific point with `mark_text()`:**
-        Imagine you wanted to label a particularly interesting house in your `price_log` vs. `sqft_liv` scatter plot. You might create a small DataFrame with the details of that point and layer a `mark_text` chart.
+        Imagine you wanted to label a particularly interesting house in your `price_log` vs. `sqft_living` scatter plot. You might create a small DataFrame with the details of that point and layer a `mark_text` chart.
 
         ```python
         # (Conceptual - assume 'final_scatter_plot' from Step 7 and housing_df exists)
         # highlight_data = pl.DataFrame({
-        #     'sqft_liv': [3000],  # Sqft of the house to highlight
-        #     'price_log': [housing_df.filter(pl.col('sqft_liv') == 3000)['price_log'].mean()], # Example Y
+        #     'sqft_living': [3000],  # Sqft of the house to highlight
+        #     'price_log': [housing_df.filter(pl.col('sqft_living') == 3000)['price_log'].mean()], # Example Y
         #     'text': ['Example High Value Home']
         # })
         #
@@ -236,7 +236,7 @@ Annotations are textual or graphical elements placed *directly onto a chart* to 
         #     baseline='middle',
         #     dx=7  # Offset text slightly to the right
         # ).encode(
-        #     x='sqft_liv:Q',
+        #     x='sqft_living:Q',
         #     y='price_log:Q',
         #     text='text:N'
         # )
