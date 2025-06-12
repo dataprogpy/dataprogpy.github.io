@@ -110,32 +110,31 @@ You might go through this cycle multiple times for a single visualization or a s
 Let's take some common tasks from the "Example Data Cleaning Task List" in Step 6 and see how we might implement them in Polars. You should adapt these to the specific tasks on *your* list.
 
 **Example Cleaning Task 1: Parse `date` and Extract `year` and `month`**
+
 * **Rationale:** Needed for time-series analysis or grouping by year/month. Our `date` column is a string like "20141013T000000".
 
 ```python
-import polars as pl
-# Assuming housing_df is your Polars DataFrame
+# Assuming housing_df is your Polars DataFrame and  
+# you have imported Polars as pl
 
 # Make sure the 'date' column exists
-if 'date' in housing_df.columns:
-    try:
-        housing_df = housing_df.with_columns(
-            # Parse the date string. The "T000000" part is effectively ignored by %Y%m%d
-            # if it's not included in the format string.
-            # Polars' strptime is robust.
-            pl.col('date').str.strptime(pl.Date, format="%Y%m%dT%H%M%S").alias('parsed_date')
-        )
-        # Now extract year and month from the new 'parsed_date' column
-        housing_df = housing_df.with_columns([
-            pl.col('parsed_date').dt.year().alias('sale_year'),
-            pl.col('parsed_date').dt.month().alias('sale_month')
-        ])
-        print("Date parsing and feature extraction successful.")
-        # print(housing_df.select(['date', 'parsed_date', 'sale_year', 'sale_month']).head())
-    except Exception as e:
-        print(f"Error during date parsing: {e}")
-else:
-    print("Column 'date' not found. Skipping date parsing.")
+# Parse the date string. The "T000000" part is effectively ignored by %Y%m%d
+# if it's not included in the format string.
+# Polars' strptime is robust.
+
+housing_df = housing_df.with_columns(
+    pl.col('date').str.strptime(pl.Date, format="%Y%m%dT%H%M%S").alias('parsed_date')
+)
+
+# Now extract year and month from the new 'parsed_date' column
+
+housing_df = housing_df.with_columns([
+    pl.col('parsed_date').dt.year().alias('sale_year'),
+    pl.col('parsed_date').dt.month().alias('sale_month')
+])
+
+housing_df.select(['date', 'parsed_date', 'sale_year', 'sale_month']).head()
+
 ```
 
 **Example Cleaning Task 2: Log Transform `price`**
@@ -143,17 +142,10 @@ else:
 
 ```python
 # Make sure the 'price' column exists and is numeric
-if 'price' in housing_df.columns and housing_df['price'].dtype in [pl.Float32, pl.Float64, pl.Int32, pl.Int64]:
-    try:
-        housing_df = housing_df.with_columns(
-            pl.col('price').log().alias('price_log')
-        )
-        print("Log transformation of 'price' successful.")
-        # print(housing_df.select(['price', 'price_log']).head())
-    except Exception as e:
-        print(f"Error during log transformation: {e}") # e.g. if price contains 0 or negative values
-else:
-    print("Column 'price' not found or not numeric. Skipping log transformation.")
+housing_df = housing_df.with_columns(
+    pl.col('price').log().alias('price_log')
+)
+    
 
 ```
 *Self-correction during cleaning:* If `price` contains 0 or negative values, `log()` will produce nulls or errors. You might need to handle those first (e.g., `pl.when(pl.col('price') > 0).then(pl.col('price').log()).otherwise(None).alias('price_log')`) or filter them out if appropriate for your analysis. This is part of the iterative process!
@@ -164,26 +156,17 @@ else:
 
 ```python
 # Ensure 'price' and 'sqft_living' exist and are numeric
-if 'price' in housing_df.columns and 'sqft_living' in housing_df.columns and \
-   housing_df['price'].dtype in pl.NUMERIC_DTYPES and \
-   housing_df['sqft_living'].dtype in pl.NUMERIC_DTYPES:
-    try:
-        housing_df = housing_df.with_columns(
-            (pl.col('price') / pl.col('sqft_living')).alias('price_per_sqft')
-        )
-        # Handle cases where sqft_living might be 0 to avoid division by zero
-        housing_df = housing_df.with_columns(
-            pl.when(pl.col('sqft_living') > 0)
-            .then(pl.col('price') / pl.col('sqft_living'))
-            .otherwise(None) # Or some other appropriate fill value
-            .alias('price_per_sqft')
-        )
-        print("Creation of 'price_per_sqft' successful.")
-        # print(housing_df.select(['price', 'sqft_living', 'price_per_sqft']).head())
-    except Exception as e:
-        print(f"Error creating 'price_per_sqft': {e}")
-else:
-    print("Columns 'price' or 'sqft_living' not found or not numeric. Skipping 'price_per_sqft'.")
+housing_df = housing_df.with_columns(
+    (pl.col('price') / pl.col('sqft_living')).alias('price_per_sqft')
+)
+# Handle cases where sqft_living might be 0 to avoid division by zero
+housing_df = housing_df.with_columns(
+    pl.when(pl.col('sqft_living') > 0)
+    .then(pl.col('price') / pl.col('sqft_living'))
+    .otherwise(None) # Or some other appropriate fill value
+    .alias('price_per_sqft')
+)
+
 ```
 
 ### **2. Vertical Visual Development with Altair (Post-Cleaning)**
@@ -193,47 +176,48 @@ Once you've performed a relevant cleaning or transformation task, revisit the vi
 Let's refine our `price` vs. `sqft_living` scatter plot from Step 5, assuming we've now created `price_log`.
 
 ```python
-import altair as alt
+
 
 # Assuming housing_df now contains 'price_log' and other cleaned columns
-if 'price_log' in housing_df.columns and 'sqft_living' in housing_df.columns:
-    # Layer 1: Basic scatter plot with transformed data
-    base_scatter = alt.Chart(housing_df).mark_point(opacity=0.3).encode( # Added opacity for overplotting
-        x=alt.X('sqft_living:Q', title='Living Area (sq ft)'),
-        y=alt.Y('price_log:Q', title='Log of Sale Price (USD)') # Using log-transformed price
-    )
-
-    # Layer 2: Add tooltips for interactivity
-    base_scatter_with_tooltips = base_scatter.encode(
-        tooltip=[
-            alt.Tooltip('price:Q', title='Price', format='$,.0f'), # Show original price in tooltip
-            'sqft_living:Q',
-            'bedrooms:O', # :O for Ordinal or discrete numeric
-            'bathrooms:Q'
-        ]
-    )
-
-    # Layer 3: Add a title and adjust properties
-    final_scatter_plot = base_scatter_with_tooltips.properties(
-        title='Log Price vs. Living Area',
-        width=600,
-        height=400
-    ).interactive() # Enable panning and zooming
-
-    # Layer 4 (Optional): Add a regression line to see the trend
-    # Note: Polars DataFrames need to be converted to pandas for transform_regression
-    # or you'd pre-calculate regression line data.
-    # For simplicity in this example, we'll skip adding a live regression line
-    # but you could add a pre-calculated one or use a loess line.
-    # Example: final_scatter_plot + final_scatter_plot.transform_loess('sqft_living', 'price_log').mark_line(color='red')
+# and you have imported Altair as alt and disabled max_rows safeguard. 
 
 
-    # Display the chart
-    final_scatter_plot.show()
-    print("Refined scatter plot generated.")
+# Layer 1: Basic scatter plot with transformed data
+base_scatter = alt.Chart(housing_df).mark_point(opacity=0.3).encode( # Added opacity for overplotting
+    x=alt.X('sqft_living:Q', title='Living Area (sq ft)'),
+    y=alt.Y('price_log:Q', title='Log of Sale Price (USD)') # Using log-transformed price
+)
 
-else:
-    print("Required columns for refined scatter plot are missing.")
+# Layer 2: Add tooltips for interactivity
+base_scatter_with_tooltips = base_scatter.encode(
+    tooltip=[
+        alt.Tooltip('price:Q', title='Price', format='$,.0f'), # Show original price in tooltip
+        'sqft_living:Q',
+        'bedrooms:O', # :O for Ordinal or discrete numeric
+        'bathrooms:Q'
+    ]
+)
+
+# Layer 3: Add a title and adjust properties
+final_scatter_plot = base_scatter_with_tooltips.properties(
+    title='Log Price vs. Living Area',
+    width=600,
+    height=400
+).interactive() # Enable panning and zooming
+
+# Layer 4 (Optional): Add a regression line to see the trend
+# Note: Depnding on the software version installed,
+# Polars DataFrames need to be converted to pandas for transform_regression
+# or you'd pre-calculate regression line data.
+# For simplicity in this example, we'll skip adding a live regression line
+# but you could add a pre-calculated one or use a loess line.
+# Example: final_scatter_plot + final_scatter_plot.transform_loess('sqft_living', 'price_log').mark_line(color='red')
+
+
+# Display the chart
+final_scatter_plot.show()
+print("Refined scatter plot generated.")
+
 
 ```
 
