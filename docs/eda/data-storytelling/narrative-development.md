@@ -62,19 +62,43 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 * **Key Insight:** Most houses fall within a certain price band, but there's a long tail of more expensive properties.
 
     ```python
-    # (Conceptual Altair code - assume housing_df is cleaned)
-    # import altair as alt
+    # Incomplete code listing.
+    # skips several data cleaning /tranformation steps.
+    price_histogram = alt.Chart(housing_cleaned_df).mark_bar().encode(
+        x=alt.X('price_log:Q').bin(maxbins=30).title('Sale Price (log USD)'),
+        y=alt.Y('count()').title('Number of Houses'),
+        tooltip=[
+            alt.Tooltip('price', title="Price USD"),
+            alt.Tooltip('count()', title='Number of Houses'), ]
+    ).properties(
+        title='Distribution of House Prices (Log Scale)',
+        width=500,
+        height=350
+    )
 
-    # price_histogram = alt.Chart(housing_df).mark_bar().encode(
-    #     alt.X('price_log:Q', bin=alt.Bin(maxbins=30), title='Log of Sale Price'),
-    #     alt.Y('count()', title='Number of Houses')
-    # ).properties(
-    _       # title='Distribution of House Prices (Log Scale)',
-    #     width=500, height=300
-    # )
-    # price_histogram.show()
+    bed_colored = price_histogram.encode(
+        color=alt.Color('bed_cat:N', title='Number of Bedrooms')
+    ).transform_filter(
+    alt.FieldOneOfPredicate(field='bed_cat', oneOf="1+ 2+ 3+ 4+".split())
+    )
+
+    bath_colored = price_histogram.encode(
+        color=alt.Color('bath_cat:N', title='Number of Bathrooms')
+    ).transform_filter(
+    alt.FieldOneOfPredicate(field='bath_cat', oneOf="1+ 2+ 3+".split())
+    )
+
+    grade_colored = price_histogram.encode(
+        color=alt.Color('grade_cat:N', title='Construction Grade')
+        ).transform_filter(
+    alt.FieldOneOfPredicate(field='grade_cat', oneOf="6 7 8 9".split())
+    )
+
     ```
-    *(Image of the price histogram would be displayed here in MkDocs)*
+<figure markdown="span">
+    ![Price distribution colored and faceted by beds, baths, and construction grade](/assets/images/price-distribution-by-bed-bath-grade.png)
+  <figcaption>Price Distribution: Using Colors and Facets to Communicate More Context</figcaption>
+</figure>
 
 **Visual 2: Price vs. Key Feature (Living Area)**
 
@@ -83,19 +107,39 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 * **Key Insight:** Generally, as living area increases, price increases. Higher grade houses tend to command higher prices for similar sizes.
 
     ```python
-    # (Conceptual Altair code)
-    # price_vs_sqft_scatter = alt.Chart(housing_df).mark_point(opacity=0.3).encode(
-    #     alt.X('sqft_living:Q', title='Living Area (sq ft)'),
-    #     alt.Y('price_log:Q', title='Log of Sale Price'),
-    #     alt.Color('grade:O', title='Construction Grade', scale=alt.Scale(scheme='viridis')), # :O for Ordinal
-    #     tooltip=[alt.Tooltip('price:Q', title='Price', format='$,.0f'), 'sqft_living', 'grade']
-    # ).properties(
-    #     title='Price vs. Living Area by Construction Grade',
-    #     width=500, height=300
-    # ).interactive()
-    # price_vs_sqft_scatter.show()
+    # Incomplete code listing.
+    # skips several data cleaning /tranformation steps.
+    points = alt.Chart(housing_cleaned_df).mark_point(opacity=0.4).encode(
+        x=alt.X('sqft_living_log', title='Living Area Sq.Ft (Log Scale)', scale=alt.Scale(zero=False)),
+        y=alt.Y('price_log', title='Sale Price $ (Log Scale)', scale=alt.Scale(zero=False)),
+        tooltip=[
+            alt.Tooltip('price:Q', title='Price', format='$,.0f'),
+            alt.Tooltip('sqft_living:Q', title='SqFt Living'),
+            alt.Tooltip('bedrooms:Q', title='Bedrooms'),
+            alt.Tooltip('bathrooms:Q', title='Bathrooms'),
+            alt.Tooltip('grade:O', title='Grade')
+        ]
+    )
+
+    line = points.transform_loess(
+            "sqft_living_log",
+            "price_log").mark_line( color='red')
+
+    price_size = (points + line).encode(
+        color=alt.Color('bath_cat:N', title='Bathrooms'),
+            )
+    price_size.facet(
+    alt.Facet("grade_cat:N", title="Construction Grade")
+    ).transform_filter(
+        alt.FieldOneOfPredicate(field='bed_cat', oneOf="1+ 2+ 3+ 4+".split()),
+        alt.FieldOneOfPredicate(field='bath_cat', oneOf="1+ 2+ 3+".split()),
+        alt.FieldOneOfPredicate(field='grade_cat', oneOf="6 7 8 9".split())
+    )
     ```
-    *(Image of the scatter plot would be displayed here)*
+<figure markdown="span">
+  <figcaption>Price vs Size Faceted by Construction Grade</figcaption>
+</figure>
+![Price vs Size faceted by construction grade](/assets/images/price-size-grade-scatter.png)
 
 **Visual 3: Price Variation by Location (Zip Code)**
 
@@ -104,21 +148,55 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 * **Key Insight:** There are noticeable price differences across zip codes, with some areas being significantly more expensive than others.
 
     ```python
-    # (Conceptual Altair code - bar chart of median prices for top N zipcodes by count)
-    # top_zipcodes = housing_df['zipcode'].value_counts().n_largest(10).get_column('zipcode')
-    # filtered_df_zipcodes = housing_df.filter(pl.col('zipcode').is_in(top_zipcodes))
+    # Incomplete code listing.
+    # skips several data cleaning /tranformation steps.
+    # uses GeoPandas DataFrame
+    base = alt.Chart(kczip_cleaned).mark_geoshape(
+    # filled=False,
+    strokeWidth=1.5
+    )
 
-    # price_by_zipcode_bar = alt.Chart(filtered_df_zipcodes).mark_bar().encode(
-    #     alt.X('zipcode:N', title='Zip Code', sort='-y'), # :N for Nominal
-    #     alt.Y('median(price):Q', title='Median Sale Price (USD)', axis=alt.Axis(format='$,.0f')),
-    #     tooltip=[alt.Tooltip('median(price):Q', title='Median Price', format='$,.0f'), 'count()']
-    # ).properties(
-    #     title='Median House Prices by Zip Code (Top 10 by Volume)',
-    #     width=500, height=300
-    # )
-    # price_by_zipcode_bar.show()
+    price = base.encode(
+        alt.Color('price_log:Q').scale(scheme="redblue").legend(title="Median Price"),
+        tooltip=[
+            alt.Tooltip('price', title='Median Price'),
+            alt.Tooltip('zipcode', title='Zipcode')
+        ]
+    ).properties(title="Price",)
+
+    sqft_liv = base.encode(
+        alt.Color('sqft_living_log:Q').scale(scheme="lightmulti").legend(title="Median Sqft Living"),
+        tooltip=[
+            alt.Tooltip('sqft_living', title='Median Sqft Living'),
+            alt.Tooltip('zipcode', title='Zipcode')
+        ]
+    ).properties(title="Sq.ft. Living",)
+
+    sqft_lot = base.encode(
+        alt.Color('sqft_lot_log:Q').scale(scheme="lightgreyred").legend(title="Median Sqft Lot"),
+        tooltip=[
+            alt.Tooltip('sqft_lot', title='Median Sqft Lot'),
+            alt.Tooltip('zipcode', title='Zipcode')
+        ]
+    ).properties(title="Sq.ft. Lot",)
+
+    (price | sqft_liv | sqft_lot).resolve_scale(
+        color='independent'
+    )
     ```
-    *(Image of the bar chart would be displayed here)*
+
+<figure markdown="span">
+  ![Price, Size, and Lot across King County Zip Codes](/assets/images/price-size-lot-by-zipcodes.png)
+  <figcaption>Price, Size, and Lot across King County Zip Codes</figcaption>
+</figure>
+
+
+<figure markdown="span">
+  ![Price, Size, and Lot across King County School Districts](/assets/images/price-size-lot-by-schooldist.png)
+  <figcaption>Price, Size, and Lot across King County School Districts</figcaption>
+</figure>
+
+
 
 This sequence tells a story: "Here's the overall market (Visual 1), here's how a key feature like size influences price (Visual 2), and here's how location further impacts it (Visual 3)."
 
@@ -140,18 +218,46 @@ Part of horizontal development can also involve showing different "slices" or "f
 * **Faceting (Small Multiples):** Instead of multiple separate charts, you can use faceting (e.g., `facet` or `row`/`column` encodings in Altair) to create a grid of charts that show the same relationship broken down by different categories. For example, you could facet the `price` vs. `sqft_living` scatter plot by `bedrooms`. This allows for easy comparison across categories.
 
     ```python
-    # (Conceptual Altair code for faceting)
-    # price_vs_sqft_faceted = alt.Chart(housing_df).mark_point(opacity=0.4).encode(
-    #     alt.X('sqft_living:Q', title='Living Area (sq ft)'),
-    #     alt.Y('price_log:Q', title='Log of Sale Price'),
-    #     alt.Column('bedrooms:O', title='Number of Bedrooms') # Facet by bedrooms
-    # ).properties(
-    #     title='Price vs. Living Area, Faceted by Number of Bedrooms',
-    #     width=200, height=200 # Adjust size for facets
-    # ).interactive()
-    # price_vs_sqft_faceted.show()
+    points = alt.Chart(housing_cleaned_df).mark_point(opacity=0.4).encode(
+        x=alt.X('sqft_living_log', title='Living Area Sq.Ft (Log Scale)', scale=alt.Scale(zero=False)),
+        y=alt.Y('price_log', title='Sale Price $ (Log Scale)', scale=alt.Scale(zero=False)),
+        tooltip=[
+            alt.Tooltip('price:Q', title='Price', format='$,.0f'),
+            alt.Tooltip('sqft_living:Q', title='SqFt Living'),
+            alt.Tooltip('bedrooms:Q', title='Bedrooms'),
+            alt.Tooltip('bathrooms:Q', title='Bathrooms'),
+            alt.Tooltip('grade:O', title='Grade')
+        ]
+    )
+
+    line = points.transform_loess(
+            "sqft_living_log",
+            "price_log").mark_line( color='red')
+
+    price_size = (points + line).encode(
+        color=alt.Color('bath_cat:N', title='Bathrooms'),
+            )
+
+    display(price_size)
+
+    # Faceting by categorical variable representing number of beds
+    price_size.facet(
+    alt.Facet("bed_cat:N", title="Number of Beds")
+    ).transform_filter(
+    alt.FieldOneOfPredicate(field='bed_cat', oneOf="1+ 2+ 3+ 4+".split()),
+    alt.FieldOneOfPredicate(field='bath_cat', oneOf="1+ 2+ 3+".split())
+    )
     ```
-    *(Image of the faceted chart would be displayed here)*
+
+<figure markdown="span">
+    ![Price and Size Scatter Plot](/assets/images/price-size-scatter.png)
+    <figcaption>Before Faceting: Price vs. Size Scatter Plot.</figcaption>
+</figure>
+
+<figure markdown="span">
+    ![Price, Size, and Beds Scatter Plot](/assets/images/price-size-bed-scatter.png)
+    <figcaption>After Faceting by Beds Category: Price vs. Size Scatter Plot.</figcaption>
+</figure>
 
 The goal is to create a journey for your audience, leading them logically from one piece of evidence to the next, ultimately supporting your main message or answering their key questions.
 
