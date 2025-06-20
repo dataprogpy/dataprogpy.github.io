@@ -176,9 +176,12 @@ nav:
       - Conclusion: eda/data-storytelling/conclusion.md
   - Introduction to Modeling:
     - modeling/index.md
-    - Modeling with scikit-learn: modeling/modeling_intro.md
-    - Supervised Learning: modeling/supervised.md
-    - Unsupervised Learning: modeling/unsupervised.md
+    - Modeling Concepts and Workflow: 
+      - modeling/modeling-concepts-workflow/index.md
+    - Supervised Learning: 
+      - modeling/supervised-learning/index.md
+    - Unsupervised Learning: 
+      - modeling/unsupervised-learning/index.md
   - Advanced Data Types:
     - adv-data-types/index.md
     - Time Series Analysis: adv-data-types/time-series.md
