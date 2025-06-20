@@ -178,6 +178,11 @@ nav:
     - modeling/index.md
     - Modeling Concepts and Workflow: 
       - modeling/modeling-concepts-workflow/index.md
+      - Introduction to Modeling: modeling/modeling-concepts-workflow/modeling-intro.md
+      - Your First Model: modeling/modeling-concepts-workflow/first-model.md
+      - Modeling Workflow: modeling/modeling-concepts-workflow/workflow.md
+      - Workflow in Action: modeling/modeling-concepts-workflow/workflow-in-action.md
+      - Next Steps: modeling/modeling-concepts-workflow/next-steps.md
     - Supervised Learning: 
       - modeling/supervised-learning/index.md
     - Unsupervised Learning: 
