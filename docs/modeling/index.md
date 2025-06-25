@@ -13,7 +13,7 @@ hide:
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/modeling/modeling-concepts-workflow)
+    [:octicons-arrow-right-24: Introduction to Modeling](/modeling/modeling-concepts-workflow/modeling-intro)
 
 -   [:material-label-multiple-outline:{ .lg .middle } __Supervised Learning__](/modeling/supervised-learning)
 
