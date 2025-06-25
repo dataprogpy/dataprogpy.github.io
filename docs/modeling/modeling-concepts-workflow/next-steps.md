@@ -2,17 +2,12 @@
 icon: material/numeric-5
 ---
 
-Of course. Here is the final section of the lesson, "Next Steps and Further Study."
 
-The content is structured to provide clear, actionable exercises for practice and to introduce more advanced topics for students who wish to explore beyond the core material. The tone remains professional and focused on building practical, robust skills.
-
----
-
-## 5.0 Next Steps and Further Study
+# Next Steps and Things to Try
 
 Mastery of a new skill comes from practice and continued exploration. This final section provides a set of recommended exercises to solidify your understanding of the modeling workflow and introduces related topics for further independent study.
 
-### Recommended Practice Exercises
+## Recommended Practice Exercises
 
 The following exercises are designed to build a more intuitive understanding of the concepts covered in this lesson. We recommend performing them in your lab notebook.
 
@@ -40,13 +35,17 @@ The following exercises are designed to build a more intuitive understanding of 
 For those who wish to look ahead, the following topics are logical extensions of this lesson. Understanding these concepts is fundamental to professional data science practice.
 
 1.  **The Confusion Matrix:**
-    * Accuracy provides a single, high-level score. A **Confusion Matrix** offers a more detailed breakdown of a classification model's performance, showing the number of true positives, true negatives, false positives, and false negatives. This is essential when the business costs of different types of errors are unequal.
+    * Accuracy provides a single, high-level score. A [**Confusion Matrix**](https://scikit-learn.org/stable/modules/model_evaluation.html#confusion-matrix) offers a more detailed breakdown of a classification model's performance, showing the number of true positives, true negatives, false positives, and false negatives. This is essential when the business costs of different types of errors are unequal.
 
+    | Confusion Matrix | Normalized Confusion Matrix |
+    | :-------------------: | :----------------------------:|
+    | ![Iris decision tree: Confusion matrix](/assets/images/iris_confusion_matrix.png) | ![Iris decision tree: Confusion matrix](/assets/images/iris_confusion_matrix_normalized.png) |
+    
 2.  **Precision, Recall, and F1-Score:**
-    * Derived from the Confusion Matrix, these metrics provide more nuanced insights than accuracy alone. **Precision** measures the accuracy of positive predictions, while **Recall** measures the model's ability to identify all actual positive instances. They are critical for problems like disease detection or fraud analytics.
+    * Derived from the Confusion Matrix, [these metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-and-f-measures) provide more nuanced insights than accuracy alone. **Precision** measures the accuracy of positive predictions, while **Recall** measures the model's ability to identify all actual positive instances. They are critical for problems like disease detection or fraud analytics.
 
 3.  **Alternative Classification Algorithms:**
-    * The Decision Tree is just one approach. An alternative and highly intuitive method is **K-Nearest Neighbors (KNN)**, which classifies a data point based on the majority class of its closest neighbors. Exploring other algorithms reinforces the concept that different problems may benefit from different tools.
+    * The [Decision Tree](https://scikit-learn.org/stable/modules/tree.html) is just one approach. An alternative and highly intuitive method is [**K-Nearest Neighbors (KNN)**](https://scikit-learn.org/stable/modules/neighbors.html), which classifies a data point based on the majority class of its closest neighbors. Exploring other algorithms reinforces the concept that different problems may benefit from different tools.
 
 4.  **Cross-Validation:**
-    * A single train-test split provides one estimate of model performance, which can be subject to luck based on how the data was partitioned. **Cross-Validation** is a more robust evaluation technique where the splitting and training process is repeated multiple times to provide a more stable and reliable estimate of the model's performance on unseen data. This will be a core topic in our next lesson.
+    * A single train-test split provides one estimate of model performance, which can be subject to luck based on how the data was partitioned. [**Cross-Validation**](https://scikit-learn.org/stable/modules/cross_validation.html) is a more robust evaluation technique where the splitting and training process is repeated multiple times to provide a more stable and reliable estimate of the model's performance on unseen data. This will be a core topic in our next lesson.

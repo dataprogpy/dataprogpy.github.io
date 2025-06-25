@@ -2,19 +2,14 @@
 icon: material/numeric-4
 ---
 
-Of course. Let's develop the hands-on lab section.
 
-This content is designed to be followed in a computational environment like Google Colab. The structure provides clear instructions, corresponding code blocks, and brief explanations of the output, guiding the student through the practical application of the workflow.
+## Workflow in Action
 
----
+In this we will translate the six-step theoretical workflow into a practical, end-to-end coding exercise. You will train, predict with, and evaluate your first machine learning model using a [Iris dataset](https://scikit-learn.org/stable/modules/generated/sklearn.datasets.load_iris.html), a classic toy dataset tht's very useful for learning various topics in machine learning.
 
-## 4.0 Hands-On Lab: Your First End-to-End Model
+**Objective:** Apply the complete modeling workflow to the Iris dataset using `scikit-learn` and develop familiarity with `scikit-learn`'s estimator API.
 
-This lab will translate the six-step theoretical workflow into a practical, end-to-end coding exercise. You will train, predict with, and evaluate your first machine learning model.
-
-**Objective:** Apply the complete modeling workflow to the Iris dataset using `scikit-learn` and `Polars`.
-
-### Lab Setup: Importing Libraries
+## Setup: Importing Libraries
 
 First, we import the necessary libraries. We need `Polars` for data handling and various modules from `scikit-learn` for loading the dataset, splitting the data, instantiating the model, and evaluating its performance.
 
@@ -118,7 +113,7 @@ print(f"Model Accuracy on Test Set: {accuracy:.4f}")
 ```
 *The accuracy score represents the proportion of correct classifications. An accuracy of 1.0 would mean a perfect score on the test set.*
 
-### Bonus: Visualizing the Model's Logic
+### Visualizing the Model's Logic
 
 A key advantage of the Decision Tree is its interpretability. We can visualize the rules the model learned during the `.fit()` step to understand exactly how it is making decisions.
 
@@ -139,3 +134,63 @@ plot_tree(
 plt.show()
 ```
 *This visualization shows the flowchart that the model uses. Starting from the top (root) node, you can trace a path down the tree based on the feature values of a given flower to see how it arrives at a final classification (leaf node).*
+
+<figure markdown="span">
+    ![Iris: Decision Tree](/assets/images/iris_decision_tree.png){ width="600" }
+  <figcaption>Looking under the hood of a decision tree model</figcaption>
+</figure>
+
+We can also visually explore to understand how different features contribute to how model performs and identify opportunities to simplify the model in the next iteration.
+
+```python
+iris = load_iris()
+
+# Parameters
+n_classes = 3
+plot_colors = "ryb"
+plot_step = 0.02
+
+
+for pairidx, pair in enumerate([[0, 1], [0, 2], [0, 3], [1, 2], [1, 3], [2, 3]]):
+    # We only take the two corresponding features
+    X = iris.data[:, pair]
+    y = iris.target
+    class_names = iris.target_names
+
+    # Train
+    clf = tree.DecisionTreeClassifier(max_depth=3, random_state=42).fit(X, y)
+
+    # Plot the decision boundary
+    ax = plt.subplot(2, 3, pairidx + 1)
+    plt.tight_layout(h_pad=0.5, w_pad=0.5, pad=2.5)
+    DecisionBoundaryDisplay.from_estimator(
+        clf,
+        X,
+        cmap=plt.cm.RdYlBu,
+        response_method="predict",
+        ax=ax,
+        xlabel=iris.feature_names[pair[0]],
+        ylabel=iris.feature_names[pair[1]],
+    )
+
+    # Plot the training points
+    for i, color in zip(range(n_classes), plot_colors):
+        idx = np.asarray(y == i).nonzero()
+        plt.scatter(
+            X[idx, 0],
+            X[idx, 1],
+            c=color,
+            label=iris.target_names[i],
+            edgecolor="black",
+            s=15,
+        )
+
+plt.suptitle("Decision surface of decision trees trained on pairs of features")
+plt.legend(loc="lower right", borderpad=0, handletextpad=0)
+_ = plt.axis("tight")
+```
+<figure markdown="span">
+    ![Iris: Decision Tree](/assets/images/iris_decision_boundary.png){ width="600" }
+  <figcaption>Some features are more equal than the others!</figcaption>
+</figure>
+

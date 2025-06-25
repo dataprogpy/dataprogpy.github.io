@@ -1,7 +1,7 @@
 ---
 icon: material/numeric-1
 ---
-# The Modeling Workflow: From Business Problems to Predictions
+# Introduction to Modeling
 
 ## Applications of Predictive Modeling
 
