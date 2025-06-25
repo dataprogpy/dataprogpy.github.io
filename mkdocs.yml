@@ -181,6 +181,7 @@ nav:
       - Introduction to Modeling: modeling/modeling-concepts-workflow/modeling-intro.md
       - Your First Model: modeling/modeling-concepts-workflow/first-model.md
       - Modeling Workflow: modeling/modeling-concepts-workflow/workflow.md
+      - Estimator API:  modeling/modeling-concepts-workflow/sklearn-api.md
       - Workflow in Action: modeling/modeling-concepts-workflow/workflow-in-action.md
       - Next Steps: modeling/modeling-concepts-workflow/next-steps.md
     - Supervised Learning: 

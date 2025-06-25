@@ -14,7 +14,8 @@ hide:
 - [ :material-numeric-1:{ .lg .middle } __Introduction to Modeling__](modeling-intro.md) 
 - [ :material-numeric-2:{ .lg .middle } __Your First Model__](first-model.md) 
 - [ :material-numeric-3:{ .lg .middle } __Workflow__](workflow.md) 
-- [ :material-numeric-4:{ .lg .middle } __Workflow in Action__](workflow-in-action.md) 
-- [ :material-numeric-5:{ .lg .middle } __Next Steps__](next-steps.md) 
+- [ :material-numeric-4:{ .lg .middle } __Estimator API__](sklearn-api.md) 
+- [ :material-numeric-5:{ .lg .middle } __Workflow in Action__](workflow-in-action.md) 
+- [ :material-numeric-6:{ .lg .middle } __Next Steps__](next-steps.md) 
 
 </div>
