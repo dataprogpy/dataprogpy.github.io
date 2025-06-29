@@ -74,11 +74,11 @@ Ready to open your first notebook? It's simple:
 3.  **Create a New Notebook:**
     * You might see a welcome pop-up window with options like viewing recent notebooks or examples. You can simply close this for now by clicking `CANCEL` or the 'X'.
 
-    ![Colab Welcome Screen](/assets/images/colab_landing_screen.png)
+    ![Colab Welcome Screen](../../assets/images/colab_landing_screen.png)
 
     * From the menu bar at the top, click **File -> New notebook in Drive**.
 
-    ![Colab new notebook from file menu](/assets/images/colab_new_notebook_from_menu.png)
+    ![Colab new notebook from file menu](../../assets/images/colab_new_notebook_from_menu.png)
     
 
 4.  **Name Your Notebook:**

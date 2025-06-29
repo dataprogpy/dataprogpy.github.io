@@ -136,7 +136,7 @@ plt.show()
 *This visualization shows the flowchart that the model uses. Starting from the top (root) node, you can trace a path down the tree based on the feature values of a given flower to see how it arrives at a final classification (leaf node).*
 
 <figure markdown="span">
-    ![Iris: Decision Tree](/assets/images/iris_decision_tree.png){ width="600" }
+    ![Iris: Decision Tree](../../assets/images/iris_decision_tree.png){ width="600" }
   <figcaption>Looking under the hood of a decision tree model</figcaption>
 </figure>
 
@@ -190,7 +190,7 @@ plt.legend(loc="lower right", borderpad=0, handletextpad=0)
 _ = plt.axis("tight")
 ```
 <figure markdown="span">
-    ![Iris: Decision Tree](/assets/images/iris_decision_boundary.png){ width="600" }
+    ![Iris: Decision Tree](../../assets/images/iris_decision_boundary.png){ width="600" }
   <figcaption>Some features are more equal than the others!</figcaption>
 </figure>
 

@@ -67,7 +67,7 @@ Understanding that libraries evolve and knowing how to consult documentation are
 As of mid-2025, Google Colab features integrated AI assistance, often leveraging models from the Gemini family. When used thoughtfully, this can significantly accelerate your learning and coding process.
 
 * **Accessing AI:** Look for AI-related icons directly within the cell toolbar :material-numeric-1-circle:{ .annotation }  (common icons include ✨, the Gemini logo, or similar). You might also find options within the `Tools` menu or via the Command Palette (Ctrl+Shift+P). *Note: The exact interface for AI features can evolve, so familiarize yourself with the current layout.*
-    ![Colab cell toolbar](/assets/images/colab_cell_toolbar.png)
+    ![Colab cell toolbar](../../assets/images/colab_cell_toolbar.png)
 * **How AI Can Help You Learn:**
 
     * **Code Generation:** Ask for code snippets. *Example prompt: "Generate Python code using Polars to group the DataFrame 'df' by the 'category' column and calculate the average 'value'."* **Critically review generated code before running!**

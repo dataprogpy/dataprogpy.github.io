@@ -10,7 +10,7 @@ Now that you have a fresh notebook open, let's get familiar with the main areas 
 
 Take a look at your Colab screen. Here are the main parts:
 
-![Colab user interface with annotation](/assets/images/colab_ui_annotated.png)
+![Colab user interface with annotation](../../assets/images/colab_ui_annotated.png)
 
 * *:material-alpha-a-circle:{ .annotation } `Menu Bar` (Top: File, Edit, View, Insert, Runtime, Tools, Help - Standard menu options)*
 * *:material-alpha-b-circle:{ .annotation } `Toolbar` (Below Menu: Buttons for common actions like +Code, +Text, file operations, runtime status)*
@@ -68,7 +68,7 @@ Simply typing in a cell doesn't do anything until you **run** (or **execute**) i
 
 When you select a cell, or sometimes just hover over it, a small toolbar :material-numeric-1-circle:{ .annotation } usually appears (often in the top right corner of the cell). This provides handy shortcuts for common actions:
 
-![Colab cell toolbar](/assets/images/colab_cell_toolbar.png)
+![Colab cell toolbar](../../assets/images/colab_cell_toolbar.png)
 
 Look for icons like:
 
@@ -104,7 +104,7 @@ As your analyses become more involved, your notebooks can get quite long. Effect
 * A pane will appear showing your headings, nested according to their level (`#`, `##`, etc.).
 * **Click any heading in this pane to jump directly to that section** of your notebook. This is incredibly useful for navigation!
 
-![Colab cell toolbar](/assets/images/colab_toc.png)
+![Colab cell toolbar](../../assets/images/colab_toc.png)
 
 **Recommendation:** Make it a habit to use Markdown headings (`#`, `##`) to structure *all* your notebooks (labs, projects). It dramatically improves readability and navigation for yourself and anyone you share your work with.
 

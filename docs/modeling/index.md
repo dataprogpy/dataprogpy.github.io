@@ -9,22 +9,22 @@ hide:
 <div class="grid cards" markdown>
 
 
--   [:simple-scikitlearn:{ .lg .middle } __Introduction to Modeling Concepts and Workflow__](/modeling/modeling-concepts-workflow)
+-   [:simple-scikitlearn:{ .lg .middle } __Introduction to Modeling Concepts and Workflow__](modeling-concepts-workflow/index.md)
 
     ---
 
-    [:octicons-arrow-right-24: Introduction to Modeling](/modeling/modeling-concepts-workflow/modeling-intro)
+    [:octicons-arrow-right-24: Introduction to Modeling](modeling-concepts-workflow/modeling-intro.md)
 
--   [:material-label-multiple-outline:{ .lg .middle } __Supervised Learning__](/modeling/supervised-learning)
-
-    ---
-
-    [:octicons-arrow-right-24: Getting started](/modeling/supervised-learning)
-
--   [:material-label-off-outline:{ .lg .middle } __Unsupervised Learning__](/modeling/unsupervised-learning)
+-   [:material-label-multiple-outline:{ .lg .middle } __Supervised Learning__](supervised-learning/index.md)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](/modeling/unsupervised-learning)
+    [:octicons-arrow-right-24: Getting started](supervised-learning/index.md)
+
+-   [:material-label-off-outline:{ .lg .middle } __Unsupervised Learning__](unsupervised-learning/index.md)
+
+    ---
+
+    [:octicons-arrow-right-24: Getting started](unsupervised-learning/index.md)
 
 </div>
