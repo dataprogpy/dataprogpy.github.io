@@ -49,9 +49,9 @@ The goal of this lesson is not to master dozens of algorithms, but to master the
 
     Please examine each of the following visualizations and answer the guiding questions.
 
-    **Chart 1: Univariate Density Plots (``)**
+    **Chart 1: Univariate Density Plots **
 
-    ![Univariate Density Plots](/assets/images/iris_univariate_density.png)
+    ![Univariate Density Plots](../../assets/images/iris_univariate_density.png)
 
     This set of charts shows the distribution of values for each of the four features independently.
 
@@ -61,7 +61,7 @@ The goal of this lesson is not to master dozens of algorithms, but to master the
 
     **Chart 2: Pairwise Scatter Plots (``)**
 
-    ![ Pairwise Scatter Plots](/assets/images/iris_pairwise_scatter.png)
+    ![ Pairwise Scatter Plots](../../assets/images/iris_pairwise_scatter.png)
 
     This "scatter plot matrix" shows the relationship between every pair of features, with points colored by species.
 
@@ -72,7 +72,7 @@ The goal of this lesson is not to master dozens of algorithms, but to master the
 
     **Chart 3: Scatter Plot with Histograms (``)**
 
-    ![Scatter Plot with Histograms](/assets/images/iris_features.png)
+    ![Scatter Plot with Histograms](../../assets/images/iris_features.png)
 
     This chart provides a focused view of `petalLength` vs. `petalWidth` and includes histograms on the margins showing the distribution of each feature, binned and colored by species.
 
@@ -82,7 +82,7 @@ The goal of this lesson is not to master dozens of algorithms, but to master the
 
     **Chart 4: Parallel Coordinates Plot (``)**
 
-    ![Parallel Coordinates Plot](/assets/images/iris_parallel_coords.png)
+    ![Parallel Coordinates Plot](../../assets/images/iris_parallel_coords.png)
 
     This plot displays each individual flower as a line, connecting its measurements across all four features. Each line is colored by its species.
 

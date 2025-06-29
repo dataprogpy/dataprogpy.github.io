@@ -96,7 +96,7 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 
     ```
 <figure markdown="span">
-    ![Price distribution colored and faceted by beds, baths, and construction grade](/assets/images/price-distribution-by-bed-bath-grade.png)
+    ![Price distribution colored and faceted by beds, baths, and construction grade](../../assets/images/price-distribution-by-bed-bath-grade.png)
   <figcaption>Price Distribution: Using Colors and Facets to Communicate More Context</figcaption>
 </figure>
 
@@ -139,7 +139,7 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
 <figure markdown="span">
   <figcaption>Price vs Size Faceted by Construction Grade</figcaption>
 </figure>
-![Price vs Size faceted by construction grade](/assets/images/price-size-grade-scatter.png)
+![Price vs Size faceted by construction grade](../../assets/images/price-size-grade-scatter.png)
 
 **Visual 3: Price Variation by Location (Zip Code)**
 
@@ -186,13 +186,13 @@ Let's imagine Sarah wants to understand the King County housing market, focusing
     ```
 
 <figure markdown="span">
-  ![Price, Size, and Lot across King County Zip Codes](/assets/images/price-size-lot-by-zipcodes.png)
+  ![Price, Size, and Lot across King County Zip Codes](../../assets/images/price-size-lot-by-zipcodes.png)
   <figcaption>Price, Size, and Lot across King County Zip Codes</figcaption>
 </figure>
 
 
 <figure markdown="span">
-  ![Price, Size, and Lot across King County School Districts](/assets/images/price-size-lot-by-schooldist.png)
+  ![Price, Size, and Lot across King County School Districts](../../assets/images/price-size-lot-by-schooldist.png)
   <figcaption>Price, Size, and Lot across King County School Districts</figcaption>
 </figure>
 
@@ -250,12 +250,12 @@ Part of horizontal development can also involve showing different "slices" or "f
     ```
 
 <figure markdown="span">
-    ![Price and Size Scatter Plot](/assets/images/price-size-scatter.png)
+    ![Price and Size Scatter Plot](../../assets/images/price-size-scatter.png)
     <figcaption>Before Faceting: Price vs. Size Scatter Plot.</figcaption>
 </figure>
 
 <figure markdown="span">
-    ![Price, Size, and Beds Scatter Plot](/assets/images/price-size-bed-scatter.png)
+    ![Price, Size, and Beds Scatter Plot](../../assets/images/price-size-bed-scatter.png)
     <figcaption>After Faceting by Beds Category: Price vs. Size Scatter Plot.</figcaption>
 </figure>
 

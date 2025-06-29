@@ -35,22 +35,22 @@ hide:
     ---
 
 
-    [:octicons-arrow-right-24: Getting Started](/getting-started)
+    [:octicons-arrow-right-24: Getting Started](getting-started/index.md)
 
-    [:octicons-arrow-right-24: Exploratory Data Analysis](/eda)
+    [:octicons-arrow-right-24: Exploratory Data Analysis](eda/index.md)
     
-    [:octicons-arrow-right-24: Introduction to Modeling ](/modeling)
+    [:octicons-arrow-right-24: Introduction to Modeling ](modeling/index.md)
 
-    [:octicons-arrow-right-24: Advanced Data Types](/adv-data-types)
+    [:octicons-arrow-right-24: Advanced Data Types](adv-data-types/index.md)
 
 -   :material-book-check-outline:{ .lg .middle } __Grading & Evaluation__
 
     ---
 
 
-    [:octicons-arrow-right-24: Grading Information](/syllabus/grading/)
+    [:octicons-arrow-right-24: Grading Information](syllabus/grading.md)
 
-    [:octicons-arrow-right-24: Project Guide](/syllabus/project-guide/)
+    [:octicons-arrow-right-24: Project Guide](syllabus/project-guide.md)
 
     [:octicons-arrow-right-24: Canvas Assignment Page](https://canvas.pitt.edu/courses/313542)
 
@@ -67,9 +67,9 @@ hide:
     ---
 
 
-    [:octicons-arrow-right-24: Course Materials](/syllabus/course-materials/)
+    [:octicons-arrow-right-24: Course Materials](syllabus/course-materials.md)
 
-    [:octicons-arrow-right-24: List of Data Sources](/resources/open-data/)
+    [:octicons-arrow-right-24: List of Data Sources](resources/open-data.md)
 
     [:octicons-arrow-right-24: Polars Docs](https://docs.pola.rs/user-guide/getting-started/)
 

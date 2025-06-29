@@ -39,7 +39,7 @@ For those who wish to look ahead, the following topics are logical extensions of
 
     | Confusion Matrix | Normalized Confusion Matrix |
     | :-------------------: | :----------------------------:|
-    | ![Iris decision tree: Confusion matrix](/assets/images/iris_confusion_matrix.png) | ![Iris decision tree: Confusion matrix](/assets/images/iris_confusion_matrix_normalized.png) |
+    | ![Iris decision tree: Confusion matrix](../../assets/images/iris_confusion_matrix.png) | ![Iris decision tree: Confusion matrix](../../assets/images/iris_confusion_matrix_normalized.png) |
     
 2.  **Precision, Recall, and F1-Score:**
     * Derived from the Confusion Matrix, [these metrics](https://scikit-learn.org/stable/modules/model_evaluation.html#precision-recall-and-f-measures) provide more nuanced insights than accuracy alone. **Precision** measures the accuracy of positive predictions, while **Recall** measures the model's ability to identify all actual positive instances. They are critical for problems like disease detection or fraud analytics.

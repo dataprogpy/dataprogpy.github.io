@@ -20,7 +20,7 @@ CSV files are one of the most common formats for storing and exchanging tabular 
     The primary function for reading CSV files in Polars is `pl.read_csv()`. Its most basic usage requires the path to the file.
 
   * **Example: Loading Local CSV Files**
-    We will use the [`customers.csv`](/assets/data/customers.csv){:target="_blank"} and [`orders.csv`](/assets/data/orders.csv){:target="_blank"}  files provided for this course. Assuming these files are in your current working directory (the same directory where your Python script or notebook is running), you can load them as follows:
+    We will use the [`customers.csv`](../../assets/data/customers.csv){:target="_blank"} and [`orders.csv`](../../assets/data/orders.csv){:target="_blank"}  files provided for this course. Assuming these files are in your current working directory (the same directory where your Python script or notebook is running), you can load them as follows:
 
     ```python
     import polars as pl

@@ -22,7 +22,7 @@ In the context of business analytics, **data wrangling** refers to the process o
 Because these diverse systems serve different primary functions, the data they produce rarely aligns perfectly with the schema (i.e., the structure and organization) required for a specific analytical investigation. Consequently, data wrangling becomes an essential intermediary step to bridge this gap, ensuring the data is accurate, consistent, and in the correct format for meaningful analysis.
 
   **Illustrative Data Challenges:**
-    The provided datasets, [`customers.csv`](/assets/data/customers.csv){:target="_blank"}and [`orders.csv`](/assets/data/orders.csv){:target="_blank"}, exemplify common issues addressed during data wrangling on a small scale:
+    The provided datasets, [`customers.csv`](../../assets/data/customers.csv){:target="_blank"}and [`orders.csv`](../../assets/data/orders.csv){:target="_blank"}, exemplify common issues addressed during data wrangling on a small scale:
 
 - In `customers.csv`:
 
