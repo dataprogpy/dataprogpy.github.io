@@ -185,8 +185,8 @@ nav:
       - Estimator API:  modeling/modeling-concepts-workflow/sklearn-api.md
       - scikit-learn Datasets:  modeling/modeling-concepts-workflow/sklearn-datasets.md
       - Next Steps: modeling/modeling-concepts-workflow/next-steps.md
-    - Supervised Learning: 
-      - modeling/supervised-learning/index.md
+    - More Robust Modeling Workflow: 
+      - modeling/robust-modeling-workflow/index.md
     - Unsupervised Learning: 
       - modeling/unsupervised-learning/index.md
   - Advanced Data Types:
