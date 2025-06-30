@@ -2,5 +2,5 @@
 icon: material/label-multiple-outline
 ---
 
-# Supervised Learning
+# Production-grade Workflow
 :material-label-multiple-outline:
