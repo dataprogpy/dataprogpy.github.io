@@ -192,6 +192,7 @@ nav:
       - Our First Pipeline:  modeling/robust-modeling-workflow/first-pipeline.md
       - Automated Hyperparameter tuning:  modeling/robust-modeling-workflow/grid-search.md
       - Tuning Ensemble Models:  modeling/robust-modeling-workflow/tuning-ensemble.md
+      - Next Steps:  modeling/robust-modeling-workflow/next-steps.md
 
     - Unsupervised Learning: 
       - modeling/unsupervised-learning/index.md
