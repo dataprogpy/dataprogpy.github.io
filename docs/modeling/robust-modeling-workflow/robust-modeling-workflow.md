@@ -1,3 +1,7 @@
+---
+icon: material/numeric-1
+---
+
 In the previous lesson, we established the core 6-step workflow for a basic classification model. While excellent for initial analysis, moving a model from a notebook to a real business application requires a more robust, automated, and maintainable process. In this lesson, we introduce key upgrades that improve robustness of the 6-step workflow. You might ask, "Why this extra work and why do we care about robustness of a workflow?"
 
 The answer lies in **agility and continuous improvement**. Real-world models must consistently deliver business value while navigating changing data, evolving business requirements, and advancing technology. This demanding environment requires that models be continuously developed, integrated, and deployed in short cycles. By transitioning from a manual process to a professional-grade workflow, you lay the foundation for modern **MLOps (Machine Learning Operations)** and **CI/CD (Continuous Integration/Continuous Deployment)** practices. The tools in this lesson are specifically designed to help data science teams build this capability, allowing them to stay responsive and maintain high-quality models in production.
