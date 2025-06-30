@@ -190,6 +190,9 @@ nav:
       - Production-grade Workflow: modeling/robust-modeling-workflow/robust-modeling-workflow.md
       - Preprocessing Pipelines: modeling/robust-modeling-workflow/preprocessing-pipelines.md
       - Our First Pipeline:  modeling/robust-modeling-workflow/first-pipeline.md
+      - Automated Hyperparameter tuning:  modeling/robust-modeling-workflow/grid-search.md
+      - Tuning Ensemble Models:  modeling/robust-modeling-workflow/tuning-ensemble.md
+
     - Unsupervised Learning: 
       - modeling/unsupervised-learning/index.md
   - Advanced Data Types:
