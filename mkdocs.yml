@@ -187,6 +187,8 @@ nav:
       - Next Steps: modeling/modeling-concepts-workflow/next-steps.md
     - More Robust Modeling Workflow: 
       - modeling/robust-modeling-workflow/index.md
+      - Production-grade Work Flow: modeling/robust-modeling-workflow/robust-modeling-workflow.md
+      - Preprocessing Pipelines: modeling/robust-modeling-workflow/preprocessing-pipelines.md
     - Unsupervised Learning: 
       - modeling/unsupervised-learning/index.md
   - Advanced Data Types:

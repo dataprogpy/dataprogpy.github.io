@@ -1,5 +1,7 @@
 
-# The Need for Preprocessing Pipelines
+# Preprocessing Pipelines
+
+Preprocessing Pipelines are an essential element of the robust workflow. In this section we will discuss key motivations behind the use of pipelines. 
 
 When working with real-world data, it's rare that the data is perfectly formatted for a machine learning algorithm. Different features often have vastly different scales, which can cause problems for many models.
 
