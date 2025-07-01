@@ -2,11 +2,11 @@
 icon: material/numeric-3
 ---
 
-# Hands-On Lab: Building a Regression Pipeline
+# Building a Regression Pipeline
 
 In this section, we'll apply the concepts of preprocessing and pipelines to a regression problem. Our goal is to build a basic model that predicts house prices from the King County dataset. This exercise will serve as the foundation for the more advanced tuning and evaluation techniques we'll cover next.
 
-First, ensure you have the `kc_house_data.csv` file available in your environment.
+First, ensure you have the [`kc_house_data.csv`](https://github.com/dataprogpy/code-samples/blob/7431e8fe6b7b3502c031ca25b1ba070488b583f7/data/kc_house_data.csv) file available in your environment.
 
 #### **Setup: Importing Libraries and Loading Data**
 
