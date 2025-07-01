@@ -23,17 +23,17 @@ Using a `Pipeline` provides following key advantages:
 5.  **Reproducibility**: This is one of the key best practices that helps ensure the model building process is reproducible across time, site, and other factors.
 
 
-## **Consistency**
+## Consistency
 
 A `Pipeline` ensures that your modeling workflow is deterministic and consistently applied. It acts as a locked-down recipe, guaranteeing that the exact same sequence of preprocessing steps—in the same order and with the same configuration—is applied during training, evaluation, and final prediction. This eliminates a common source of error where manual steps are accidentally omitted or misconfigured when working with new data, ensuring that your production predictions are generated in the exact same manner as your training experiments.
 
 
-## **Prevents Data Leakage**
+## Prevents Data Leakage
 
 This is arguably the most critical operational advantage of using a `Pipeline`. Data leakage occurs when information from outside the training dataset is used to create the model. A classic example is scaling your data *before* performing a train-test split. The `Pipeline` prevents this by intelligently managing the data flow. When used within a process like cross-validation, the `Pipeline` ensures that the preprocessing steps (e.g., `StandardScaler`) are **fitted only on the training portion** of the data for each fold. The learned transformation is then applied to both the training and validation portions, correctly simulating how the model would behave on truly unseen data.
 
 
-## **Simplicity**
+## Simplicity
 
 Despite encapsulating a potentially complex sequence of operations, a `Pipeline` object adheres to the same consistent API as any other `scikit-learn` estimator. It has the familiar `.fit()`, `.predict()`, and `.score()` methods. This elegant abstraction allows you to treat the entire workflow—from data scaling to final prediction—as a single object. This greatly simplifies your code and makes it easier to use your entire workflow within other `scikit-learn` utilities, such as performing a `GridSearchCV` over both preprocessing and model hyperparameters simultaneously.
 
