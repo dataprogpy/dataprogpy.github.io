@@ -13,6 +13,7 @@ Two of the most common and effective ensemble strategies are **Bagging** and **B
 **Bagging**, which stands for **B**ootstrap **Agg**regating, works like asking a large group of independent experts for their opinion and averaging their responses. The goal is to reduce **variance** and prevent a single model from overfitting to quirks in the data.
 
 The most popular bagging algorithm is the **Random Forest**. Here’s how it works:
+
 1.  It creates hundreds of different Decision Trees.
 2.  Each tree is trained on a random sample (a "bootstrap" sample) of the original training data.
 3.  Each tree also only considers a random subset of features at each split point.
@@ -26,6 +27,7 @@ This process results in a model that is typically much more accurate and stable 
 **Boosting** builds a model sequentially, where each new model in the sequence focuses on correcting the errors made by the previous one. Think of it as building a team of specialists, where each new member is trained specifically to fix the mistakes of the team so far.
 
 Popular boosting algorithms include **Gradient Boosting** and **XGBoost**. The general process is:
+
 1.  A simple initial model is trained on the data.
 2.  The algorithm identifies the errors (residuals) made by this first model.
 3.  A second model is trained specifically to predict those errors.
@@ -33,11 +35,13 @@ Popular boosting algorithms include **Gradient Boosting** and **XGBoost**. The g
 
 Boosting often leads to state-of-the-art performance but can be more sensitive to noisy data and requires more careful tuning than bagging models. For our demonstration, we will focus on the highly effective and widely used Random Forest.
 
-Yes, your understanding is correct. The popular `xgboost` library provides a wrapper that fully adopts `scikit-learn`'s Estimator API. This means you can plug an `XGBRegressor` directly into your existing `Pipeline` and `GridSearchCV` framework just like any other `scikit-learn` model, making it an excellent choice for a demonstration.
+???+ note
+
+    The popular `xgboost` library provides a wrapper that fully adopts `scikit-learn`'s Estimator API. This means you can plug an `XGBRegressor` directly into your existing `Pipeline` and `GridSearchCV` framework just like any other `scikit-learn` model, making it an excellent choice for a demonstration.
 
 -----
 
-### **8.0 Hands-On Lab: Tuning an Ensemble Model**
+## Tuning an Ensemble Model
 
 Let's see the power of ensembles in action. We will replace the single `DecisionTreeRegressor` in our workflow with a powerful boosting model, `XGBRegressor`, and run our hyperparameter search again to find the best configuration for this new model.
 
