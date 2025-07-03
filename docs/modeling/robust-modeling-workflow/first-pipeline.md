@@ -8,62 +8,105 @@ In this section, we'll apply the concepts of preprocessing and pipelines to a re
 
 First, ensure you have the [`kc_house_data.csv`](https://github.com/dataprogpy/code-samples/blob/7431e8fe6b7b3502c031ca25b1ba070488b583f7/data/kc_house_data.csv) file available in your environment.
 
-#### **Setup: Importing Libraries and Loading Data**
+## **Setup: Importing Libraries and Loading Data**
 
 We begin by importing the necessary libraries and loading our dataset into a Polars DataFrame.
+
+???+ warning "Truncated code listing"
+
+    The code shown in this page are to help your understanding of your concepts 
+    and workflows being discussed in this specific lesson. Please see the 
+    code demo notebook file for a fully functional code.
 
 ```python
 import polars as pl
 from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler
+# pipeline meta estimator
+from sklearn.pipeline import (
+    Pipeline,
+    make_pipeline,
+)
+# transformers
+from sklearn.preprocessing import (
+    StandardScaler, 
+    OneHotEncoder,
+    FunctionTransformer,
+)
+# models
 from sklearn.tree import DecisionTreeRegressor
+#metrics
 from sklearn.metrics import mean_absolute_error
 
 # Load the dataset
 df = pl.read_csv("kc_house_data.csv")
 ```
 
-#### **Step 1: Feature Selection and Data Preparation**
+## **Step 1: Feature Selection and Data Preparation**
 
 For this initial model, we will select a small subset of numerical features that we hypothesize will be predictive of the house price. We will define our feature matrix `X` and our target vector `y`.
 
 ```python
 # Select a subset of features for our initial model
-features = [
-    "bedrooms", "bathrooms", "sqft_living",
-    "sqft_lot", "floors", "waterfront", "view",
-    "condition", "grade", "sqft_above", "sqft_basement",
-    "yr_built", "yr_renovated"
-]
+numeric_features = ['bedrooms', 'bathrooms', 'sqft_living', 'sqft_lot',
+                    'floors', 'waterfront', 'view', 'condition', 'grade',
+                    'sqft_above', 'sqft_basement', 'yr_built', 'yr_renovated', 
+                    'lat', 'long', 'sqft_living15', 'sqft_lot15', ]
 
+categorical_features = [
+    # 'zipcode', 
+    'school_district',
+    ]
 target = "price"
 
-X = df.select(features)
+X = df
 y = df.select(target)
 
 # Display the shape of our feature matrix
 print(f"Shape of X: {X.shape}")
 ```
 
-#### **Step 2: Create the Modeling Pipeline**
+## **Step 2: Create the Preprocessing Pipeline**
 
-Now, we define our pipeline. We will use `make_pipeline` to create a sequence of two steps:
+Different feature subsets often require unique preprocessing. We can approach this systematically with the following steps:
 
-1.  **`StandardScaler()`**: This will scale our numerical features to have zero mean and unit variance.
-2.  **`DecisionTreeRegressor()`**: Our regression model. We'll set a `random_state` for reproducibility.
+* **Identify Subsets & Steps**: First, identify the different feature types (e.g., numerical, categorical) and the specific preprocessing each requires. Note that these steps are often order-sensitive; for example, missing value imputation should typically occur before scaling or encoding.
+* **Build Feature Pipelines**: For each feature subset, create a dedicated pipeline that performs its required sequence of transformations.
+* **Combine into a Preprocessor**: Combine the individual feature pipelines into a single, comprehensive preprocessor. This composite transformer will apply the correct steps to the correct columns of your dataset.
+* **Create a Final Model Pipeline**: Finally, create the full pipeline by adding your chosen machine learning model (the estimator) as the last step. This final object encapsulates the entire workflow, from data preprocessing to model training.
+
+<!-- 1.  **`DecisionTreeRegressor()`**: Our regression model. We'll set a `random_state` for reproducibility. -->
 
 <!-- end list -->
 
 ```python
-# Create the pipeline
-pipe = make_pipeline(
+# function that perform data cleaning step
+def tweak_housing(df):
+    pass
+
+tweak_transformer = FunctionTransformer(tweak_housing)
+
+# Create the transformer pipeline for a subset of features
+numeric_transformer = make_pipeline(
+    SimpleImputer(strategy='median'),
     StandardScaler(),
-    DecisionTreeRegressor(random_state=42)
 )
 
-print("Pipeline created:")
-print(pipe)
+# Note the alternative syntax for creating a pipeline
+categorical_transformer = Pipeline(
+    steps=[
+         ('onehot', OneHotEncoder(handle_unknown='ignore',
+                              sparse_output=False)),
+    # ('target', TargetEncoder()),
+    # ('std', StandardScaler()),
+    ])
+
+preprocessor = ColumnTransformer(
+    transformers=[
+        ('num', numeric_transformer, numeric_features),
+        ('cat',categorical_transformer, categorical_features),
+        ],
+        # remainder='passthrough',
+    )
 ```
 
 #### **Step 3: Split, Train, and Predict**
@@ -76,6 +119,11 @@ X_train, X_test, y_train, y_test = train_test_split(
     X, y, test_size=0.2, random_state=42
 )
 
+pipe = Pipeline(steps=[
+    ('tweak', tweak_transformer),
+    ('preprocessor', preprocessor),
+    ('dt', DecisionTreeRegressor()),
+    ])
 # Fit the entire pipeline on the training data
 pipe.fit(X_train, y_train)
 
