@@ -1,5 +1,5 @@
 ---
-icon: material/numeric-2
+icon: material/numeric-3
 ---
 
 # Preprocessing Pipelines
