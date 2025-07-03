@@ -4,11 +4,11 @@ icon: material/numeric-5
 
 -----
 
-### Automated Hyperparameter Tuning**
+# Automated Hyperparameter Tuning
 
 This lab demonstrates the complete, robust workflow. We will use `GridSearchCV` to automatically search for the best hyperparameters for our pipeline, using cross-validation on our training data. We will then perform a final evaluation on the held-out test set.
 
-#### **Setup: Imports and Data Splits**
+## **Setup: Imports and Data Splits**
 
 First, we'll import `GridSearchCV` and reuse the `X_train`, `X_test`, `y_train`, and `y_test` sets from our previous lab.
 
@@ -19,7 +19,7 @@ from sklearn.model_selection import GridSearchCV
 # from the previous lab's train_test_split.
 ```
 
-#### **Step 1: Define the Parameter Grid**
+## **Step 1: Define the Parameter Grid**
 
 We need to tell `GridSearchCV` which hyperparameters to test. We define this in a dictionary where the keys are the names of the parameters and the values are lists of settings to try.
 
@@ -34,7 +34,7 @@ param_grid = {
 }
 ```
 
-#### **Step 2: Set Up and Run GridSearchCV**
+## **Step 2: Set Up and Run GridSearchCV**
 
 Now, we instantiate `GridSearchCV`. We provide our pipeline (`pipe`), the `param_grid`, the number of cross-validation folds (`cv=5`), and the scoring metric. Since `GridSearchCV` tries to *maximize* a score, and we want to *minimize* error, we use `'neg_mean_absolute_error'`.
 
@@ -54,7 +54,7 @@ grid_search = GridSearchCV(
 grid_search.fit(X_train, y_train)
 ```
 
-#### **Step 3: Inspect the Results**
+## **Step 3: Inspect the Results**
 
 `GridSearchCV` stores the best combination of parameters it found in the `best_params_` attribute. The `best_estimator_` attribute holds the pipeline that was refit on the entire training set using these optimal parameters.
 
@@ -68,7 +68,7 @@ best_mae = -grid_search.best_score_
 print(f"\nBest Cross-Validated MAE: ${best_mae:,.2f}")
 ```
 
-#### **Step 4: Final Evaluation on the Test Set**
+## **Step 4: Final Evaluation on the Test Set**
 
 Finally, we use the `best_estimator_` found by `GridSearchCV` to make predictions on our held-out test set. This provides our final, unbiased assessment of the tuned model's performance.
 
