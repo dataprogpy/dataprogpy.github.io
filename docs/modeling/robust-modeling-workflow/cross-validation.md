@@ -10,6 +10,14 @@ The simplest way is to split your data into two sets: one for **training** the m
 
 **Cross-validation (CV)** solves this problem. It's a technique where you systematically split the data into multiple training and testing sets to get a more reliable estimate of your model's performance. Instead of just one test score, you get several, which you can then average to get a more accurate and stable measure of how your model will generalize to new data.
 
+---- 
+
+<figure markdown="span">
+![KFold Visualized](../../assets/images/grid_search_workflow.png)
+<span><sup><em>Image Credit: https://scikit-learn.org/ </em></sup></span>
+<figcaption>Cross validation workflow. </figcaption>
+</figure>
+
 -----
 
 ## The Basic Split: `train_test_split`
@@ -44,7 +52,13 @@ This is the most common and straightforward cross-validation technique.
     3.  It repeats this process 'k' times, with each fold getting a turn to be the test set.
     4.  You end up with 'k' different performance scores, which you can average to get a final, more reliable score.
 
+
+    <figure markdown="span">
     ![KFold Visualized](../../assets/images/grid_search_cross_validation.png)
+    <span><sup><em>Image Credit: https://scikit-learn.org/ </em></sup></span>
+    <figcaption>Cross validation using k-folds of training data. </figcaption>
+    </figure>
+
 
   * **When to use it:** **K-Fold** is a great default choice for cross-validation when you're working with a regression problem (predicting a number) or a balanced classification problem (where each class has a similar number of samples).
 
