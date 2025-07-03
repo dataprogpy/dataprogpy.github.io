@@ -1,9 +1,8 @@
 ---
-icon: material/numeric-3
+icon: material/numeric-2
 ---
-Of course. Here's a breakdown of cross-validation and scikit-learn's methods to help you understand them.
 
-### What is Cross-Validation? 🤔
+## What is Cross-Validation? 🤔
 
 In machine learning, you build a model to make predictions on new, unseen data. But how do you know how well your model will perform *before* you deploy it? You need to test it.
 
@@ -13,9 +12,9 @@ The simplest way is to split your data into two sets: one for **training** the m
 
 -----
 
-### The Basic Split: `train_test_split`
+## The Basic Split: `train_test_split`
 
-This is your starting point. While not technically a cross-validation method, it's the fundamental building block.
+This is the technique we previously introduced in our six-step workflow. This is just a starting point. While not technically a cross-validation method, it's the fundamental building block.
 
   * **How it works:** It shuffles your dataset and splits it into two parts: a training set and a testing set. You decide the proportions, like 80% for training and 20% for testing.
   * **When to use it:** Use this for a quick and simple model evaluation, especially with large datasets where the computational cost of running full cross-validation might be too high. It's a fast and easy way to get a first impression of your model.
@@ -31,11 +30,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_
 
 -----
 
-### Cross-Validation Techniques in Scikit-Learn
+## Cross-Validation Techniques in Scikit-Learn
 
 Now let's get into the actual cross-validation methods. These are more robust.
 
-#### K-Fold (`KFold`)
+### K-Fold 
 
 This is the most common and straightforward cross-validation technique.
 
@@ -47,7 +46,14 @@ This is the most common and straightforward cross-validation technique.
 
   * **When to use it:** **K-Fold** is a great default choice for cross-validation when you're working with a regression problem (predicting a number) or a balanced classification problem (where each class has a similar number of samples).
 
-#### Stratified K-Fold (`StratifiedKFold`)
+```python
+from sklearn.model_selection import KFold
+
+# X is your features, y is your target
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+```
+
+### Stratified K-Fold 
 
 This is an improved version of K-Fold specifically for classification problems where the classes are imbalanced.
 
@@ -56,7 +62,7 @@ This is an improved version of K-Fold specifically for classification problems w
 
   * **When to use it:** Always use **Stratified K-Fold** for **classification problems**, especially when your classes are imbalanced. It's generally a safer and more reliable choice than standard K-Fold for classification.
 
-#### Group K-Fold (`GroupKFold`)
+### Group K-Fold 
 
 This is a specialized version for when your data has "groups" or "clusters."
 
@@ -64,7 +70,7 @@ This is a specialized version for when your data has "groups" or "clusters."
     **Group K-Fold** ensures that all the data from a single group (e.g., one patient) will be in *either* the training set or the test set, but **never both**.
   * **When to use it:** Use **Group K-Fold** when you have groups of related or non-independent data points. Common examples include repeated measurements on the same subject, medical data from multiple patients, or reviews from the same users.
 
-#### Stratified Group K-Fold (`StratifiedGroupKFold`)
+### Stratified Group K-Fold 
 
 As the name suggests, this method combines the features of Stratified K-Fold and Group K-Fold.
 
@@ -73,7 +79,7 @@ As the name suggests, this method combines the features of Stratified K-Fold and
 
 -----
 
-### Summary: Which One Should I Use?
+## Summary: Which One Should I Use?
 
 | Method                  | When to Use It                                                                                                | Key Idea                                                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |

@@ -188,9 +188,10 @@ nav:
     - More Robust Modeling Workflow: 
       - modeling/robust-modeling-workflow/index.md
       - Production-grade Workflow: modeling/robust-modeling-workflow/robust-modeling-workflow.md
+      - Cross-validation: modeling/robust-modeling-workflow/cross-validation.md
       - Preprocessing Pipelines: modeling/robust-modeling-workflow/preprocessing-pipelines.md
       - Our First Pipeline:  modeling/robust-modeling-workflow/first-pipeline.md
-      - Automated Hyperparameter tuning:  modeling/robust-modeling-workflow/grid-search.md
+      - Automated Hyperparameter Tuning:  modeling/robust-modeling-workflow/grid-search.md
       - Tuning Ensemble Models:  modeling/robust-modeling-workflow/tuning-ensemble.md
       - Next Steps:  modeling/robust-modeling-workflow/next-steps.md
 
