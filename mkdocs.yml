@@ -195,8 +195,14 @@ nav:
       - Tuning Ensemble Models:  modeling/robust-modeling-workflow/tuning-ensemble.md
       - Next Steps:  modeling/robust-modeling-workflow/next-steps.md
 
-    - Unsupervised Learning: 
-      - modeling/unsupervised-learning/index.md
+    - Modeling Without a Target: 
+      - modeling/modeling-without-target/index.md
+      - Introduction to Unsupervised Learning: modeling/modeling-without-target/unsupervised-learning.md
+      - Uncovering Clusters: modeling/modeling-without-target/clustering.md 
+      - Reducing Data Dimensionality: modeling/modeling-without-target/dimensionality-reduction.md
+      - Engineering Features: modeling/modeling-without-target/feature-engineering.md
+      - Tuning Unsupervised Models: modeling/modeling-without-target/tuning-unsupervised-models.md
+      - Next Steps: modeling/modeling-without-target/next-steps.md 
   - Advanced Data Types:
     - adv-data-types/index.md
     - Time Series Analysis: adv-data-types/time-series.md

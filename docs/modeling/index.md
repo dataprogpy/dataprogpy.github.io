@@ -21,10 +21,10 @@ hide:
 
     [:octicons-arrow-right-24: Introduction to Production-grade Workflow ](robust-modeling-workflow/robust-modeling-workflow.md)
 
--   [:material-label-off-outline:{ .lg .middle } __Unsupervised Learning__](unsupervised-learning/index.md)
+-   [:material-label-off-outline:{ .lg .middle } __Modeling Without a Target__](modeling-without-target/index.md)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](unsupervised-learning/index.md)
+    [:octicons-arrow-right-24: Introduction to Unsupervised Learning](modeling-without-target/unsupervised-learning.md)
 
 </div>
