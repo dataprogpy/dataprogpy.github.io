@@ -1,5 +1,5 @@
 ---
-icon: material/numeric-6
+icon: material/numeric-7
 ---
 
 # Next Steps and Active Learning

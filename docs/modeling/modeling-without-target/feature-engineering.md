@@ -2,104 +2,175 @@
 icon: material/numeric-4
 ---
 
-# Feature Engineering Using Unsupervised Models
+# **Feature Engineering: Creating Better Inputs for Better Models**
 
 
-### **4.0 Putting It All Together: Unsupervised Techniques to Improve Supervised Models**
+## Introduction to Feature Engineering
 
-While clustering and PCA are valuable for exploratory analysis, their most powerful application in a business context is often to improve the performance of supervised models. By discovering the latent structure in the data, we can engineer new, powerful features that lead to more accurate and robust predictions.
+So far, we have largely used the features provided in our datasets as-is. However, one of the most impactful activities in the entire machine learning workflow is **feature engineering**—the process of using domain knowledge and statistical techniques to create new features from existing ones. The quality of your features directly determines the maximum performance your model can achieve. Better features lead to better models.
 
-This process, known as **feature engineering**, is a critical and creative aspect of machine learning. We will now demonstrate two common strategies for this.
+There are three primary categories of feature engineering:
 
-#### **Scenario 1: Clustering for Feature Engineering**
+1.  **Feature Transformation**: This involves modifying existing features to make them more suitable for a model. This includes scaling numerical features or encoding categorical ones. You have already been doing this with tools like `StandardScaler` and `OneHotEncoder` inside your `Pipeline`. Other examples include creating polynomial features or applying mathematical transformations like logarithms.
 
-Geographic location is a critical factor in house prices, but using raw latitude and longitude can be difficult for some models. We can use K-Means to group houses into "location clusters" and then add this cluster ID as a new categorical feature to our regression model.
+2.  **Feature Selection**: This is the process of automatically selecting a subset of the most relevant features from your original dataset and discarding the rest. The goal is to reduce noise, improve model efficiency, and often, enhance predictive performance by focusing only on what's important.
 
-```python
-import polars as pl
-from sklearn.model_selection import train_test_split
-from sklearn.pipeline import make_pipeline
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
-from sklearn.compose import ColumnTransformer
-from sklearn.cluster import KMeans
-from sklearn.ensemble import GradientBoostingRegressor
-from sklearn.metrics import mean_absolute_error
+3.  **Feature Extraction**: This involves creating entirely new features by combining or transforming existing ones. The goal is to capture the most important information in a more compact and powerful representation. You have already seen this with PCA, where we extracted new "principal component" features from the original pixel data.
 
-# Load data and select initial features
-df = pl.read_csv("kc_house_data.csv")
-numerical_features = ["bedrooms", "bathrooms", "sqft_living", "grade"]
-location_features = ["lat", "long"]
-target = "price"
+A key takeaway for any data scientist is that **supervised and unsupervised techniques are often used together to achieve analytical goals**. We use unsupervised methods like PCA for feature extraction and supervised methods like feature selection to prepare the best possible inputs for our final predictive models.
 
-X = df.select(numerical_features + location_features)
-y = df.select(target)
 
-# --- Create location-based clusters ---
-# 1. Fit KMeans on the location data
-kmeans = KMeans(n_clusters=10, random_state=42, n_init=10) # Find 10 neighborhood clusters
-location_clusters = kmeans.fit_predict(X.select(location_features))
+## **Feature Selection in Practice**
 
-# 2. Add the new cluster feature to our dataset
-# Note: The cluster labels need to be strings for one-hot encoding
-X = X.with_columns(
-    pl.Series(name="location_cluster", values=location_clusters.astype(str))
-)
+Let's demonstrate how feature selection works. We will take the clean Iris dataset, which has 4 highly informative features, and intentionally add 20 "noisy," irrelevant features. We will then use a feature selection technique to see if it can correctly identify and select the original 4 features, and we'll measure whether this selection improves our model's performance.
 
-# 3. Build a new supervised learning pipeline with the cluster feature
-# We need ColumnTransformer to apply different preprocessing to different columns
-preprocessor = ColumnTransformer(transformers=[
-    ('num', StandardScaler(), numerical_features),
-    ('cat', OneHotEncoder(), ["location_cluster"])
-])
+### **Code Walkthrough: Selecting the Best Features**
 
-# Create the full pipeline
-pipe_with_clusters = make_pipeline(
-    preprocessor,
-    GradientBoostingRegressor(random_state=42)
-)
-
-# 4. Evaluate the model
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-pipe_with_clusters.fit(X_train, y_train)
-mae = mean_absolute_error(y_test, pipe_with_clusters.predict(X_test))
-
-print(f"MAE of model with location clusters: ${mae:,.2f}")
-```
-
-By adding a single, powerful "location\_cluster" feature, we often see a significant improvement in our model's predictive accuracy compared to using latitude and longitude alone.
-
------
-
-#### **Scenario 2: PCA for Preprocessing**
-
-Imagine a dataset with many highly correlated features, such as `sqft_living`, `sqft_above`, and `sqft_lot`. We can use PCA to consolidate these into a few "size components" and feed those components into our model instead. This can reduce noise and improve model stability.
+**1. Setup: Create a Noisy Dataset**
+First, we load the Iris data and then create 20 columns of random noise. We use `np.hstack` to stack our 4 original features and the 20 new noisy features side-by-side, creating a dataset with 24 features in total.
 
 ```python
-# In this conceptual example, we'll apply PCA to our numerical features
-# and build a pipeline with the PCA-transformed data.
+# The iris dataset
+X, y = load_iris(return_X_y=True)
+print(f"X shape before introducing noisy features: {X.shape}")
 
-from sklearn.decomposition import PCA
+# Some noisy data not correlated
+E = np.random.RandomState(42).uniform(0, 0.1, size=(X.shape[0], 20))
 
-# 1. Define the PCA pipeline
-pipe_with_pca = make_pipeline(
-    StandardScaler(),
-    PCA(n_components=5), # Reduce to 5 principal components
-    GradientBoostingRegressor(random_state=42)
+# Add the noisy data to the informative features
+X = np.hstack((X, E))
+print(f"X shape after introducing noisy features: {X.shape}")
+
+# Split dataset to select features and evaluate the classifier
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, stratify=y, random_state=0
 )
-
-# 2. Evaluate the PCA-based model
-# We'll use only the original numerical and location features for this example
-X_original = df.select(numerical_features + location_features)
-X_train_orig, X_test_orig, y_train_orig, y_test_orig = train_test_split(
-    X_original, y, test_size=0.2, random_state=42
-)
-
-pipe_with_pca.fit(X_train_orig, y_train_orig)
-mae_pca = mean_absolute_error(y_test_orig, pipe_with_pca.predict(X_test_orig))
-
-print(f"MAE of model with PCA features: ${mae_pca:,.2f}")
 ```
 
-This demonstrates how PCA can be seamlessly integrated as a preprocessing step within a supervised learning pipeline to potentially create a more efficient and robust model.
+**2. Scoring Features with `SelectKBest`**
+We will use `SelectKBest`, a `scikit-learn` utility that scores features using a statistical test (in this case, `f_classif`, which is an ANOVA F-test) and selects the 'k' features with the highest scores. We'll set `k=4`, hypothesizing that it can find our four original features.
 
-Yes, this is the final section. It includes recommended exercises for practice and a summary of both this lesson and the entire modeling module.
+```python
+selector = SelectKBest(f_classif, k=4)
+selector.fit(X_train, y_train)
+scores = -np.log10(selector.pvalues_)
+scores /= scores.max()
+
+# Plot the scores
+X_indices = np.arange(X.shape[-1])
+plt.figure(1)
+plt.clf()
+plt.bar(X_indices - 0.05, scores, width=0.2)
+plt.title("Feature univariate score")
+plt.xlabel("Feature number")
+plt.ylabel(r"Univariate score ($-Log(p_{value})$)")
+plt.show()
+```
+
+The bar chart clearly shows that the first four features have significantly higher scores than the 20 noisy features we added, confirming that our selection method is working as expected.
+
+**3. Comparing Model Performance**
+Now for the critical test: does removing the noisy features actually improve our model's performance? We will train two models: one on the full 24-feature dataset and another on a pipeline that includes our `SelectKBest` step.
+
+```python
+# Model 1: Using all 24 features
+clf = make_pipeline(MinMaxScaler(), LinearSVC())
+clf.fit(X_train, y_train)
+print(
+    "Classification accuracy without selecting features: {:.3f}".format(
+        clf.score(X_test, y_test)
+    )
+)
+
+# Model 2: Pipeline with feature selection
+clf_selected = make_pipeline(SelectKBest(f_classif, k=4), MinMaxScaler(), LinearSVC())
+clf_selected.fit(X_train, y_train)
+print(
+    "Classification accuracy after univariate feature selection: {:.3f}".format(
+        clf_selected.score(X_test, y_test)
+    )
+)
+```
+
+The output shows a clear improvement in classification accuracy after performing feature selection. By removing the irrelevant noise, we enabled the `LinearSVC` model to learn more effectively from the signals that truly matter.
+
+The final block of code visualizes a comparison of the feature scores, confirming that the selection process correctly identified the most important features for the model.
+
+```python
+# ... (visualization code from the prompt) ...
+plt.title("Comparing feature selection")
+plt.xlabel("Feature number")
+plt.yticks(())
+plt.axis("tight")
+plt.legend(loc="upper right")
+plt.show()
+```
+
+This example demonstrates that adding more features is not always better. Intelligent feature selection is a crucial step for building efficient and high-performing models.
+
+
+## **Feature Extraction with PCA**
+
+We've seen how feature selection *chooses* the best existing features. **Feature extraction**, by contrast, creates entirely new features from the old ones. The goal is to capture the most important information from the original feature set in a smaller, more powerful set of new features.
+
+Principal Component Analysis (PCA) is a primary tool for this. By using the principal components as our new features, we can often reduce the complexity of our model, reduce noise, and even improve predictive performance.
+
+### **Code Walkthrough: Finding the Optimal Number of Components**
+
+This example demonstrates a complete workflow where we use `GridSearchCV` to find the optimal number of principal components to keep for a classification task on the handwritten digits dataset.
+
+**1. Setting Up the Pipeline**
+First, we define a three-step `Pipeline`. This will be the blueprint for our experiment.
+
+```python
+# Define a pipeline to search for the best combination of PCA truncation
+# and classifier regularization.
+pca = PCA()
+# Define a Standard Scaler to normalize inputs
+scaler = StandardScaler()
+# set the tolerance to a large value to make the example faster
+logistic = LogisticRegression(max_iter=10000, tol=0.1)
+
+pipe = Pipeline(steps=[("scaler", scaler), ("pca", pca), ("logistic", logistic)])
+X_digits, y_digits = datasets.load_digits(return_X_y=True)
+```
+
+  * **`scaler`**: Our standard preprocessing step to scale the pixel data.
+  * **`pca`**: The feature extraction step. We create a `PCA` object without specifying the number of components yet; this will be tuned by our grid search.
+  * **`logistic`**: Our final supervised model, a `LogisticRegression` classifier.
+
+**2. Defining the Search Space**
+Next, we create a `param_grid` to tell `GridSearchCV` what to tune. This is where the synergy between the components happens.
+
+```python
+# Parameters of pipelines can be set using '__' separated parameter names:
+param_grid = {
+    "pca__n_components": [5, 15, 30, 45, 60],
+    "logistic__C": np.logspace(-4, 4, 4),
+}
+```
+
+  * **`"pca__n_components"`**: This is the key. We are telling the grid search to treat the number of principal components as a hyperparameter. It will build models using the top 5, 15, 30, 45, and 60 components.
+  * **`"logistic__C"`**: We are also simultaneously tuning the regularization strength `C` of our final classifier.
+
+**3. Running the Search and Analyzing Results**
+Finally, we create a `GridSearchCV` object with our pipeline and parameter grid and fit it to the data.
+
+```python
+search = GridSearchCV(pipe, param_grid, n_jobs=2)
+search.fit(X_digits, y_digits)
+print("Best parameter (CV score=%0.3f):" % search.best_score_)
+print(search.best_params_)
+```
+
+The grid search will now automatically test every combination. For example, it will train a model using 5 principal components and a `C` value of 0.0001, then a model with 5 components and a `C` of 0.01, and so on, for all possible pairs.
+
+The final output from `search.best_params_` will tell us the winning combination—the optimal number of extracted features and the best classifier setting for this specific problem, demonstrating a powerful and automated approach to feature engineering.
+
+## **Exploring Other Feature Extraction Methods**
+
+While PCA is a powerful and common technique, `scikit-learn` offers other methods for feature extraction that may be better suited for different types of problems.
+
+As you continue to learn, I encourage you to explore **`FeatureAgglomeration`**. This technique works by applying hierarchical clustering to the features themselves, progressively grouping together features that are most similar.
+
+* **Typical Use Case**: `FeatureAgglomeration` is particularly useful when you have many features that are redundant or measure similar underlying concepts. By grouping them, you can create a simplified set of "meta-features" that are easier for a model to interpret, which can be especially effective in domains like bioinformatics or text analysis where you might have thousands of highly correlated features.

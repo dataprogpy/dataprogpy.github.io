@@ -201,7 +201,8 @@ nav:
       - Uncovering Clusters: modeling/modeling-without-target/clustering.md 
       - Reducing Data Dimensionality: modeling/modeling-without-target/dimensionality-reduction.md
       - Engineering Features: modeling/modeling-without-target/feature-engineering.md
-      - Tuning Unsupervised Models: modeling/modeling-without-target/tuning-unsupervised-models.md
+      - Clustering + Dimensionality Reduction: modeling/modeling-without-target/informed-initialization.md
+      - Fine-tuning Feature Engineering: modeling/modeling-without-target/tuning-feature-engineering.md
       - Next Steps: modeling/modeling-without-target/next-steps.md 
   - Advanced Data Types:
     - adv-data-types/index.md

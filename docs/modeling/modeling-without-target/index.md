@@ -16,8 +16,8 @@ hide:
 - [ :material-numeric-2:{ .lg .middle } __Clustering__](clustering.md) 
 - [ :material-numeric-3:{ .lg .middle } __Dimensionality Reduction__](dimensionality-reduction.md) 
 - [ :material-numeric-4:{ .lg .middle } __Feature Engineering__](feature-engineering.md) 
-- [ :material-numeric-5:{ .lg .middle } __Tuning Unsupervised Models__](tuning-unsupervised-models.md) 
-- [ :material-numeric-6:{ .lg .middle } __Tuning Ensemble Models__](tuning-ensemble.md) 
+- [ :material-numeric-5:{ .lg .middle } __Clustering + Dimensionality Reduction__](informed-initialization.md) 
+- [ :material-numeric-6:{ .lg .middle } __Fine-tuning Feature Engineering__](tuning-feature-engineering.md) 
 - [ :material-numeric-7:{ .lg .middle } __Next Steps__](next-steps.md) 
 
 </div>
