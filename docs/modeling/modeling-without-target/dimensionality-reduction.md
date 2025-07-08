@@ -4,8 +4,6 @@ icon: material/numeric-3
 
 # Dimensionality Reduction
 
-### **3.0 Dimensionality Reduction with PCA**
-
 The second major type of unsupervised learning we will cover is **dimensionality reduction**. As its name suggests, this is the process of reducing the number of features (or dimensions) in a dataset while trying to preserve as much of the important information as possible.
 
 #### **Motivation: Why Reduce Dimensions?**
@@ -24,11 +22,6 @@ These new components are designed to capture the maximum possible **variance** (
 
 By using only the first few principal components (e.g., PC1 and PC2), we can often represent a significant portion of the original dataset's information in a much lower-dimensional space, making it easier to visualize and model.
 
-You're right to question that—your example is a perfect illustration of **clustering**, not dimensionality reduction. The goal you described is to find better *groups of observations* (market segments), which is what clustering algorithms like K-Means do.
-
-A better example for dimensionality reduction focuses on consolidating *features* into underlying concepts.
-
-***
 
 ### A Concrete Example for PCA and Latent Structure
 
@@ -37,6 +30,7 @@ Imagine a company that wants to understand customer satisfaction and conducts a 
 #### The Observed Features
 
 The raw data consists of customer ratings (1-5) for questions like:
+
 * *Q1: How would you rate our product's price?*
 * *Q2: Do you feel our product offers good value?*
 * *Q3: Was our customer support agent helpful?*
@@ -52,84 +46,100 @@ Building a model on all 20 features can be complex and inefficient, as many ques
 Instead of treating all 20 questions as independent, PCA can analyze the correlation patterns in the responses and discover the underlying, or **latent**, drivers of satisfaction.
 
 It might find that the responses are primarily driven by three "meta-features":
-1.  **Component 1 (Value Perception):** A new, single feature that captures the combined essence of the questions about price and value (Q1, Q2).
-2.  **Component 2 (Service Quality):** A second feature that summarizes the questions about the support experience (Q3, Q4).
-3.  **Component 3 (Brand Loyalty):** A third feature that represents the themes of trust and recommendation (Q5, Q6).
+
+1.  **Component 1 (Value Perception):** A new, single feature that captures the combined essence of the questions about price and value (Q1, Q2, ...).
+2.  **Component 2 (Service Quality):** A second feature that summarizes the questions about the support experience (Q3, Q4, ...).
+3.  **Component 3 (Brand Loyalty):** A third feature that represents the themes of trust and recommendation (Q5, Q6, ...).
 
 #### The Business Value
 
 Instead of working with 20 noisy and correlated features, the company can now use just these 3 powerful principal components. This allows them to build simpler, faster models and gain a clearer understanding of what truly drives customer satisfaction.
 
-Yes, that's an excellent point. PCA is fundamentally a technique for uncovering the **latent structure** in data.
-
----
-### The Connection to Latent Structure
-
-The term **latent structure** refers to the underlying, unobserved patterns or "meta-features" that are believed to be driving the variation in the data you can actually see.
-
-For example, in a customer satisfaction survey with 50 questions, the answers might not be driven by 50 independent factors. Instead, they could be driven by just a few latent concepts like "customer service quality," "product value," and "brand perception." PCA is a tool that helps you discover and quantify these underlying themes from the observed data. The principal components it finds are, in essence, a representation of this latent structure.
-
-### Recommendation for this Course
-
-For this introductory course, it's often more effective to explain the *concept* without necessarily using the formal term "latent structure," which can feel a bit abstract.
-
-You could frame it like this:
-
-> "Think of PCA as a tool for consolidating many correlated features into a few powerful, underlying 'themes' or 'components'. For instance, features like `sqft_living`, `sqft_above`, and `sqft_basement` are all related to a general concept of 'house size'. PCA helps us capture this overarching theme in a single, new feature (a principal component)."
-
-This approach gives students the deep intuition you're aiming for without introducing potentially confusing academic jargon.
-
-Excellent. Let's proceed with the hands-on lab for PCA, where students can see these concepts in action.
+Of course. This example is perfect for demonstrating the power of PCA for visualization. Here is a code walkthrough designed for your students.
 
 -----
 
-### **Hands-On Lab 2: Simplifying Data with PCA**
+### **Code Walkthrough: Visualizing High-Dimensional Data with PCA**
 
-This lab demonstrates how to use PCA to reduce the dimensionality of a dataset. We will use the `load_digits` dataset, which contains 8x8 pixel images of handwritten digits. Each image is "unrolled" into a row with 64 features, making it impossible to visualize directly. Our goal is to reduce these 64 features to just 2 principal components so we can plot and see the underlying structure.
+The Iris dataset has four features, making it impossible to visualize in its entirety on a single 2D plot. This code example demonstrates how to use Principal Component Analysis (PCA) to reduce the data from four dimensions to two, allowing us to create a meaningful visualization that still captures the essence of the original data.
+
+#### **1. Setup and Data Loading**
+
+First, we import the necessary libraries. We need `matplotlib` for plotting, `PCA` from `sklearn.decomposition`, and the `load_iris` dataset itself.
 
 ```python
-import polars as pl
 import matplotlib.pyplot as plt
-from sklearn.datasets import load_digits
 from sklearn.decomposition import PCA
-from sklearn.preprocessing import StandardScaler
+from sklearn.datasets import load_iris
 
-# 1. Load the digits dataset
-digits = load_digits()
-X = digits.data
-y = digits.target
-
-print(f"Original data shape: {X.shape}")
-
-# 2. Scale the data before applying PCA
-# PCA is affected by scale, so it's standard practice to scale your data first.
-scaler = StandardScaler()
-X_scaled = scaler.fit_transform(X)
-
-# 3. Instantiate and fit PCA
-# We want to reduce the data to 2 dimensions for visualization.
-pca = PCA(n_components=2)
-X_pca = pca.fit_transform(X_scaled)
-
-print(f"Data shape after PCA: {X_pca.shape}")
-
-# 4. Analyze the results
-# We can check how much variance our new components captured.
-explained_variance = pca.explained_variance_ratio_
-print(f"Explained variance by PC1: {explained_variance[0]:.2%}")
-print(f"Explained variance by PC2: {explained_variance[1]:.2%}")
-print(f"Total variance captured by 2 components: {explained_variance.sum():.2%}")
-
-# 5. Visualize the 2D representation
-plt.figure(figsize=(10, 8))
-plt.scatter(X_pca[:, 0], X_pca[:, 1], c=y, cmap='viridis', edgecolor='none', alpha=0.7, s=40)
-plt.title('PCA of Handwritten Digits Dataset')
-plt.xlabel('First Principal Component (PC1)')
-plt.ylabel('Second Principal Component (PC2)')
-plt.colorbar(label='Digit Label')
-plt.show()
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+target_names = iris.target_names
 ```
 
-#### **Analysis of the Visualization**
+  * `X` now holds our data with 4 features (the four measurements).
+  * `y` holds the corresponding species label (0, 1, or 2).
 
-In the resulting scatter plot, each point represents one of the original 64-dimensional images, now projected onto our two new principal components. Notice how, even in this radically simplified 2D view, clusters of digits have formed. You can see distinct groups for '0', '6', '4', and others. This demonstrates the power of PCA: it has successfully captured the most important structural information from the original 64 features and represented it in just two, allowing us to visualize the inherent separation between the different digit classes.
+-----
+
+#### **2. Applying PCA**
+
+Next, we instantiate and fit the `PCA` model. The most important hyperparameter here is **`n_components=2`**, where we explicitly tell PCA that we want to reduce the data to just two principal components. The `.fit(X)` command learns the optimal 2D projection from our 4D data, and `.transform(X)` then applies this projection to create our new, low-dimensional dataset `X_r`.
+
+```python
+# Instantiate and fit the PCA model
+pca = PCA(n_components=2)
+X_r = pca.fit_transform(X)
+```
+
+After this step, `X_r` is a new array with the same number of rows as the original data, but now with only two columns representing PC1 and PC2.
+
+-----
+
+#### **3. Analyzing the Explained Variance**
+
+This is a crucial step to understand how much information our new components have retained. The `explained_variance_ratio_` attribute tells us the percentage of the original data's variance that is captured by each principal component.
+
+```python
+# Print the explained variance ratio
+print(
+    "explained variance ratio (first two components): %s"
+    % str(pca.explained_variance_ratio_)
+)
+```
+
+The output will show that the first principal component (PC1) alone captures the vast majority of the variance (typically \>90%), and together, the first two components capture a very high percentage of the original information. This gives us confidence that our 2D plot will be a meaningful representation of the data.
+
+-----
+
+#### **4. Creating the Visualization**
+
+Finally, we create a scatter plot of our new 2D data (`X_r`). We loop through each class (`setosa`, `versicolor`, `virginica`), plotting the points for each with a different color and label.
+
+```python
+# Set up the plot
+plt.figure()
+colors = ["navy", "turquoise", "darkorange"]
+lw = 2
+
+# Plot each class separately
+for color, i, target_name in zip(colors, [0, 1, 2], target_names):
+    plt.scatter(
+        X_r[y == i, 0], X_r[y == i, 1], color=color, alpha=0.8, lw=lw, label=target_name
+    )
+
+# Add title and legend
+plt.legend(loc="best", shadow=False, scatterpoints=1)
+plt.title("PCA of IRIS dataset")
+plt.show()
+```
+<figure markdown="span">
+    ![Iris: Principle Components Analysis](../../assets/images/iris_pca.png){ width="600" }
+  <figcaption>Applying Principle Components Analysis to Iris Dataset</figcaption>
+</figure>
+
+#### **5. Interpreting the Result**
+
+The final plot shows a 2D "shadow" of the original 4D data. You can clearly see that the three species form distinct clusters. The `setosa` class is perfectly separated, while the `versicolor` and `virginica` classes are mostly separated, with some minor overlap. This visualization confirms that even after reducing the dimensionality by half, the fundamental structure required to distinguish between the species is preserved. This is the power of PCA in action.
