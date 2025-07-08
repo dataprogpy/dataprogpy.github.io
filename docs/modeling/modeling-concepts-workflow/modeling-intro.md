@@ -1,6 +1,7 @@
 ---
 icon: material/numeric-1
 ---
+
 # Introduction to Modeling
 
 ## Applications of Predictive Modeling

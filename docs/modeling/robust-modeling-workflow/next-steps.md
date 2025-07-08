@@ -2,8 +2,7 @@
 icon: material/numeric-7
 ---
 
-
-# **Next Steps and Active Learning**
+# Next Steps and Active Learning
 
 ## Active Learning Exercise
 

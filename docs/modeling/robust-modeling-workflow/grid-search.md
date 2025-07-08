@@ -2,8 +2,6 @@
 icon: material/numeric-5
 ---
 
------
-
 # Automated Hyperparameter Tuning
 
 This lab demonstrates the complete, robust workflow. We will use `GridSearchCV` to automatically search for the best hyperparameters for our pipeline, using cross-validation on our training data. We will then perform a final evaluation on the held-out test set.

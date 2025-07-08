@@ -2,8 +2,7 @@
 icon: material/numeric-4
 ---
 
-# **Feature Engineering: Creating Better Inputs for Better Models**
-
+# Feature Engineering: Creating Better Inputs for Better Models
 
 ## Introduction to Feature Engineering
 
