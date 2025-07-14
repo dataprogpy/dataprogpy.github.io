@@ -206,7 +206,8 @@ nav:
       - Next Steps: modeling/modeling-without-target/next-steps.md 
   - Advanced Data Types:
     - adv-data-types/index.md
-    - Time Series Analysis: adv-data-types/time-series.md
+    - Time Series Analysis: 
+      - adv-data-types/time-series/index.md
     - Text Analysis: adv-data-types/text-analysis.md
   - Resources:
     - resources/index.md
