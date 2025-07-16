@@ -1,3 +1,7 @@
+---
+icon: material/numeric-1
+---
+
 Excellent suggestions. Grounding the lesson in familiar business data like stock prices and explicitly defining foundational concepts like "window" and "lag" before showing code will create a much stronger learning experience.
 
 Here is the revised content for Module 1, incorporating your feedback.

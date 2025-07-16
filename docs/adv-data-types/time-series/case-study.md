@@ -1,5 +1,6 @@
-Of course. Here is the content for the concluding case study.
-
+---
+icon: material/numeric-5
+---
 -----
 
 ### **Case Study: Forecasting Retail Sales**
