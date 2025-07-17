@@ -197,11 +197,10 @@ ma_90 = base.mark_line(color='red').encode(
 # Combine the original price plot with the moving average plots
 (closing_price + ma_30 + ma_90).interactive().display()
 ```
+<figure markdown="span">
+    ![`GOOG` Stock Price: Time Series Visualized](../../assets/images/visualization.png){ width="600" }
+  <figcaption>Comparing 30 and 90 day moving averages with daily price changes.</figcaption>
+</figure>
 
 In the combined chart, you can clearly see how the 30-day moving average (orange) follows the price more closely, while the 90-day moving average (red) provides a much smoother line, making the longer-term trend easier to discern. This demonstrates the practical effect of choosing different window widths for analysis.
 
-Yes, adding a dedicated section on data wrangling issues specific to time series is an excellent idea. It directly addresses the practical challenges students will face and reinforces the unique nature of this data type. It provides immediate, actionable knowledge that working professionals will find valuable.
-
-Here is a proposed section that you can add to **Module 1** of your static site content.
-
----
