@@ -217,8 +217,8 @@ nav:
       - adv-data-types/time-series/index.md
       - Foundations: adv-data-types/time-series/foundations.md
       - Structural Analysis: adv-data-types/time-series/decomposition.md
-      - Modeling: adv-data-types/time-series/modeling.md
-      - Model Evaluation: adv-data-types/time-series/model-evaluation.md
+      - Models: adv-data-types/time-series/modeling.md
+      - Modeling Workflow: adv-data-types/time-series/modeling-workflow.md
       - Case Study: adv-data-types/time-series/case-study.md
       - Next Steps: adv-data-types/time-series/next-steps.md 
     - Text Analysis: adv-data-types/text-analysis.md

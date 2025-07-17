@@ -50,11 +50,7 @@ Now we apply these concepts using the `statsmodels` and `arch` Python libraries.
 We'll use the `statsmodels` library to fit an ARIMA model. The key is to provide the `order=(p,d,q)` that you determined during your analysis in Module 2.
 
 ```python
-import polars as pl
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
 
-# Assume 'differenced_series' is our stationary data from Module 2
 # From our ACF/PACF analysis, let's say we chose an order of (1,0,1)
 # Note: Since the data is already differenced, 'd' is 0 here.
 
@@ -80,5 +76,6 @@ plt.show()
 ```
 
 The `results.summary()` output provides a wealth of information, including the model coefficients and their statistical significance, which helps you validate your model's structure.
+
 
 
