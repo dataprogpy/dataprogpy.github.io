@@ -1,166 +1,235 @@
 ---
 icon: material/numeric-5
 ---
------
 
-### **Case Study: Forecasting Retail Sales**
+# Modeling S&P 500 Using GARCH
 
-This capstone case study will walk you through a complete, end-to-end forecasting project. We will apply all the concepts you've learned—from initial exploration to building and comparing sophisticated models—to forecast monthly retail sales.
+In financial markets, predicting the direction of a stock price is incredibly difficult. However, predicting its **volatility**—how much the price is likely to fluctuate—is often more achievable and just as important for managing risk. This project will walk you through an end-to-end workflow for modeling the volatility of the S&P 500 index using a **GARCH (Generalized Autoregressive Conditional Heteroskedasticity)** model.
 
-#### **Project Goal**
 
-The objective is to build and evaluate two different types of forecasting models—a statistical SARIMA model and a machine learning model—to predict the next 12 months of sales for a retail company. We will then compare their performance to determine which model is more suitable for this task.
+### **1. Data Acquisition and Preparation**
 
-#### **The Data**
-
-We will use a dataset representing monthly sales for a U.S. retail store. The data spans several years and will allow us to analyze both trend and seasonal patterns.
-
------
-
-### **1. Data Exploration (EDA)**
-
-First, we load the data and perform an initial visual analysis to understand its structure.
+Our first step is to acquire historical data for the S\&P 500 index (`^GSPC`) using the `yfinance` library. We'll focus on the daily 'Close' price from early 2015 to late 2023.
 
 ```python
-import polars as pl
-import matplotlib.pyplot as plt
-import statsmodels.api as sm
+ticker = '^GSPC'
+period1 = dt.datetime(2015, 1, 1)
+period2 = dt.datetime(2023, 9, 22)
+interval = '1d' # 1d, 1m
 
-# Load the dataset
-# This assumes you have a CSV with 'DATE' and 'SALES' columns
-file_path = 'path/to/your/retail_sales.csv'
-df = pl.read_csv(file_path).with_columns(
-    pl.col("DATE").str.to_datetime(format="%Y-%m-%d")
+SP_500 = yf.download(ticker, start=period1, end=period2, interval=interval, progress=False)
+SP_500 = SP_500.reset_index()
+
+df=SP_500[["Date","Close"]]
+df["unique_id"]="1"
+df.columns=["ds", "y", "unique_id"]
+StatsForecast.plot(df)
+```
+
+<figure markdown="span">
+    ![S&P 500 Time Series Data Visualized](../../assets/images/sp500_full.png){ width="600" }
+  <figcaption>S&P 500 Time Series Data Visualized</figcaption>
+</figure>
+
+The `statsforecast` library requires the data to be in a specific format with columns named `ds` (for the date), `y` (for the value we're analyzing), and `unique_id` (to identify the time series). We rename our columns accordingly to prepare for modeling.
+
+-----
+
+### **2. Analyzing the Raw Price Series**
+
+Before we can model volatility, we need to understand the characteristics of our data. Most statistical models, including those for volatility, assume the data is **stationary**.  We can use the **Augmented Dickey-Fuller (ADF) test** to check for stationarity. 
+
+
+```python
+
+def Augmented_Dickey_Fuller_Test_func(series , column_name):
+    print (f'Dickey-Fuller test results for columns: {column_name}')
+    dftest = adfuller(series, autolag='AIC')
+    dfoutput = pd.Series(dftest[0:4], index=['Test Statistic','p-value','No Lags Used','Number of observations used'])
+    for key,value in dftest[4].items():
+       dfoutput['Critical Value (%s)'%key] = value
+    print (dfoutput)
+    if dftest[1] <= 0.05:
+        print("Conclusion:====>")
+        print("Reject the null hypothesis")
+        print("The data is stationary")
+    else:
+        print("Conclusion:====>")
+        print("The null hypothesis cannot be rejected")
+        print("The data is not stationary")
+     
+
+Augmented_Dickey_Fuller_Test_func(df["y"],'S&P500')
+```
+
+**Interpreting the ADF Test Results**
+
+When we run the ADF test on the raw S\&P 500 closing prices, the **p-value** will be significantly greater than 0.05. This means we cannot reject the null hypothesis, leading to the conclusion that the raw price data is **not stationary**. It has a clear trend, making it unsuitable for direct modeling.
+
+
+### **3. Transforming Data to Returns**
+
+To address the non-stationarity, we'll transform the price series into a series of daily **returns**. Returns are stationary and represent the percentage change in price from one day to the next.
+
+```python
+df['return'] = 100 * df["y"].pct_change()
+df.dropna(inplace=True, how='any')
+df['sq_return'] = df["return"].mul(df["return"])
+
+# visualizing the time series
+
+base = alt.Chart(df).mark_line().encode(
+    x='ds',
+    # y='return',
+).properties(
+    width=800,
+    height=400,
+    # title="SP500 Return Chart"
+)
+return_chart = base.encode(
+    y='return'
+).properties(
+    title="SP500 Return Chart"
+)
+sq_return_chart = base.encode(
+    y='sq_return'
+).properties(
+    title="SP500 Squared Return Chart"
 )
 
-# Plot the raw data
-df.plot(x='DATE', y='SALES', title='Monthly Retail Sales')
-plt.show()
+(return_chart | sq_return_chart).properties(
+    title="SP500 Return and Squared Return Chart"
+)
 
-# Decompose the series to see the components
-series_pd = df.to_pandas().set_index('DATE')['SALES']
-decomposition = sm.tsa.seasonal_decompose(series_pd, model='multiplicative', period=12)
-fig = decomposition.plot()
-fig.set_size_inches(12, 8)
-plt.show()
 ```
 
-**Observations:**
+<figure markdown="span">
+    ![S&P 500 Returns vs. Squared Returns ](../../assets/images/sp500_return.png){ width="600" }
+  <figcaption>S&P 500 Returns vs. Squared Returns</figcaption>
+</figure>
 
-  * The raw data shows a clear **upward trend**, indicating sales are growing over time.
-  * There is a strong, repeating **seasonal pattern**, with peaks occurring at the end of each year, likely due to holiday sales.
-  * The multiplicative decomposition confirms these findings and shows that the magnitude of the seasonal swing grows with the trend.
+We also calculate the **squared returns**, as this is often used as a proxy for financial variance or volatility. The visualization of the returns and squared returns reveals a key characteristic of financial data known as **volatility clustering**. Notice how periods of high fluctuation are clumped together, followed by periods of relative calm. This is precisely the phenomenon that GARCH models are designed to capture.
+
+
+### **4. Checking for Autocorrelation**
+
+Next, we use the **Ljung-Box test** to check if there is significant autocorrelation in our returns data. Autocorrelation means that past values are correlated with future values.
+
+```python
+ljung_res = acorr_ljungbox(df["return"], lags= 40, boxpierce=True)
+
+# ln_pvalue < 0.05 ? reject null hypotheses i.e. no autocorrelation
+ljung_res.head()
+     
+
+df=df[["ds","unique_id","return"]]
+df.columns=["ds", "unique_id", "y"]
+train = df[df.ds<='2023-05-31'] # Let's forecast the last 30 days
+test = df[df.ds>'2023-05-31']
+train.shape, test.shape
+```
+
+**Interpreting the Ljung-Box Test Results**
+
+The test results will show very small p-values <0.05 for our returns data. This leads us to **reject the null hypothesis** of no autocorrelation, confirming that the returns are indeed correlated with their past values. This is another signal that a time-dependent model like GARCH is appropriate.
 
 -----
 
-### **2. Data Preparation and Backtesting Setup**
+### **5. Model Selection with Cross-Validation**
 
-Before modeling, we need to set up our backtesting framework. We will reserve the last 12 months of data as our hold-out test set to evaluate the final models.
+A GARCH model is defined by two parameters, `p` and `q`, which represent the number of past squared returns and past variances to include in the model, respectively. To find the best combination of `(p,q)`, we use **cross-validation**.
+
+`StatsForecast`'s `cross_validation` function automates this process by creating multiple "windows" of training data and testing how well different GARCH models perform at forecasting. We evaluate the models using the **Root Mean Squared Error (RMSE)**, with the goal of finding the model order that produces the lowest average error.
 
 ```python
-# Split the data into training and test sets
-train_df = df.filter(pl.col("DATE") < '2022-01-01')
-test_df = df.filter(pl.col("DATE") >= '2022-01-01')
+season_length = 7 # Dayly data
+horizon = len(test) # number of predictions biasadj=True, include_drift=True,
 
-print(f"Training data runs from {train_df['DATE'].min()} to {train_df['DATE'].max()}")
-print(f"Test data runs from {test_df['DATE'].min()} to {test_df['DATE'].max()}")
+models = [GARCH(1,1),
+          GARCH(1,2),
+          GARCH(2,2),
+          GARCH(2,1),
+          GARCH(3,1),
+          GARCH(3,2),
+          GARCH(3,3),
+          GARCH(1,3),
+          GARCH(2,3)]
+
+sf = StatsForecast(
+    models=models,
+    freq='C', # custom business day frequency
+)
+
+crossvalidation_df = sf.cross_validation(df=train,
+                                         h=horizon,
+                                         step_size=6,
+                                         n_windows=5)
+
+print(crossvalidation_df)
+     
+
+evals = evaluate(crossvalidation_df.drop(columns='cutoff'), metrics=[rmse], agg_fn='mean')
+print(evals)
 ```
+
+Based on the cross-validation results, the `GARCH(1,1)` model is often a strong performer for financial data, so we'll select that for our final model.
 
 -----
 
-### **3. Modeling - Part 1: The SARIMA Approach**
+### **6. Fitting and Forecasting**
 
-For our first model, we'll use a statistical approach. We will use `auto_arima` to find the best SARIMA model for our training data.
+Now, we fit our chosen `GARCH(1,1)` model to the training dataset and use it to forecast volatility for the hold-out test period.
 
 ```python
-import pmdarima as pm
+season_length = 7 
+horizon = len(test) 
+models = [GARCH(1,1)]
 
-# Use the training data to find the best model
-train_series = train_df['SALES'].to_numpy()
+sf = StatsForecast(models=models,
+                   freq='C', 
+                  )
+sf.fit(df=train)
 
-sarima_model = pm.auto_arima(train_series,
-                             seasonal=True, m=12,
-                             trace=True,
-                             error_action='ignore',
-                             suppress_warnings=True,
-                             stepwise=True)
+StatsForecast(models=[GARCH(1,1)], freq='C')
 
-print(sarima_model.summary())
+result=sf.fitted_[0,0].model_
+display(result)
 
-# Generate forecasts for the test period
-sarima_forecast = sarima_model.predict(n_periods=len(test_df))
+residual=pd.DataFrame(result.get("actual_residuals"), columns=["residual Model"])
+display(residual)
+     
+
+Y_hat = sf.forecast(df=train, h=horizon, fitted=True, level=[95])
+display(Y_hat.head())
+values=sf.forecast_fitted_values()
+display(values.head())
+sf.plot(train, Y_hat.merge(test), max_insample_length=200)
+     
+
+forecast_df = sf.predict(h=horizon, level=[80,95])
+sf.plot(train, test.merge(forecast_df), level=[80, 95], max_insample_length=200)
+    
 ```
 
-`auto_arima` will perform a search and land on the optimal `(p,d,q)(P,D,Q)m` parameters, giving us a robust statistical model fitted to our training data.
+<figure markdown="span">
+    ![Predictions Plot](../../assets/images/predictions_confidence.png){ width="600" }
+  <figcaption>Predicted Returns and the Intervals</figcaption>
+</figure>
+
+The plots generated by `StatsForecast` allow us to visually inspect how well our model's predictions align with the actual returns in the test set. The shaded regions represent the 80% and 95% **prediction intervals**, giving us a probabilistic range for our forecasts.
 
 -----
 
-### **4. Modeling - Part 2: The Machine Learning Approach**
+### **7. Final Model Evaluation**
 
-Next, we'll build a machine learning model. This requires us to first engineer relevant features from our time series data.
-
-```python
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.metrics import mean_squared_error
-import numpy as np
-
-# Feature Engineering Function
-def create_features(data):
-    return data.with_columns([
-        pl.col("DATE").dt.month().alias("month"),
-        pl.col("DATE").dt.year().alias("year"),
-        # Create lag features for the last 12 months
-        *[pl.col("SALES").shift(i).alias(f"lag_{i}") for i in range(1, 13)]
-    ])
-
-# Create features for the full dataset and then split
-df_featured = create_features(df)
-train_featured = df_featured.filter(pl.col("DATE") < '2022-01-01').drop_nulls()
-test_featured = df_featured.filter(pl.col("DATE") >= '2022-01-01')
-
-# Define features and target
-features = [col for col in train_featured.columns if col not in ['DATE', 'SALES']]
-target = "SALES"
-
-X_train, y_train = train_featured[features], train_featured[target]
-X_test, y_test = test_featured[features], test_featured[target]
-
-# Train the RandomForest model
-ml_model = RandomForestRegressor(n_estimators=100, random_state=42)
-ml_model.fit(X_train, y_train)
-
-# Generate predictions
-ml_forecast = ml_model.predict(X_test)
-```
-
------
-
-### **5. Evaluation and Conclusion**
-
-Now we compare the performance of both models on the test set using the Root Mean Squared Error (RMSE).
+Finally, we quantitatively evaluate the model's performance on the test set using a variety of metrics.
 
 ```python
-# Calculate RMSE for both models
-sarima_rmse = np.sqrt(mean_squared_error(test_df['SALES'], sarima_forecast))
-ml_rmse = np.sqrt(mean_squared_error(test_df['SALES'], ml_forecast))
-
-print(f"SARIMA Model RMSE: {sarima_rmse:.2f}")
-print(f"Machine Learning Model RMSE: {ml_rmse:.2f}")
-
-# Visualize the comparison
-plt.figure(figsize=(14, 7))
-plt.plot(train_df['DATE'], train_df['SALES'], label='Training Data')
-plt.plot(test_df['DATE'], test_df['SALES'], label='Actual Sales', color='blue')
-plt.plot(test_df['DATE'], sarima_forecast, label=f'SARIMA Forecast', color='red', linestyle='--')
-plt.plot(test_df['DATE'], ml_forecast, label=f'ML Forecast', color='green', linestyle=':')
-plt.title('Model Comparison: SARIMA vs. Machine Learning')
-plt.legend()
-plt.show()
-
+evaluate(
+    test.merge(Y_hat),
+    metrics=[mae, mape, partial(mase, seasonality=season_length), rmse, smape],
+    train_df=train,
+)
 ```
 
-#### **Conclusion**
-
-In this case study, we followed a structured workflow to tackle a real-world forecasting problem. We saw that both the statistical SARIMA model and the feature-based machine learning model were able to capture the trend and seasonality of the data.
-
-By comparing their RMSE on a held-out test set, we can make an informed decision about which model performs better for this specific task. Often, machine learning models can have an edge when complex, non-linear patterns exist or when many external variables are available. However, SARIMA models provide excellent performance for series with clear, regular patterns and are often easier to interpret. This analysis provides a solid, data-driven foundation for a business to plan for future sales.
+Metrics like **Mean Absolute Error (MAE)** and **Root Mean Squared Error (RMSE)** tell us the average magnitude of our forecast errors in the same units as the original data (daily returns). The **Mean Absolute Percentage Error (MAPE)** gives us a sense of the error in percentage terms, which is often easier to interpret. This final evaluation gives us a concrete measure of how well our GARCH model can predict the volatility of the S&P 500.
