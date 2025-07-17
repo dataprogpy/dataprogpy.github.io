@@ -2,47 +2,7 @@
 icon: material/numeric-4
 ---
 
-### **Model Implementation and Evaluation**
 
-Now we apply these concepts using the `statsmodels` and `arch` Python libraries.
-
-#### **Code Demo: Fitting and Forecasting with ARIMA**
-
-We'll use the `statsmodels` library to fit an ARIMA model. The key is to provide the `order=(p,d,q)` that you determined during your analysis in Module 2.
-
-```python
-import polars as pl
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
-
-# Assume 'differenced_series' is our stationary data from Module 2
-# From our ACF/PACF analysis, let's say we chose an order of (1,0,1)
-# Note: Since the data is already differenced, 'd' is 0 here.
-
-# Fit the ARIMA model
-model = sm.tsa.ARIMA(differenced_series, order=(1, 0, 1))
-results = model.fit()
-
-# Print the model summary
-print(results.summary())
-
-# Generate forecasts
-forecast_steps = 24
-forecast = results.forecast(steps=forecast_steps)
-
-# Plot the original series and the forecast
-plt.figure(figsize=(12, 6))
-plt.plot(differenced_series, label='Observed')
-plt.plot(forecast, label='Forecast', color='red')
-plt.title('ARIMA Forecast')
-plt.legend()
-plt.show()
-
-```
-
-The `results.summary()` output provides a wealth of information, including the model coefficients and their statistical significance, which helps you validate your model's structure.
-
------
 
 #### **Model Evaluation**
 
