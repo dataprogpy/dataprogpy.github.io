@@ -39,41 +39,37 @@ There are two primary models for combining these components:
 It’s natural to first think of combining components additively ($Y = T + S + R$), and for many series, this is correct. You should use an **additive model** when the seasonal variation is roughly **constant in absolute terms**, regardless of the trend. For example, a local bakery might sell about 200 more loaves every Saturday than on a weekday. This 200-loaf difference remains stable whether their overall weekly sales are trending up or down.
 
 However, you should use a **multiplicative model** ($Y = T \times S \times R$) when the size of the seasonal swing is **proportional to the level of the trend**. Think of a national retailer whose fourth-quarter sales are consistently 30% higher than other quarters. When the company's annual revenue is $10 million, that 30% jump is $3 million. When the company grows and its revenue is $100 million, that same 30% seasonality now represents a $30 million jump. The seasonal effect grows as the trend grows. This is very common in economic and sales data.
+ 
 
-#### **Code Demo: Decomposition with `statsmodels`**
+### Code Demo: Decomposition with `statsmodels`
 
 The `statsmodels` library provides a simple function to perform this decomposition. We'll use the classic "Air Passengers" dataset, which exhibits a clear trend and multiplicative seasonality.
 
 ```python
-import polars as pl
-import statsmodels.api as sm
-import matplotlib.pyplot as plt
+# Data prep
+df = pd.read_csv("/content/drive/MyDrive/dataprogpy/data/AirPassengers.csv", parse_dates=[0])
+df.columns = ["month", "passengers"]
+df.set_index("month", inplace=True)
 
-# Load the Air Passengers dataset (often included with statsmodels or available online)
-# This example assumes you have a CSV with 'Month' and 'Passengers' columns
-file_path = 'path/to/your/AirPassengers.csv'
-df = pl.read_csv(file_path).with_columns(
-    pl.col("Month").str.to_datetime(format="%Y-%m")
-)
+# Decomposition
+decomposition = sm.tsa.seasonal_decompose(df['passengers'], model='multiplicative', period=12)
 
-# Set the date as the index for statsmodels
-df = df.to_pandas().set_index('Month')
-
-# Perform multiplicative decomposition, specifying the period of seasonality (12 for monthly)
-decomposition = sm.tsa.seasonal_decompose(df['Passengers'], model='multiplicative', period=12)
-
-# Plot the decomposed components
+# Visualization
 fig = decomposition.plot()
 fig.set_size_inches(10, 8)
 plt.show()
 
 ```
 
+<figure markdown="span">
+    ![Time Series Decomposition](../../assets/images/decomposition_plot.png){ width="600" }
+  <figcaption>Air Passengers Data Decomposed: Trend, Seasonality, and Residual</figcaption>
+</figure>
+
 The output plot displays the original observed series and its three extracted components. Analyzing these individual plots is far more insightful than looking at the original series alone.
 
------
 
-### **Autocorrelation (ACF and PACF)**
+### Autocorrelation (ACF and PACF)
 
 While decomposition reveals the primary trend and seasonal patterns, we also need to understand how each observation relates to its immediate past values. This is measured by **autocorrelation**.
 
@@ -84,17 +80,6 @@ While decomposition reveals the primary trend and seasonal patterns, we also nee
 These two functions are the primary diagnostic tools for determining the parameters of ARIMA models once a series has been made stationary.
 
 
-### **3. Choosing a Lag Value**
-
-This is a frequent point of confusion. The key is that you don't just "pick one" lag value during exploration.
-
-**Revised Explanation:**
-
-Remember, the big idea of a **lag** is to look at a past version of the data to see if it relates to the present. When students ask, "How do I choose the lag value?" the answer is that during the initial analysis, you don't choose a single lag. Instead, you use tools like the **ACF and PACF plots** to examine a whole range of lags at once.
-
-The goal is to spot **patterns** in these plots. For example, in monthly sales data, you might see a significant spike at lag 12, lag 24, and lag 36. This pattern tells you that there is a yearly seasonal relationship in your data. The choice of specific lag values comes later, during the modeling stage, and it's directly guided by the significant lags you identify in these plots.
-
-***
 
 ??? question "**ACF/PACF vs. Standard Correlation**"
 
@@ -143,6 +128,11 @@ df_diff.plot(x="Month", y="passengers_diff")
 
 ```
 
+<figure markdown="span">
+    ![Diffed Time Series Data](../../assets/images/diffed_data.png){ width="600" }
+  <figcaption>Achieving Stationarity via Differencing</figcaption>
+</figure>
+
 Notice how the plot of the differenced data no longer has a clear trend; its mean appears constant.
 
 #### **Code Demo: ACF/PACF Plots**
@@ -164,6 +154,11 @@ plot_pacf(differenced_series, ax=ax2, lags=40)
 plt.show()
 
 ```
+
+<figure markdown="span">
+    ![Autocorrelation and partial autocorrelation plots](../../assets/images/acf_pacf.png){ width="600" }
+  <figcaption>Autocorrelation Function (ACF) and Parital Autocorrelation Function Plots Produced Using `statsmodels`</figcaption>
+</figure>
 
 **How to interpret the plots:**
 
