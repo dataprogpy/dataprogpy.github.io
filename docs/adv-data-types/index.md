@@ -17,11 +17,11 @@ hide:
 
     [:octicons-arrow-right-24: Foundations of Time Series Analysis](time-series/foundations.md)
 
--   [:material-text-search:{ .lg .middle } __Text Analysis__](text-analysis.md)
+-   [:material-text-search:{ .lg .middle } __Text Analysis__](text-analysis/index.md)
 
     ---
 
-    [:octicons-arrow-right-24: Getting started](text-analysis.md)
+    [:octicons-arrow-right-24: Getting started](text-analysis/index.md)
 
 
 </div>
