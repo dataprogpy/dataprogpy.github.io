@@ -223,6 +223,12 @@ nav:
     - Text Analysis: 
       - adv-data-types/text-analysis/index.md
       - Getting Started: adv-data-types/text-analysis/getting-started.md
+      - Text Data Preparation: adv-data-types/text-analysis/text-data-preparation.md
+      - Vectorization: adv-data-types/text-analysis/vectorization.md
+      - Sentiment Analysis: adv-data-types/text-analysis/sentiment-analysis.md
+      - Topic Modeling: adv-data-types/text-analysis/topic-modeling.md
+      - Next Steps: adv-data-types/text-analysis/next-steps.md
+      
   - Resources:
     - resources/index.md
     - Data Sources: resources/open-data.md
