@@ -227,6 +227,7 @@ nav:
       - Vectorization: adv-data-types/text-analysis/vectorization.md
       - Sentiment Analysis: adv-data-types/text-analysis/sentiment-analysis.md
       - Topic Modeling: adv-data-types/text-analysis/topic-modeling.md
+      - Named Entity Recognition: adv-data-types/text-analysis/named-entity-recognition.md
       - Next Steps: adv-data-types/text-analysis/next-steps.md
       
   - Resources:

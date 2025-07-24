@@ -16,6 +16,7 @@ hide:
 - [ :material-numeric-3:{ .lg .middle } __Vectorization__](vectorization.md) 
 - [ :material-numeric-4:{ .lg .middle } __Sentiment Analysis__](sentiment-analysis.md) 
 - [ :material-numeric-5:{ .lg .middle } __Topic Modeling__](topic-modeling.md) 
-- [ :material-numeric-6:{ .lg .middle } __Conclusion & Next Steps__](next-steps.md)
+- [ :material-numeric-6:{ .lg .middle } __Named Entity Recognition__](named-entity-recognition.md)
+- [ :material-numeric-7:{ .lg .middle } __Conclusion & Next Steps__](next-steps.md)
 
 </div>
