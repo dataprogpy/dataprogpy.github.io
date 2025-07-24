@@ -1,13 +1,8 @@
 ---
 icon: material/numeric-3
 ---
-Excellent, let's proceed.
 
-Here is the content for **Section 3: From Words to Numbers: Vectorization**.
-
------
-
-# Section 3: From Words to Numbers: Vectorization
+# Vectorization: From Words to Numbers 
 
 In the previous section, we successfully transformed our raw text into a clean, standardized list of tokens for each document. This was a critical step in reducing noise, but our data is still in a format that machines cannot use for modeling: a list of words. Machine learning algorithms, including those in `scikit-learn` that you are familiar with, operate on numerical data, not strings of text.
 
@@ -18,6 +13,8 @@ This section covers the final and most crucial bridge between our textual data a
 Let's assume we have performed the pre-processing steps from Section 2 on a few of our "GlobalCart" reviews. Our starting point for this section—our clean **corpus**—is a list of documents, where each document is a list of clean tokens.
 
 ```python
+from nltk.tokenize.treebank import TreebankWordDetokenizer
+
 # This is our pre-processed corpus from the end of Section 2.
 # Each inner list represents one document (one customer review).
 corpus = [
@@ -30,7 +27,15 @@ corpus = [
 # Why: For scikit-learn's vectorizers to work, they expect a list of strings,
 # not a list of lists. We'll join our tokens back into single strings.
 # This is a common preparatory step before vectorization.
+
+
+# Method 1: Using join()
 processed_corpus = [" ".join(doc) for doc in corpus]
+
+
+# Method 2: Using a detokenizer
+detokenizer = TreebankWordDetokenizer()
+processed_corpus = [detokenizer.detokenize(doc) for doc in corpus]
 
 print(processed_corpus)
 ```
@@ -95,14 +100,17 @@ print("Vocabulary:", vocabulary)
 | **2** | 0 | 1 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 2 | 0 | 0 |
 | **3** | 0 | 0 | 0 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 1 | 0 | 1 | 0 | 0 | 0 | 0 | 1 | 1 |
 
-Each row now represents one of our original documents, and each column represents a word in our vocabulary. For example, in Document 2 (row index 2), the word "return" appears twice, so its corresponding entry is 2. We have successfully vectorized our text\!
+Each row now represents one of our original documents, and each column represents a word in our vocabulary. For example, in Document 2 (row index 2), the word "return" appears twice, so its corresponding entry is 2. We have successfully vectorized our text! 
 
-> **[NOTE] The Limits of Bag-of-Words**
->
-> BoW is simple and effective, but it has two key limitations:
->
-> 1.  It completely loses the original word order and context.
-> 2.  It treats every word as equally important. A word like "blender" might be more important than "large" in a document, but BoW only sees their counts.
+---
+
+!!! note "**The Limits of Bag-of-Words**"
+  
+    BoW is simple and effective, but it has two key limitations:
+
+    1.  It completely loses the original word order and context.
+    2.  It treats every word as equally important. A word like "blender" might be more important than "large" in a document, but BoW only sees their counts.
+
 
 ### Method 2: Term Frequency-Inverse Document Frequency (TF-IDF)
 
@@ -146,4 +154,75 @@ Notice the difference. In the BoW matrix, "blender" and "return" had scores of 1
 
 We have now successfully converted our text into a rich numerical format. This matrix is the `X` that you are used to working with. It is ready to be fed into any `scikit-learn` classifier or clustering algorithm to finally unlock the insights hidden within our text.
 
-*(Proceed to Section 4: Strategies for Sentiment Analysis)*
+### Enhancing Features with N-grams
+
+So far, both Bag-of-Words and TF-IDF have treated each word as an independent token. This approach is powerful, but it has one significant drawback: it completely ignores word order and, therefore, crucial context.
+
+Consider a review that says a product was "**not good**." Our current methods, called **unigram** models, would see the tokens "not" and "good" separately. If "not" is removed as a stop word, we would be left with only "good," completely reversing the original meaning.
+
+To solve this, we can enhance our feature creation process by including **N-grams**, which are contiguous sequences of *n* words. This allows our vectorizer to capture multi-word phrases and preserve local context.
+
+#### What Are N-grams? 🔗
+
+An **N-gram** is simply a contiguous sequence of *n* items from a given sample of text. The "items" are typically words. What we have been doing so far—breaking text down into individual words—is actually called using **unigrams** (where n=1).
+
+  * **Unigram (1-gram):** A single word (e.g., "blender", "package", "good").
+  * **Bigram (2-gram):** A sequence of two adjacent words (e.g., "running shoes", "customer service", "very fast").
+  * **Trigram (3-gram):** A sequence of three adjacent words (e.g., "pro-grade blender", "arrived in one day").
+
+By creating N-grams, you start to capture word combinations and local context that are lost when you treat every word as an independent token.
+
+
+#### Why Are N-grams Important?
+
+N-grams are crucial for capturing context and meaning that individual words alone cannot convey.
+
+1.  **Capturing Phrases and Compound Nouns:** A word like "running" and a word like "shoes" have separate meanings. The bigram **"running shoes"**, however, refers to a specific product. Analyzing only unigrams would lose this specific concept.
+
+2.  **Understanding Negation and Modifiers:** This is one of the most important use cases. Consider the review "The service was **not good**."
+
+      * A unigram model would see the tokens "not" and "good". Since "not" is often a stop word, it might be removed, leaving only the positive word "good" and completely misinterpreting the sentiment.
+      * A bigram model would see the token **"not good"**, which is a powerful signal of negative sentiment.
+
+#### Where Do N-grams Fit in the Workflow? ⚙️
+
+You don't typically generate N-grams during the initial cleaning phase. Instead, you instruct the **vectorizer** to create them from your cleaned tokens.
+
+Both `CountVectorizer` and `TfidfVectorizer` in `scikit-learn` have a simple but powerful parameter called `ngram_range`. This parameter is a tuple that defines the minimum and maximum size of the N-grams to be extracted.
+
+For example, `ngram_range=(1, 2)` tells the vectorizer to create features for all **unigrams** (single words) AND all **bigrams** (pairs of words).
+
+Here’s a practical example:
+
+```python
+from sklearn.feature_extraction.text import CountVectorizer
+
+# A simple, pre-processed document
+document = ["the blender was not good"]
+
+# Why: ngram_range=(1, 2) instructs the vectorizer to create tokens for
+# individual words (n=1) and pairs of adjacent words (n=2).
+vectorizer = CountVectorizer(ngram_range=(1, 2))
+
+vectorizer.fit_transform(document)
+
+# Let's look at the features it created
+print(vectorizer.get_feature_names_out())
+```
+
+**Output:**
+
+```
+['blender' 'blender was' 'good' 'not' 'not good' 'the' 'the blender' 'was' 'was not']
+```
+
+As you can see, the vectorizer didn't just create features for individual words; it also created features for word pairs like "not good" and "blender was," capturing more context.
+ 
+
+
+
+
+By including bigrams or even trigrams, our resulting document-term matrix becomes a much richer and more context-aware representation of the original text.
+
+
+"We have now successfully converted our text into a rich numerical format using Bag-of-Words, TF-IDF, and N-grams. This resulting matrix is the `X` that you are used to working with, ready to be fed into any `scikit-learn` classifier or clustering algorithm to finally unlock the insights hidden within our text."
