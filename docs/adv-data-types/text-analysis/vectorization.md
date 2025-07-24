@@ -51,6 +51,54 @@ print(processed_corpus)
 ]
 ```
 
+#### Why a Detokenizer is Often Better 💡
+
+A dedicated detokenizer is "smarter" because it understands how to handle punctuation and contractions correctly. A simple `join` operation just inserts a space between every token, which can lead to awkward formatting.
+
+Consider this example:
+
+```python
+from nltk.tokenize.treebank import TreebankWordDetokenizer
+
+tokens = ['The', 'blender', 'wasn', "'t", 'working', '.']
+
+# Method 1: Using join()
+joined_text = " ".join(tokens)
+print("Using join():", joined_text)
+
+
+# Method 2: Using a detokenizer
+detokenizer = TreebankWordDetokenizer()
+detokenized_text = detokenizer.detokenize(tokens)
+print("Using Detokenizer:", detokenized_text)
+```
+
+**Output:**
+
+```
+Using join(): The blender wasn 't working .
+Using Detokenizer: The blender wasn't working.
+```
+
+As you can see, the `TreebankWordDetokenizer` correctly reattaches the contraction `n't` to `wasn` and places the period immediately after "working" without an extra space.
+
+### When `" ".join()` is Sufficient for Our Workflow
+
+In the workflow we established, we typically perform several cleaning steps *before* rejoining the tokens, including:
+
+  * Removing all punctuation.
+  * Converting words to their root form (lemmas).
+
+After these steps, our list of tokens might look like `['blender', 'be', 'not', 'work']`. In this scenario, the primary advantage of a detokenizer (handling punctuation) is no longer relevant. Both `" ".join()` and a detokenizer would produce the exact same, correct output: `"blender be not work"`.
+
+Given this context, using the simpler, more fundamental `" ".join()` method was pedagogically clearer without sacrificing the quality of the final result for our specific pipeline.
+
+!!! tip "**When to Use a Detokenizer**"
+
+    * Use a **detokenizer** when your workflow requires you to preserve punctuation and contractions, and you need to reconstruct a grammatically correct sentence.
+    * Stick with **`" ".join()`** for simplicity when your pre-processing steps have already removed punctuation, and perfect grammatical reconstruction is not the primary goal.
+
+
 With our corpus in this format, we are ready to convert it into numbers.
 
 ### Method 1: The Bag-of-Words (BoW) Model

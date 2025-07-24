@@ -1,13 +1,8 @@
 ---
 icon: material/numeric-4
 ---
-Of course. Let's move on to the practical application of our prepared data.
 
-Here is the content for **Section 4: Strategies for Sentiment Analysis**.
-
------
-
-# Section 4: Strategies for Sentiment Analysis
+# Strategies for Sentiment Analysis
 
 Now that we have learned how to prepare and vectorize text, we can begin performing analysis. One of the most common and valuable applications of text analysis in a business context is **Sentiment Analysis**—the process of programmatically identifying and categorizing the opinion or emotion expressed in a piece of text.
 
@@ -53,13 +48,13 @@ TextBlob's `.sentiment` property returns two scores:
   * **Polarity:** A score from -1.0 (most negative) to +1.0 (most positive).
   * **Subjectivity:** A score from 0.0 (very objective) to 1.0 (very subjective).
 
-> **[TIP] The Power and Peril of Abstraction**
->
-> TextBlob is a fantastic example of a high-level API. It's incredibly fast and easy to use. However, it's a "black box"—it hides the pre-processing steps and uses a general-purpose sentiment lexicon that may not be optimized for your specific domain. It's perfect for quick, general-purpose analysis but offers little control.
+!!! tip  "**The Power and Peril of Abstraction**"
+ 
+    TextBlob is a fantastic example of a high-level API. It's incredibly fast and easy to use. However, it's a "black box"—it hides the pre-processing steps and uses a general-purpose sentiment lexicon that may not be optimized for your specific domain. It's perfect for quick, general-purpose analysis but offers little control.
 
 ### Approach 2: The Transparent Rule-Based Method (VADER)
 
-A second approach is to use another rule-based tool, but one that is more transparent and specialized. **VADER** (Valence Aware Dictionary and sEntiment Reasoner) is a sentiment analysis tool included with `NLTK`. It is specifically tuned for social media text, making it excellent at understanding slang, emojis, and the emphatic use of punctuation and capitalization.
+A second approach is to use another lexicon and rule-based tool, but one that is more transparent and specialized. **VADER** (Valence Aware Dictionary and sEntiment Reasoner) is a sentiment analysis tool included with `NLTK`. It is specifically tuned for social media text, making it excellent at understanding slang, emojis, and the emphatic use of punctuation and capitalization.
 
 VADER analyzes text against its lexicon of words and rules and returns a dictionary of four scores.
 
@@ -99,97 +94,87 @@ The most powerful and flexible approach is to build your own sentiment analysis 
 
 The key advantage here is that the model learns the nuances of sentiment *from your own labeled data*. This allows it to understand domain-specific language (e.g., that "quiet" is a highly positive attribute for a blender but might be neutral for a pair of shoes).
 
-> **[Hands-On] Building a Custom Sentiment Classifier**
->
-> Let's build a model to classify our GlobalCart reviews.
->
-> **Step 1: Prepare Labeled Data**
-> First, we need a labeled dataset. Let's imagine we've manually labeled our four processed documents from the last section. The vectorized data from our `TfidfVectorizer` is our feature matrix `X`, and our manual labels are our target vector `y`.
->
-> ```python
-> from sklearn.model_selection import train_test_split
-> from sklearn.linear_model import LogisticRegression
-> from sklearn.metrics import classification_report
-> ```
+**Building a Custom Sentiment Classifier**
 
-> # X is our tfidf\_matrix from Section 3
->
-> X = df\_tfidf.to\_numpy()
+Let's build a model to classify our GlobalCart reviews.
 
-> # y is our list of manual labels corresponding to each document
->
-> y = ['positive', 'negative', 'negative', 'neutral'] \# We will filter to two classes for a simple demo
+**Step 1: Prepare Labeled Data**
+First, we need a labeled dataset. Let's imagine we've manually labeled our four processed documents from the last section. The vectorized data from our `TfidfVectorizer` is our feature matrix `X`, and our manual labels are our target vector `y`.
 
-> # For this binary classification demo, let's filter for just positive/negative
->
-> # In a real scenario, you'd handle all three classes.
->
-> X\_binary = X[:3] \# First 3 documents
-> y\_binary = y[:3] \# First 3 labels ('positive', 'negative', 'negative')
->
-> ````
-> 
-> **Step 2: Train the Model**
-> We will use `LogisticRegression`, a standard and interpretable model for classification tasks.
+```python
+  
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import classification_report
 
-> ```python
-> # Why: We fit the logistic regression model on our full (though small) dataset.
-> # The model learns the relationship between the TF-IDF features and the sentiment labels.
-> model = LogisticRegression()
-> model.fit(X_binary, y_binary)
-> ````
->
-> **Step 3: Evaluate and Predict**
-> In a real project, you would split your data into training and testing sets. For this small demo, we can see how the model learned to classify our existing data.
->
-> ```python
-> # Why: We use the trained model to make predictions.
-> predictions = model.predict(X_binary)
-> ```
+# X is our tfidf_matrix from Section 3
 
-> print("Model Predictions:", predictions)
-> print("\\nClassification Report:\\n", classification\_report(y\_binary, predictions))
->
-> ```
-> 
-> **Output:**
+X = df_tfidf.to_numpy()
 
-> ```
->
-> Model Predictions: ['positive' 'negative' 'negative']
+# y is our list of manual labels corresponding to each document
 
-> Classification Report:
-> precision    recall  f1-score   support
+y = ['positive', 'negative', 'negative', 'neutral'] # We will filter to two classes for a simple demo
 
-> ```
-> negative       1.00      1.00      1.00         2
-> positive       1.00      1.00      1.00         1
-> ```
+# For this binary classification demo, let's filter for just positive/negative
 
-> ```
-> accuracy                           1.00         3
-> ```
->
-> macro avg       1.00      1.00      1.00         3
-> weighted avg       1.00      1.00      1.00         3
->
-> ```
-> 
-> Our model learned perfectly from our tiny dataset\! With a much larger, real-world dataset, this approach becomes incredibly powerful and is the standard for building high-performance, custom sentiment analysis systems.
-> ```
+# In a real scenario, you'd handle all three classes.
+
+X_binary = X[:3] # First 3 documents
+y_binary = y[:3] # First 3 labels ('positive', 'negative', 'negative')
+
+```
+ 
+ **Step 2: Train the Model**
+
+ We will use `LogisticRegression`, a standard and interpretable model for classification tasks.
+
+```python
+ model = LogisticRegression()
+ model.fit(X_binary, y_binary)
+```
+
+**Step 3: Evaluate and Predict**
+
+In a real project, you would split your data into training and testing sets. For this small demo, we can see how the model learned to classify our existing data.
+
+```python
+
+predictions = model.predict(X_binary)
+print("Model Predictions:", predictions)
+print(
+  "\nClassification Report:\n", 
+  classification_report(y_binary, predictions)
+  )
+```
+ 
+ **Output:**
+ ```
+
+ Model Predictions: ['positive' 'negative' 'negative']
+ Classification Report:
+              precision    recall  f1-score   support
+
+ negative       1.00        1.00      1.00         2
+ positive       1.00        1.00      1.00         1
+
+ accuracy                             1.00         3
+ macro avg      1.00      1.00        1.00         3
+ weighted avg   1.00      1.00        1.00         3
+
+ ```
+ 
+ Our model learned perfectly from our tiny dataset\! With a much larger, real-world dataset, this approach becomes incredibly powerful and is the standard for building high-performance, custom sentiment analysis systems.
 
 ### Summary: Choosing Your Strategy
 
 The right strategy depends on your specific needs, data availability, and time constraints.
 
-> **[INFO] Comparison of Sentiment Analysis Approaches**
->
-> | Strategy | Ease of Use | Customization | Data Requirement | Best For... |
-> | :--- | :--- | :--- | :--- | :--- |
-> | **TextBlob** | Very Easy | None | None | Quick, general-purpose sentiment checks. |
-> | **VADER** | Easy | Low | None | Analyzing social media or informal text. |
-> | **Custom Model** | Hard | High | Labeled Data | High-accuracy, domain-specific tasks. |
+!!! info "**Comparison of Sentiment Analysis Approaches**"
+
+    | Strategy | Ease of Use | Customization | Data Requirement | Best For... |
+    | :--- | :--- | :--- | :--- | :--- |
+    | **TextBlob** | Very Easy | None | None | Quick, general-purpose sentiment checks. |
+    | **VADER** | Easy | Low | None | Analyzing social media or informal text. |
+    | **Custom Model** | Hard | High | Labeled Data | High-accuracy, domain-specific tasks. |
 
 You are now equipped with a range of tools to analyze sentiment. The next section will shift our focus from supervised classification to unsupervised discovery, where we will learn to find hidden themes in our text data.
-
-*(Proceed to Section 5: Uncovering Hidden Themes with Topic Modeling)*
