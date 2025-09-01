@@ -55,9 +55,6 @@ It might find that the responses are primarily driven by three "meta-features":
 
 Instead of working with 20 noisy and correlated features, the company can now use just these 3 powerful principal components. This allows them to build simpler, faster models and gain a clearer understanding of what truly drives customer satisfaction.
 
-Of course. This example is perfect for demonstrating the power of PCA for visualization. Here is a code walkthrough designed for your students.
-
------
 
 ### **Code Walkthrough: Visualizing High-Dimensional Data with PCA**
 
