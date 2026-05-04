@@ -34,10 +34,12 @@ The grading breakdown is as follows:
 **Overall Goal:** To reward consistent and active engagement with the course's hands-on learning materials throughout the semester.
 
 **Weekly Grading Method:**
+
 * For each session where practice work (Colab/Jupyter notebook based on provided scaffolding material) is assigned, your submission will be graded on a **Complete / Incomplete** basis.
 * Grading focuses on **evidence of effort and engagement**, not perfect correctness.
 
 **Final Score Calculation:**
+
 * Your final score out of 15 points for this component will be determined by the proportion of weekly submissions marked as 'Complete'.
 * **Formula:** `Score = (Number of 'Complete' Submissions / Total Number of Required Submissions) * 15`
     * *(Example: If there are 12 sessions with required submissions and a student receives 'Complete' on 10 of them, their score is (10 / 12) * 15 = 12.5 points)*
@@ -158,6 +160,10 @@ A submission will be marked as 'Incomplete' if it meets one or more of the follo
 ### Extra Credit
 
 **3. Optional Extra Credit Component: Advanced Data Types (15 Points)**
+
+!!! question "What does **'Optional'** mean?"
+
+    Our students typically juggle several personal and professional commitments. Unless you are aiming to demonstrate the highest level of mastery or need to secure the best possible grade, you may choose to skip this component. Please note that participating requires you to plan ahead and begin execution well before the default course schedule.
 
 * **Objective:** To demonstrate proficiency in analyzing specialized data types beyond the core project requirements.
 * **Requirement:** Students choosing this option must select *either* time-series analysis *or* text analysis. This requires selecting a dataset suitable for the chosen advanced technique during the Project Plan phase (Component 1).

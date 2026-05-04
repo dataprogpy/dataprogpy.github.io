@@ -21,9 +21,9 @@ hide:
 !!! info "Schedule & Instructor"  
 
     - __Meeting Times:__ Thursdays 6:20-9:20pm 
-    - __Meeting Location:__ [Zoom Meeting Room](https://pitt.zoom.us/j/98751974356). See Canvas for passcode.
+    - __Meeting Location:__ [Zoom Meeting Room](https://pitt.zoom.us/j/98751974356). See Canvas announcement for passcode.
     - __Instructor:__ Midhu Balan
-    - __Virtual Office Hours:__ Th 3:00-5:00pm @ [Zoom](https://pitt.zoom.us/my/midhubalan).
+    - __Virtual Office Hours:__ Th 12:00-1:00pm @ [Zoom](https://pitt.zoom.us/my/midhubalan).
     {.card}
 
 </div>
